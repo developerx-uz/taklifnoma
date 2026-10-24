@@ -180,7 +180,7 @@ const translations = {
     biz_title: `Us`,
     biz_text: `DEAR AND RESPECTED GUESTS!<br>WE ARE DELIGHTED TO INVITE YOU TO OUR WEDDING`,
     card_title: `HONORED GUESTS`,
-    card_message: `We cordially invite you to celebrate the joyous union and wedding gala of our beloved children <strong class="highlight-visol">Farrux & Marjona</strong>.`,
+    card_message: `We cordially invite you to celebrate the joyous union and wedding gala of our beloved children <strong class="highlight-visol">Farruxjon & Marjonaxon</strong>.`,
     card_parents: `With love & respect: Parents`,
     sana_label: `DATE`,
     countdown_title: `COUNTDOWN TO OUR WEDDING`,
