@@ -4,234 +4,341 @@
    ========================================================================== */
 
 /* ==========================================================================
-   SECTION 2: BIZ (Story Section)
+   SECTION 2: SHOHONA TAKLIFNOMA KARTASI (Royal Wedding Invitation Card)
+   Rasm asosida 100% qayta yaratilgan o'ta nafis, hashamatli va to'liq tahrirlanadigan dizayn
    ========================================================================== */
-.biz-section {
-  min-height: 85vh;
+.royal-invitation-section {
+  min-height: calc(100vh - 54px);
+  min-height: calc(100dvh - 54px);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding: 50px 20px;
-}
-
-.section-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  z-index: 1;
-  filter: brightness(0.65) contrast(1.1);
-  transition: transform 6s ease-out;
-}
-
-.dark-gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(7, 10, 18, 0.82) 0%, rgba(7, 10, 18, 0.45) 40%, rgba(7, 10, 18, 0.88) 100%);
-  z-index: 2;
-}
-
-.biz-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  width: 100%;
-  max-width: 650px;
-  background: rgba(10, 14, 25, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 50px 36px;
-  border-radius: 28px;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85);
+  padding: 16px 12px 28px;
+  box-sizing: border-box;
+  background: radial-gradient(circle at center, #111827 0%, #060911 100%);
   overflow: hidden;
 }
 
-.biz-card-border {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  border: 1.5px solid var(--gold-primary);
-  border-radius: 18px;
-  pointer-events: none;
-}
-
-.biz-card-border::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  border: 0.5px solid rgba(212, 175, 55, 0.45);
-  border-radius: 14px;
-}
-
-.biz-card-inner {
+/* Shohona Karta Konteyneri (Haqiqiy rasm foni bilan) */
+.royal-card-wrapper {
   position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.badge-ornament {
-  margin-bottom: 10px;
-}
-
-.sparkle {
-  color: var(--gold-primary);
-  font-size: 1.15rem;
-}
-
-.biz-title {
-  font-family: var(--font-calligraphy);
-  font-size: 3.6rem;
-  background: var(--gold-gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1;
-  margin-bottom: 12px;
-}
-
-.biz-intro-text {
-  font-family: var(--font-title);
-  font-size: 0.92rem;
-  line-height: 1.75;
-  letter-spacing: 2px;
-  color: #f1f5f9;
-  text-transform: uppercase;
-}
-
-.quote-heart {
-  margin-top: 24px;
-  color: var(--gold-primary);
-  font-size: 1.05rem;
-  animation: heartPulse 1.8s infinite;
-}
-
-/* ==========================================================================
-   SECTION 3: FORMAL IVORY INVITATION CARD
-   ========================================================================== */
-.formal-card-section {
-  padding: 45px 20px;
-}
-
-.ivory-card {
   width: 100%;
-  max-width: 820px;
-  background-color: var(--ivory-card-bg);
-  color: var(--ivory-card-text);
+  max-width: 480px;
+  background-color: #fffefb;
+  background-image: url('../assets/images/taklifnoma_card_bg.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 26px;
-  padding: 45px 30px;
-  position: relative;
-  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7), inset 0 0 120px rgba(230, 218, 195, 0.45);
-  overflow: hidden;
-}
-
-.ivory-card-border {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  border: 2px solid #d4af37;
-  border-radius: 18px;
-  pointer-events: none;
-}
-
-.ivory-card-border::before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  border-radius: 14px;
-}
-
-.ivory-card-inner {
-  position: relative;
-  z-index: 2;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+              0 0 35px rgba(212, 175, 55, 0.35);
+  padding: 34px 22px 28px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow: hidden;
 }
 
-.card-ornament {
-  width: 140px;
-  margin: 6px auto 16px;
+/* Orqa fon markazidagi mayin nur qatlami (Matnlar tiniq va o'qishli chiqishi uchun) */
+.royal-card-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 30px;
+  right: 30px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.35) 65%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.card-ornament.flipped {
-  transform: rotate(180deg);
-  margin: 16px auto 6px;
-}
-
-.ornament-svg {
+.royal-card-inner {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card-title {
-  font-family: var(--font-title);
-  font-size: 1.35rem;
-  letter-spacing: 3.5px;
-  color: #795516;
-  margin-bottom: 18px;
-  font-weight: 700;
+/* 1. TEPPA BANNER: TAKLIFNOMA (3D Oltin bo'rtma lenta) */
+.royal-banner-wrap {
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card-message {
-  font-family: var(--font-serif);
-  font-size: 1.12rem;
-  line-height: 1.75;
-  color: #3f3933;
-  max-width: 650px;
-  margin-bottom: 22px;
-}
-
-.highlight-visol {
-  display: block;
-  font-size: 1.35rem;
-  color: #9f7922;
-  font-weight: 700;
-  margin: 6px 0;
-}
-
-.calligraphy-names {
-  font-family: var(--font-calligraphy);
-  font-size: 3.2rem;
-  color: #9f7922;
-  line-height: 1.1;
-  margin: 12px 0 18px;
+.royal-ribbon-banner {
+  width: 96%;
+  position: relative;
+  padding: 7px 18px;
+  background: linear-gradient(180deg, #fcedc7 0%, #e8c46f 22%, #caa13b 55%, #8f650e 100%);
+  border: 1.5px solid #754f07;
+  border-radius: 40px 40px 45px 45px / 20px 20px 25px 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28),
+              inset 0 1.5px 3px rgba(255, 255, 255, 0.85),
+              inset 0 -2px 4px rgba(70, 42, 4, 0.45);
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  gap: 10px;
 }
 
-.calligraphy-names .and-sym {
-  font-size: 2.2rem;
-  color: #c59b27;
+.royal-banner-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.4rem, 4.8vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #fffaf0;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 1px 0 #edd593,
+               1px 2px 0 #6e460a,
+               2px 3px 0 #4a2d04,
+               0 5px 12px rgba(45, 27, 4, 0.55);
 }
 
-.parents-respect {
-  font-family: var(--font-serif);
+.banner-sparkle {
+  color: #fff4d1;
+  font-size: 0.85rem;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+.royal-banner-heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.flourish-curve {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #caa13b 100%);
+}
+
+.flourish-curve.right {
+  background: linear-gradient(90deg, #caa13b 0%, transparent 100%);
+}
+
+.heart-center {
+  color: #caa13b;
+  font-size: 0.85rem;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
+}
+
+/* 2. TABRIK SO'ZI: Hurmatli aziz mehmonlar! */
+.royal-greeting {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 3.6vw, 1.38rem);
+  font-weight: 700;
+  color: #121c2e;
+  margin: 6px 0 4px;
+  letter-spacing: 0.5px;
+}
+
+/* 3. MATN: Sizlarni quvonchli kunimiz... */
+.royal-invitation-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.92rem, 2.7vw, 1.05rem);
+  line-height: 1.45;
+  color: #1a2638;
+  max-width: 410px;
+  margin: 0 auto 10px;
+  font-weight: 600;
+}
+
+/* 4. MARKAZIY RAMKA: Farruxjon va Marjonaxon larning nikoh to'ylariga... */
+.royal-cartouche-frame {
+  position: relative;
+  width: 96%;
+  max-width: 420px;
+  background: rgba(255, 253, 247, 0.88);
+  border: 1.5px solid #caa13b;
+  border-radius: 20px;
+  padding: 12px 18px 10px;
+  margin: 6px auto 14px;
+  box-shadow: 0 4px 16px rgba(160, 125, 45, 0.16),
+              inset 0 0 12px rgba(212, 175, 55, 0.14);
+}
+
+.cartouche-couple-names {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.35rem, 4.4vw, 1.68rem);
+  font-weight: 700;
+  color: #8b1e28;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+.cartouche-connector {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #1d2b40;
+  margin: 0 3px;
+}
+
+.cartouche-wedding-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 3vw, 1.12rem);
+  color: #121c2e;
+  margin: 4px 0 0;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* 5. 3 TA MA'LUMOT BADGE (Sana, Vaqt, Manzil) */
+.royal-details-triad {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto 12px;
+}
+
+.detail-triad-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.triad-icon-badge {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #fffcf5 0%, #ecd49c 50%, #cca13d 100%);
+  border: 1.5px solid #997316;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a3a04;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15),
+              inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.triad-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #121c2e;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.triad-pill-box {
+  width: 100%;
+  min-height: 32px;
+  background: linear-gradient(180deg, #fffdf8 0%, #f6e8c7 100%);
+  border: 1.5px solid #caa13b;
+  border-radius: 18px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #101927;
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
+              0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.triad-pill-box.venue-box {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.74rem;
+  line-height: 1.15;
+  text-align: center;
+  padding: 3px 4px;
+}
+
+/* 6. HURMAT BILAN (Bo'sh joy qoldirilgan) */
+.royal-divider-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 160px;
+  margin: 4px auto 6px;
+  opacity: 0.75;
+}
+
+.royal-divider-mini .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #caa13b 100%);
+}
+
+.royal-divider-mini .line:last-child {
+  background: linear-gradient(90deg, #caa13b 0%, transparent 100%);
+}
+
+.flourish-icon {
+  color: #caa13b;
+  font-size: 0.85rem;
+}
+
+.royal-respect-wrap {
+  margin: 2px auto 6px;
+  text-align: center;
+}
+
+.royal-respect-title {
+  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 1.05rem;
-  color: #71695f;
-  margin-top: 6px;
+  font-weight: 700;
+  color: #121c2e;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.royal-respect-empty {
+  min-height: 18px;
+}
+
+/* 7. PASTDAGI TILAK: Siz azizlarni kutib qolamiz! */
+.royal-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(0.88rem, 2.7vw, 1rem);
+  color: #121c2e;
+  letter-spacing: 0.3px;
+}
+
+.footer-heart {
+  color: #8b1e28;
+  font-size: 0.85rem;
 }
 
 /* ==========================================================================

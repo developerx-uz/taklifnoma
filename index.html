@@ -14,7 +14,7 @@
   <!-- Google Fonts: Luxury Serif, Calligraphy and Modern Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons for Wedding Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -69,7 +69,6 @@
         <!-- Desktop Navigation Links -->
         <nav class="desktop-menu" id="desktop-menu">
           <a href="#hero" class="nav-link" data-key="nav_home">Bosh sahifa</a>
-          <a href="#biz" class="nav-link" data-key="nav_biz">Biz</a>
           <a href="#taklifnoma" class="nav-link" data-key="nav_invite">Taklifnoma</a>
           <a href="#sana" class="nav-link" data-key="nav_countdown">Sana</a>
           <a href="#tartib" class="nav-link" data-key="nav_schedule">Dastur</a>
@@ -178,11 +177,105 @@
       </section>
 
       <!-- =====================================================================
-           2-EKRAN: TAKLIFNOMA (Foydalanuvchi yangi versiyasini taqdim etishi uchun bo'shatildi)
+           2-EKRAN: SHOHONA TAKLIFNOMA KARTASI (Faqat Nikoh to'yi — 1 ta to'liq ekran)
            ===================================================================== -->
-      <div id="taklifnoma-container">
-        <!-- Yangi taklifnoma versiyasi shu yerga joylashtiriladi -->
-      </div>
+      <section class="section royal-invitation-section" id="taklifnoma">
+        <div class="royal-card-wrapper">
+          <div class="royal-card-inner">
+            
+            <!-- 1. 3D Oltin Bo'rtma Banner: TAKLIFNOMA -->
+            <div class="royal-banner-wrap">
+              <div class="royal-ribbon-banner">
+                <span class="banner-sparkle left" aria-hidden="true">✦</span>
+                <h2 class="royal-banner-title" data-key="taklifnoma_title">TAKLIFNOMA</h2>
+                <span class="banner-sparkle right" aria-hidden="true">✦</span>
+              </div>
+              <div class="royal-banner-heart" aria-hidden="true">
+                <span class="flourish-curve"></span>
+                <i class="fa-solid fa-heart heart-center"></i>
+                <span class="flourish-curve right"></span>
+              </div>
+            </div>
+
+            <!-- 2. Hurmatli aziz mehmonlar! -->
+            <p class="royal-greeting" data-key="taklifnoma_greeting">Hurmatli aziz mehmonlar!</p>
+
+            <!-- 3. Taklifnoma matni -->
+            <p class="royal-invitation-body" data-key="taklifnoma_intro">
+              Sizlarni quvonchli kunimiz — farzandlarimizning nikoh to‘yi tantanalariga taklif qilamiz.
+              Ushbu shodiyonamizda biz bilan birga bo‘lib, quvonchimizga sherik bo‘lishingizdan mamnun bo‘lamiz.
+            </p>
+
+            <!-- 4. Markaziy Ramka: Farruxjon va Marjonaxon larning nikoh to'ylariga taklif etamiz! -->
+            <div class="royal-cartouche-frame">
+              <h3 class="cartouche-couple-names">
+                <span class="cartouche-name">Farruxjon</span>
+                <span class="cartouche-connector">va</span>
+                <span class="cartouche-name">Marjonaxon</span>
+              </h3>
+              <p class="cartouche-wedding-line" data-key="taklifnoma_event">
+                larning nikoh to‘ylariga taklif etamiz!
+              </p>
+            </div>
+
+            <!-- 5. 3 ta ma'lumot qutisi: Sana, Vaqt, Manzil -->
+            <div class="royal-details-triad">
+              <!-- SANA -->
+              <div class="detail-triad-col">
+                <div class="triad-icon-badge">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <span class="triad-label" data-key="sana_label">Sana:</span>
+                <div class="triad-pill-box">
+                  <span data-key="taklifnoma_sana_val">30-oktabr</span>
+                </div>
+              </div>
+
+              <!-- VAQT -->
+              <div class="detail-triad-col">
+                <div class="triad-icon-badge">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <span class="triad-label" data-key="taklifnoma_vaqt">Vaqt:</span>
+                <div class="triad-pill-box">
+                  <span data-key="taklifnoma_vaqt_val">18:00</span>
+                </div>
+              </div>
+
+              <!-- MANZIL -->
+              <div class="detail-triad-col">
+                <div class="triad-icon-badge">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <span class="triad-label" data-key="loc_title">Manzil:</span>
+                <div class="triad-pill-box venue-box">
+                  <span data-key="taklifnoma_manzil_val">Termiz Shahar<br>Soxil to‘yxonasi</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Hurmat bilan (Bo'sh joy qoldirilgan) -->
+            <div class="royal-divider-mini" aria-hidden="true">
+              <span class="line"></span>
+              <span class="flourish-icon">❦</span>
+              <span class="line"></span>
+            </div>
+
+            <div class="royal-respect-wrap">
+              <p class="royal-respect-title" data-key="taklifnoma_respect">Hurmat bilan,</p>
+              <div class="royal-respect-empty"></div>
+            </div>
+
+            <!-- 7. Pastki qism: Siz azizlarni kutib qolamiz! -->
+            <div class="royal-card-footer">
+              <span class="footer-heart" aria-hidden="true">❤</span>
+              <span class="footer-note" data-key="taklifnoma_footer">Siz azizlarni kutib qolamiz!</span>
+              <span class="footer-heart" aria-hidden="true">❤</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       <!-- SECTION 4: SANA & ORTGA HISOBLASH (Countdown & Calendar matching screenshot) -->
       <section class="section countdown-section" id="sana">
