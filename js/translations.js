@@ -317,16 +317,7 @@ function switchLanguage(lang) {
   } catch (_) {}
 }
 
-// Attach language selector events on load
+// Ensure language defaults cleanly to Uzbek
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      switchLanguage(btn.dataset.lang);
-    });
-  });
-
-  const savedLang = localStorage.getItem('wedding_lang');
-  if (savedLang && translations[savedLang]) {
-    switchLanguage(savedLang);
-  }
+  switchLanguage('uz');
 });
