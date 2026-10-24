@@ -8,17 +8,32 @@
    Rasm asosida 100% qayta yaratilgan o'ta nafis, hashamatli va to'liq tahrirlanadigan dizayn
    ========================================================================== */
 .royal-invitation-section {
+  /* =========================================================================
+     1 TA RAQAM BILAN BOSHQARILADIGAN ASOSIY SOZLAMALAR:
+     --header-height : Header balandligi (standart 54px)
+     --top-shift     : Header ostidan pastga tushirish (masalan: 0px, 10px, 20px, 30px)
+     --text-zone-top : Matn boshlanadigan joy (image.png TAKLIFNOMA arki osti, standart 22.5%)
+     ========================================================================= */
+  --header-height: 54px;
+  --top-shift: 0px; /* <-- O'zingiz xohlagancha sinab ko'rish uchun shu 1 ta raqamni o'zgartiring: 0px, 10px, 20px, 30px */
+  --text-zone-top: 22.5%;
+  --text-zone-bottom: 14%;
+  --text-zone-side: 8%;
+
   width: 100%;
-  height: calc(100vh - 54px);
-  height: calc(100dvh - 54px);
-  min-height: calc(100vh - 54px);
-  max-height: calc(100vh - 54px);
+  height: calc(100vh - var(--header-height) - var(--top-shift));
+  height: calc(100dvh - var(--header-height) - var(--top-shift));
+  min-height: calc(100vh - var(--header-height) - var(--top-shift));
+  max-height: calc(100vh - var(--header-height) - var(--top-shift));
+  margin-top: var(--top-shift) !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
   position: relative;
   display: flex;
   align-items: stretch;
   justify-content: center;
-  padding: 0 !important;
-  margin: 0 !important;
   background: #fffdf9;
   overflow: hidden;
   box-sizing: border-box;
@@ -45,10 +60,10 @@
 /* Matn qatlami: image.png dagi TAKLIFNOMA arki ostidan boshlanib, pastki uzuklar ustida tugaydi */
 .royal-card-text-zone {
   position: absolute;
-  top: 22.5%;
-  bottom: 14%;
-  left: 8%;
-  right: 8%;
+  top: var(--text-zone-top);
+  bottom: var(--text-zone-bottom);
+  left: var(--text-zone-side);
+  right: var(--text-zone-side);
   display: flex;
   flex-direction: column;
   align-items: center;
