@@ -420,6 +420,42 @@ function toggleAudio() {
   }
 }
 
+// Background Visibility Handler
+let wasPlayingBeforeHiddenScript = false;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (isAudioPlaying) {
+      wasPlayingBeforeHiddenScript = true;
+      if (audioElement && !audioElement.paused) audioElement.pause();
+      stopProceduralMusic();
+      vinylDisc?.classList.remove('spinning');
+    }
+  } else {
+    if (wasPlayingBeforeHiddenScript && isAudioPlaying) {
+      if (audioElement) audioElement.play().catch(() => startProceduralMusic());
+      vinylDisc?.classList.add('spinning');
+      wasPlayingBeforeHiddenScript = false;
+    }
+  }
+});
+
+window.addEventListener('pagehide', () => {
+  if (isAudioPlaying) {
+    wasPlayingBeforeHiddenScript = true;
+    if (audioElement && !audioElement.paused) audioElement.pause();
+    stopProceduralMusic();
+    vinylDisc?.classList.remove('spinning');
+  }
+});
+
+window.addEventListener('pageshow', () => {
+  if (wasPlayingBeforeHiddenScript && isAudioPlaying) {
+    if (audioElement) audioElement.play().catch(() => startProceduralMusic());
+    vinylDisc?.classList.add('spinning');
+    wasPlayingBeforeHiddenScript = false;
+  }
+});
+
 // First click anywhere on the page starts music softly if not started
 let userInteracted = false;
 function handleInitialUserGesture() {

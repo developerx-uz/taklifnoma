@@ -102,8 +102,12 @@ function toggleAudio() {
   if (isAudioPlaying) {
     // Stop audio
     isAudioPlaying = false;
+    wasPlayingBeforeHidden = false;
     if (audioEl) audioEl.pause();
     stopProceduralMusic();
+    if (audioCtx && audioCtx.state === 'running') {
+      audioCtx.suspend();
+    }
     if (disc) disc.classList.remove('spinning');
     if (soundTop) soundTop.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
     if (typeof showToast === 'function') {
@@ -112,6 +116,7 @@ function toggleAudio() {
   } else {
     // Start audio
     isAudioPlaying = true;
+    wasPlayingBeforeHidden = false;
     if (disc) disc.classList.add('spinning');
     if (soundTop) soundTop.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
     if (tooltip) tooltip.classList.remove('show');
@@ -137,6 +142,91 @@ function toggleAudio() {
     }
   }
 }
+
+// ============================================================================
+// BACKGROUND PAUSE / VISIBILITY HANDLER
+// Ilovadan (brauzerdan) chiqib ketganda yoki boshqa ilovaga o'tganda musiqani to'xtatish
+// ============================================================================
+let wasPlayingBeforeHidden = false;
+
+function pauseAudioBackground() {
+  const audioEl = document.getElementById('wedding-audio');
+  const disc = document.getElementById('vinyl-disc');
+  
+  if (audioEl && !audioEl.paused) {
+    audioEl.pause();
+  }
+  stopProceduralMusic();
+  if (audioCtx && audioCtx.state === 'running') {
+    audioCtx.suspend();
+  }
+  if (disc) disc.classList.remove('spinning');
+}
+
+function resumeAudioBackground() {
+  if (!isAudioPlaying) return;
+  
+  const disc = document.getElementById('vinyl-disc');
+  const audioEl = document.getElementById('wedding-audio');
+  
+  if (disc) disc.classList.add('spinning');
+  
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
+  if (audioEl) {
+    const playPromise = audioEl.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Resumed successfully
+      }).catch(() => {
+        startProceduralMusic();
+      });
+    } else {
+      startProceduralMusic();
+    }
+  } else {
+    startProceduralMusic();
+  }
+}
+
+// 1. Page Visibility API (Ekran o'chganda, boshqa ilovaga yoki tabga o'tganda)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (isAudioPlaying) {
+      wasPlayingBeforeHidden = true;
+      pauseAudioBackground();
+    }
+  } else {
+    if (wasPlayingBeforeHidden && isAudioPlaying) {
+      resumeAudioBackground();
+      wasPlayingBeforeHidden = false;
+    }
+  }
+});
+
+// 2. Window Blur / PageHide / Freeze (Ilova minimallashtirilganda yoki orqa fonga o'tganda)
+window.addEventListener('pagehide', () => {
+  if (isAudioPlaying) {
+    wasPlayingBeforeHidden = true;
+    pauseAudioBackground();
+  }
+});
+
+window.addEventListener('pageshow', () => {
+  if (wasPlayingBeforeHidden && isAudioPlaying) {
+    resumeAudioBackground();
+    wasPlayingBeforeHidden = false;
+  }
+});
+
+document.addEventListener('freeze', () => {
+  if (isAudioPlaying) {
+    wasPlayingBeforeHidden = true;
+    pauseAudioBackground();
+  }
+});
 
 // Connect listeners
 document.addEventListener('DOMContentLoaded', () => {
