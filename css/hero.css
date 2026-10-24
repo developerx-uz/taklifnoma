@@ -106,97 +106,53 @@ body.is-unlocked .desktop-menu {
   max-height: 100%;
   width: 100%;
   max-width: 520px;
-  margin: -18px auto 0;
-  gap: 5px;
+  margin: -10px auto 0;
+  gap: 6px;
 }
 
 /* Hero Incoming Subtitle Tag */
 .hero-incoming-tag {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   letter-spacing: 3.5px;
   color: var(--gold-light);
   text-transform: uppercase;
-  opacity: 0.92;
+  opacity: 0.95;
   font-weight: 600;
   margin: 0;
 }
 
-/* Couple Names & Date */
-.hero-names-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2px 0;
-}
-
-.couple-names {
-  font-family: var(--font-title);
-  font-size: clamp(1.7rem, 4.2vw, 2.15rem);
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-}
-
-.groom-name, .bride-name {
-  background: var(--gold-gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-}
-
-.ampersand {
-  font-family: var(--font-calligraphy);
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-  color: var(--gold-primary);
-  -webkit-text-fill-color: var(--gold-primary);
-  margin: -4px 0;
-  font-weight: 400;
-}
-
-.hero-date {
-  font-family: var(--font-title);
-  font-size: 0.95rem;
-  letter-spacing: 4px;
-  color: var(--gold-light);
-  font-weight: 600;
-  margin-top: 5px;
-}
-
-/* Bismillah & Quran Verse Card (Anfol surasi, 63) */
+/* Bismillah & Quran Verse Card: Yuqoriga ko'tarilgan ramka */
 .bismillah-block {
-  margin: 2px 0;
+  margin: 0;
   width: 95%;
-  max-width: 390px;
-  background: rgba(11, 16, 29, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  max-width: 410px;
+  background: rgba(11, 16, 29, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.2px solid rgba(212, 175, 55, 0.35);
   padding: 10px 18px;
   border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12);
   text-align: center;
 }
 
 .arabic-verse {
   font-family: 'Amiri', 'Traditional Arabic', serif;
-  font-size: 1.18rem;
+  font-size: 1.25rem;
   color: var(--gold-light);
   direction: rtl;
   letter-spacing: 1px;
-  line-height: 1.25;
-  margin-bottom: 2px;
+  line-height: 1.3;
+  margin-bottom: 3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .quran-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   line-height: 1.4;
   color: #e2e8f0;
   margin: 0;
@@ -204,29 +160,77 @@ body.is-unlocked .desktop-menu {
 
 .quote-source {
   display: block;
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   color: var(--gold-primary);
   margin-top: 3px;
   font-family: var(--font-sans);
+  letter-spacing: 0.5px;
 }
 
-/* Delicate Heart in Center */
-.hero-mid-heart {
-  margin: 0;
+/* Couple Names: Farruxjon & Marjonaxon — Eng markazda, kattaroq va yanada chiroyli */
+.hero-names-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0 4px;
+  text-align: center;
+}
+
+.couple-names {
+  font-family: var(--font-title);
+  font-size: clamp(2.1rem, 5.6vw, 2.75rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.08;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95),
+               0 0 35px rgba(212, 175, 55, 0.28);
+}
+
+.groom-name, .bride-name {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7e0 20%, #f5d37e 45%, #d4af37 75%, #a87d15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  filter: drop-shadow(0 2px 14px rgba(212, 175, 55, 0.38));
+  letter-spacing: 2.5px;
+}
+
+.ampersand {
+  font-family: var(--font-calligraphy);
+  font-size: clamp(2.4rem, 6.2vw, 3.2rem);
   color: var(--gold-primary);
-  font-size: 0.85rem;
-  opacity: 0.85;
-  animation: heartPulse 1.8s infinite;
+  -webkit-text-fill-color: var(--gold-primary);
+  margin: -6px 0;
+  font-weight: 400;
+  line-height: 1;
+  filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.5));
+}
+
+.hero-date {
+  font-family: var(--font-title);
+  font-size: 0.96rem;
+  letter-spacing: 4.5px;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-top: 5px;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
 }
 
 /* ==========================================================================
-   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock (Drag Left to Right)
+   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock (Enlarged & Lifted Higher)
    ========================================================================== */
 .unlock-slider-wrap,
 .unlock-btn-wrap {
   width: 100%;
-  max-width: 290px;
-  margin-top: 4px;
+  max-width: 325px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   position: relative;
   z-index: 5;
 }
@@ -234,18 +238,18 @@ body.is-unlocked .desktop-menu {
 .unlock-slider {
   position: relative;
   width: 100%;
-  height: 52px;
-  background: rgba(14, 18, 26, 0.82);
+  height: 58px;
+  background: rgba(14, 18, 28, 0.86);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1.5px solid rgba(212, 175, 55, 0.45);
-  border-radius: 50px;
+  border: 1.8px solid rgba(212, 175, 55, 0.55);
+  border-radius: 60px;
   padding: 4px;
   display: flex;
   align-items: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
-              inset 0 2px 6px rgba(0, 0, 0, 0.5),
-              0 0 20px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65),
+              inset 0 2px 8px rgba(0, 0, 0, 0.55),
+              0 0 25px rgba(212, 175, 55, 0.22);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
