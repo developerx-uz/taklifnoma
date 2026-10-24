@@ -21,6 +21,15 @@ const translations = {
     btn_unlock: `SURIB OCHISH`,
     wedding_tag: `NIKOH TO'YI`,
     hero_welcome_note: `Baxtimizga sherik bo'ling`,
+    taklifnoma_greeting: `Hurmatli aziz mehmonlar!`,
+    taklifnoma_intro: `Sizlarni quvonchli kunimiz — farzandlarimizning nikoh to‘yi tantanalariga taklif qilamiz. Ushbu shodiyonamizda biz bilan birga bo‘lib, quvonchimizga sherik bo‘lishingizdan mamnun bo‘lamiz.`,
+    taklifnoma_event: `larning nikoh to‘ylariga taklif etamiz!`,
+    taklifnoma_vaqt: `Vaqt:`,
+    taklifnoma_sana_val: `30-oktabr`,
+    taklifnoma_vaqt_val: `18:00`,
+    taklifnoma_manzil_val: `Termiz Shahar<br>Soxil to‘yxonasi`,
+    taklifnoma_respect: `Hurmat bilan,`,
+    taklifnoma_footer: `Siz azizlarni kutib qolamiz!`,
     open_btn: `Taklifnomani ochish`,
     biz_title: `Biz`,
     biz_text: `AZIZ VA QADRLI INSONLAR!<br>SIZNI TO‘YIMIZGA TAKLIF QILISHDAN MAMNUNMIZ`,
@@ -100,6 +109,15 @@ const translations = {
     btn_unlock: `ПРОВЕДИТЕ ДЛЯ ОТКРЫТИЯ`,
     wedding_tag: `СВАДЕБНОЕ ТОРЖЕСТВО`,
     hero_welcome_note: `Разделите с нами наше счастье`,
+    taklifnoma_greeting: `Дорогие и уважаемые гости!`,
+    taklifnoma_intro: `Приглашаем вас на счастливое торжество — свадьбу наших дорогих детей. Будем искренне рады видеть вас и разделить с нами эту радость.`,
+    taklifnoma_event: `приглашаем вас на торжество бракосочетания!`,
+    taklifnoma_vaqt: `Время:`,
+    taklifnoma_sana_val: `30 октября`,
+    taklifnoma_vaqt_val: `18:00`,
+    taklifnoma_manzil_val: `город Термез<br>Ресторан «Сохил»`,
+    taklifnoma_respect: `С уважением,`,
+    taklifnoma_footer: `С нетерпением ждём вас!`,
     open_btn: `Открыть приглашение`,
     biz_title: `Мы`,
     biz_text: `ДОРОГИЕ И УВАЖАЕМЫЕ ГОСТИ!<br>МЫ СЧАСТЛИВЫ ПРИГЛАСИТЬ ВАС НА НАШУ СВАДЬБУ`,
@@ -179,6 +197,15 @@ const translations = {
     btn_unlock: `SLIDE TO UNLOCK`,
     wedding_tag: `WEDDING CELEBRATION`,
     hero_welcome_note: `Share in our happiness`,
+    taklifnoma_greeting: `Honored and Dear Guests!`,
+    taklifnoma_intro: `We warmly invite you to celebrate the joyous wedding celebration of our beloved children. We would be honored to share this memorable day with you.`,
+    taklifnoma_event: `cordially invite you to their wedding celebration!`,
+    taklifnoma_vaqt: `Time:`,
+    taklifnoma_sana_val: `October 30`,
+    taklifnoma_vaqt_val: `6:00 PM`,
+    taklifnoma_manzil_val: `Termez City<br>Soxil Banquet Hall`,
+    taklifnoma_respect: `With warm regards,`,
+    taklifnoma_footer: `We look forward to seeing you!`,
     open_btn: `Open Invitation`,
     biz_title: `Us`,
     biz_text: `DEAR AND RESPECTED GUESTS!<br>WE ARE DELIGHTED TO INVITE YOU TO OUR WEDDING`,
@@ -260,7 +287,7 @@ function switchLanguage(lang) {
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.dataset.key;
     if (t[key] !== undefined) {
-      if (key === 'card_message' || key === 'biz_text') {
+      if (key === 'card_message' || key === 'biz_text' || key === 'taklifnoma_manzil_val') {
         el.innerHTML = t[key];
       } else {
         el.textContent = t[key];

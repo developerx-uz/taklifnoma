@@ -20,166 +20,85 @@
   overflow: hidden;
 }
 
-/* Shohona Karta Konteyneri (Haqiqiy rasm foni bilan) */
+/* Shohona Karta Konteyneri (Foydalanuvchi taqdim etgan haqiqiy image.png foni bilan) */
 .royal-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
+  aspect-ratio: 1429 / 2560;
   background-color: #fffefb;
-  background-image: url('../assets/images/taklifnoma_card_bg.jpg');
+  background-image: url('../assets/images/taklifnoma_bg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 26px;
+  border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
               0 0 35px rgba(212, 175, 55, 0.35);
-  padding: 34px 22px 28px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
   overflow: hidden;
 }
 
-/* Orqa fon markazidagi mayin nur qatlami (Matnlar tiniq va o'qishli chiqishi uchun) */
-.royal-card-wrapper::before {
-  content: '';
+/* Matn qatlami: image.png dagi TAKLIFNOMA arki ostidan boshlanib, pastki uzuklar ustida tugaydi */
+.royal-card-text-zone {
   position: absolute;
-  top: 40px;
-  bottom: 40px;
-  left: 30px;
-  right: 30px;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.35) 65%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.royal-card-inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
+  top: 22.5%;
+  bottom: 14%;
+  left: 9%;
+  right: 9%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
-
-/* 1. TEPPA BANNER: TAKLIFNOMA (3D Oltin bo'rtma lenta) */
-.royal-banner-wrap {
-  width: 100%;
-  max-width: 380px;
-  margin-bottom: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.royal-ribbon-banner {
-  width: 96%;
-  position: relative;
-  padding: 7px 18px;
-  background: linear-gradient(180deg, #fcedc7 0%, #e8c46f 22%, #caa13b 55%, #8f650e 100%);
-  border: 1.5px solid #754f07;
-  border-radius: 40px 40px 45px 45px / 20px 20px 25px 25px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28),
-              inset 0 1.5px 3px rgba(255, 255, 255, 0.85),
-              inset 0 -2px 4px rgba(70, 42, 4, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.royal-banner-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.4rem, 4.8vw, 1.85rem);
-  font-weight: 900;
-  letter-spacing: 4px;
-  color: #fffaf0;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1.1;
-  text-shadow: 0 1px 0 #edd593,
-               1px 2px 0 #6e460a,
-               2px 3px 0 #4a2d04,
-               0 5px 12px rgba(45, 27, 4, 0.55);
-}
-
-.banner-sparkle {
-  color: #fff4d1;
-  font-size: 0.85rem;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-}
-
-.royal-banner-heart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.flourish-curve {
-  width: 34px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, #caa13b 100%);
-}
-
-.flourish-curve.right {
-  background: linear-gradient(90deg, #caa13b 0%, transparent 100%);
-}
-
-.heart-center {
-  color: #caa13b;
-  font-size: 0.85rem;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
-}
-
-/* 2. TABRIK SO'ZI: Hurmatli aziz mehmonlar! */
 .royal-greeting {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(1.15rem, 3.6vw, 1.38rem);
+  font-size: clamp(1.22rem, 3.8vw, 1.5rem);
   font-weight: 700;
   color: #121c2e;
-  margin: 6px 0 4px;
+  margin: 0;
+  line-height: 1.15;
   letter-spacing: 0.5px;
 }
 
-/* 3. MATN: Sizlarni quvonchli kunimiz... */
+/* 2. MATN: Sizlarni quvonchli kunimiz... */
 .royal-invitation-body {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(0.92rem, 2.7vw, 1.05rem);
-  line-height: 1.45;
-  color: #1a2638;
-  max-width: 410px;
-  margin: 0 auto 10px;
+  font-size: clamp(0.86rem, 2.7vw, 1.02rem);
+  line-height: 1.42;
+  color: #1c2738;
+  max-width: 370px;
+  margin: 0;
   font-weight: 600;
 }
 
-/* 4. MARKAZIY RAMKA: Farruxjon va Marjonaxon larning nikoh to'ylariga... */
+/* 3. MARKAZIY RAMKA: Farruxjon va Marjonaxon larning nikoh to'ylariga... */
 .royal-cartouche-frame {
   position: relative;
-  width: 96%;
-  max-width: 420px;
-  background: rgba(255, 253, 247, 0.88);
+  width: 98%;
+  max-width: 390px;
+  background: rgba(255, 252, 245, 0.78);
+  backdrop-filter: blur(4px);
   border: 1.5px solid #caa13b;
-  border-radius: 20px;
-  padding: 12px 18px 10px;
-  margin: 6px auto 14px;
-  box-shadow: 0 4px 16px rgba(160, 125, 45, 0.16),
-              inset 0 0 12px rgba(212, 175, 55, 0.14);
+  border-radius: 16px;
+  padding: 8px 12px;
+  margin: 0;
+  box-shadow: 0 4px 14px rgba(160, 125, 45, 0.14),
+              inset 0 0 10px rgba(212, 175, 55, 0.12);
 }
 
 .cartouche-couple-names {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(1.35rem, 4.4vw, 1.68rem);
+  font-size: clamp(1.3rem, 4.2vw, 1.62rem);
   font-weight: 700;
   color: #8b1e28;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.18;
   letter-spacing: 0.5px;
 }
 
@@ -187,17 +106,17 @@
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 600;
-  font-size: 1.05rem;
-  color: #1d2b40;
+  font-size: 1rem;
+  color: #1a2638;
   margin: 0 3px;
 }
 
 .cartouche-wedding-line {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(0.95rem, 3vw, 1.12rem);
+  font-size: clamp(0.92rem, 2.9vw, 1.08rem);
   color: #121c2e;
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-weight: 700;
   letter-spacing: 0.3px;
 }
