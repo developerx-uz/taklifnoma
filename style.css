@@ -330,16 +330,64 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 1: HERO / MUQOVA
+   LOCKED / UNLOCKED INVITATION CONTROLLER
+   ========================================================================== */
+body.is-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100vh !important;
+  max-height: 100dvh !important;
+  touch-action: none;
+}
+
+body.is-locked .invitation-container {
+  overflow: hidden !important;
+  height: calc(100vh - 54px) !important;
+  height: calc(100dvh - 54px) !important;
+  max-height: calc(100vh - 54px) !important;
+  max-height: calc(100dvh - 54px) !important;
+}
+
+body.is-locked .section:not(.hero-section),
+body.is-locked footer {
+  display: none !important;
+}
+
+body.is-locked .desktop-menu {
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+body.is-unlocked {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  touch-action: auto;
+}
+
+body.is-unlocked .desktop-menu {
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* ==========================================================================
+   SECTION 1: HERO / MUQOVA (Strictly 1 screen / 100vh)
    ========================================================================== */
 .hero-section {
-  min-height: 94vh;
-  padding: 35px 20px 45px;
+  height: calc(100vh - 54px);
+  height: calc(100dvh - 54px);
+  min-height: calc(100vh - 54px);
+  max-height: calc(100vh - 54px);
+  padding: 12px 16px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   position: relative;
+  box-sizing: border-box;
 }
 
 .floral-frame-bg {
@@ -370,61 +418,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100%;
+  max-height: 100%;
   width: 100%;
-  max-width: 800px;
+  max-width: 520px;
   margin: 0 auto;
-  gap: 24px;
+  gap: 8px;
 }
 
-/* Bismillah and Quran Quote */
-.bismillah-block {
-  margin-top: 10px;
-  max-width: 90%;
-  background: rgba(11, 16, 29, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  padding: 18px 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.arabic-verse {
-  font-family: 'Amiri', 'Traditional Arabic', serif;
-  font-size: 1.35rem;
-  color: var(--gold-light);
-  direction: rtl;
-  letter-spacing: 1px;
-}
-
-.verse-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 8px 0;
-}
-
-.gold-gem {
-  color: var(--gold-primary);
-  font-size: 0.85rem;
-  animation: pulseGold 2.5s infinite;
-}
-
-.quran-quote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #e2e8f0;
-}
-
-.quote-source {
-  display: block;
-  font-size: 0.76rem;
-  color: var(--gold-primary);
-  margin-top: 6px;
+/* Hero Incoming Tag */
+.hero-incoming-tag {
   font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 3.5px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  opacity: 0.92;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* Hero Couple Names */
@@ -432,28 +444,28 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  margin: 2px 0;
 }
 
 .wedding-tag {
   font-family: var(--font-title);
-  font-size: 0.8rem;
-  letter-spacing: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 5px;
   color: var(--gold-light);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   opacity: 0.95;
 }
 
 .couple-names {
   font-family: var(--font-title);
-  font-size: 2.4rem;
-  letter-spacing: 3px;
+  font-size: clamp(1.7rem, 4.2vw, 2.15rem);
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 1.15;
+  line-height: 1.1;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
 }
 
@@ -466,77 +478,69 @@ body {
 
 .ampersand {
   font-family: var(--font-calligraphy);
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   color: var(--gold-primary);
   -webkit-text-fill-color: var(--gold-primary);
-  margin: -6px 0;
+  margin: -4px 0;
   font-weight: 400;
-}
-
-.gold-line-decor {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 220px;
-  margin: 16px 0 12px;
-}
-
-.gold-line-decor .line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-}
-
-.gold-line-decor .diamond {
-  color: var(--gold-primary);
-  font-size: 0.75rem;
 }
 
 .hero-date {
   font-family: var(--font-title);
-  font-size: 1.25rem;
-  letter-spacing: 5px;
-  color: var(--gold-light);
-  font-weight: 600;
-}
-
-/* Hero Top Heart Line */
-.hero-top-heart {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 160px;
-  margin-bottom: 4px;
-}
-
-.hero-top-heart .line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-}
-
-.hero-top-heart i {
-  color: var(--gold-primary);
-  font-size: 0.7rem;
-  opacity: 0.85;
-}
-
-/* Hero Incoming Tag */
-.hero-incoming-tag {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.95rem;
   letter-spacing: 4px;
   color: var(--gold-light);
-  text-transform: uppercase;
-  opacity: 0.9;
   font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Bismillah and Quran Quote Card */
+.bismillah-block {
+  margin: 2px 0;
+  width: 95%;
+  max-width: 390px;
+  background: rgba(11, 16, 29, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  padding: 11px 18px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.arabic-verse {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.18rem;
+  color: var(--gold-light);
+  direction: rtl;
+  letter-spacing: 1px;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.quran-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.quote-source {
+  display: block;
+  font-size: 0.66rem;
+  color: var(--gold-primary);
+  margin-top: 3px;
+  font-family: var(--font-sans);
 }
 
 /* Hero Mid Heart */
 .hero-mid-heart {
-  margin: 8px 0;
+  margin: 0;
   color: var(--gold-primary);
   font-size: 0.85rem;
+  opacity: 0.85;
   animation: heartPulse 1.8s infinite;
 }
 
@@ -546,8 +550,8 @@ body {
 .unlock-slider-wrap,
 .unlock-btn-wrap {
   width: 100%;
-  max-width: 320px;
-  margin-top: 14px;
+  max-width: 290px;
+  margin-top: 4px;
   position: relative;
   z-index: 5;
 }
@@ -555,18 +559,18 @@ body {
 .unlock-slider {
   position: relative;
   width: 100%;
-  height: 58px;
-  background: rgba(14, 18, 26, 0.78);
+  height: 52px;
+  background: rgba(14, 18, 26, 0.82);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1.5px solid rgba(212, 175, 55, 0.45);
   border-radius: 50px;
-  padding: 5px;
+  padding: 4px;
   display: flex;
   align-items: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
               inset 0 2px 6px rgba(0, 0, 0, 0.5),
-              0 0 20px rgba(212, 175, 55, 0.12);
+              0 0 20px rgba(212, 175, 55, 0.15);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
@@ -681,10 +685,10 @@ body {
 /* Draggable Slider Handle / Thumb */
 .unlock-slider-handle {
   position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 48px;
-  height: 48px;
+  left: 4px;
+  top: 4px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -713,17 +717,18 @@ body {
 }
 
 .unlock-slider-handle .lock-icon-circle {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #fcedc7 0%, #d4af37 50%, #8f6a00 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #0b0e17;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   flex-shrink: 0;
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.65),
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.65),
+              inset 0 1px 2px rgba(255, 255, 255, 0.7);
               inset 0 1px 2px rgba(255, 255, 255, 0.7);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.2s ease,
