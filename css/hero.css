@@ -106,7 +106,7 @@ body.is-unlocked .desktop-menu {
   max-width: 520px;
   margin: 0 auto;
   gap: 10px;
-  transform: translateY(-55px);
+  transform: translateY(-35px);
 }
 
 /* Hero Incoming Subtitle Tag */
