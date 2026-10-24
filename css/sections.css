@@ -19,7 +19,7 @@
      ========================================================================= */
   --header-height: 54px;
   --top-shift: 0px; /* <-- O'zingiz xohlagancha sinab ko'rish uchun shu 1 ta raqamni o'zgartiring: 0px, 10px, 20px, 30px */
-  --img-fit: fill;  /* <-- 'fill' yoki 'contain' */
+  --img-fit: contain; /* <-- 'contain' (tabiiy 1080x2200 proporsiyani saqlaydi) yoki 'fill' */
 
   width: 100%;
   height: calc(100vh - var(--header-height) - var(--top-shift));
