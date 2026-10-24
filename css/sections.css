@@ -392,8 +392,94 @@
 }
 
 /* ==========================================================================
-   SECTION 7: TO'YXONA (Venue Showcase)
+   SECTION 7: TO'YXONA (1080x2200 Shohona karta va 4 ta rasm hitboxlari)
    ========================================================================== */
+.venue-card-section {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #080c16;
+  box-sizing: border-box;
+}
+
+.venue-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.venue-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 1080 / 2200;
+  display: block;
+  object-fit: contain;
+}
+
+/* 4 ta rasm ustidagi bosiluvchi interaktiv hitboxlar */
+.venue-hitbox {
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 28px;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  z-index: 2;
+}
+
+.venue-hitbox:hover {
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.7);
+}
+
+.venue-hitbox:active {
+  transform: scale(0.98);
+}
+
+/* 1-rasm (Yuqori chap: Tashqi fasad va SOHIL neon yozuvi) */
+.venue-hitbox.hitbox-toyxona-1 {
+  left: 6.4%;
+  top: 30.6%;
+  width: 42.7%;
+  height: 24.2%;
+}
+
+/* 2-rasm (Yuqori o'ng: Shohona zal va billur qandillar) */
+.venue-hitbox.hitbox-toyxona-2 {
+  left: 50.9%;
+  top: 30.6%;
+  width: 42.8%;
+  height: 24.2%;
+}
+
+/* 3-rasm (Pastki chap: Kelin-kuyov yo'lagi va to'r) */
+.venue-hitbox.hitbox-toyxona-3 {
+  left: 6.4%;
+  top: 56.3%;
+  width: 42.7%;
+  height: 24.2%;
+}
+
+/* 4-rasm (Pastki o'ng: Tantanali dasturxonlar va sahna) */
+.venue-hitbox.hitbox-toyxona-4 {
+  left: 50.9%;
+  top: 56.3%;
+  width: 42.8%;
+  height: 24.2%;
+}
+
+/* Fallback showcase styles */
 .venue-showcase {
   display: flex;
   flex-direction: column;
