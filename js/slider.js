@@ -65,6 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // When unlocked, clicking home / monogram smoothly scrolls to the top of the invitation
+  document.querySelectorAll('a[href="#hero"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (document.body.classList.contains('is-unlocked')) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  });
+
   // =========================================================================
   // AUDIO CHIME ON UNLOCK
   // =========================================================================
@@ -101,33 +111,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // TRIGGER UNLOCK
   // =========================================================================
   function triggerUnlock() {
-    if (unlocked) {
-      document.getElementById('biz')?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
+    if (unlocked) return;
     unlocked = true;
 
-    // 1. Remove scroll-lock classes from body to unlock full page
-    document.body.classList.remove('is-locked');
-    document.body.classList.add('is-unlocked');
-
-    // 2. Update ARIA accessibility
-    unlockSlider.setAttribute('aria-valuenow', '100');
-    unlockSlider.setAttribute('aria-label', 'Taklifnoma ochildi');
-
-    // 3. Visual slider state
+    // 1. Visual slider state: handle snaps to right and lock opens
     unlockSlider.classList.remove('is-dragging');
     unlockSlider.classList.add('unlocked');
 
     maxSlide = calculateMaxSlide();
-    unlockHandle.style.transition = 'transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1)';
+    unlockHandle.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1)';
     unlockHandle.style.transform = `translateX(${maxSlide}px)`;
     if (unlockFill) {
-      unlockFill.style.transition = 'width 0.28s cubic-bezier(0.2, 0.9, 0.3, 1)';
+      unlockFill.style.transition = 'width 0.22s cubic-bezier(0.2, 0.9, 0.3, 1)';
       unlockFill.style.width = '100%';
     }
     if (unlockLabel) {
-      unlockLabel.style.transition = 'opacity 0.2s ease';
+      unlockLabel.style.transition = 'opacity 0.15s ease';
       unlockLabel.style.opacity = '0';
     }
 
@@ -136,26 +135,26 @@ document.addEventListener('DOMContentLoaded', () => {
       lockIcon.classList.add('fa-lock-open');
     }
 
-    // 4. Haptic vibration feedback for smartphones
+    // 2. Haptic vibration feedback for smartphones
     if ('vibrate' in navigator) {
       try { navigator.vibrate([40, 50, 40]); } catch (_) {}
     }
 
-    // 5. Play soft crystal chime
+    // 3. Play soft crystal chime
     playUnlockChime();
 
-    // 6. Reveal floating music widgets only now
+    // 4. Reveal floating music widgets
     const floatingMusic = document.getElementById('floating-music');
     const soundToggleTop = document.getElementById('sound-toggle-top');
     floatingMusic?.classList.add('visible');
     soundToggleTop?.classList.add('visible');
 
-    // 7. Automatically start romantic melody
+    // 5. Automatically start romantic melody
     if (typeof toggleAudio === 'function' && !isAudioPlaying) {
       toggleAudio();
     }
 
-    // 8. Tooltip prompt on the music disc
+    // 6. Tooltip prompt on the music disc
     const tooltip = document.getElementById('music-tooltip');
     setTimeout(() => {
       tooltip?.classList.add('show');
@@ -164,18 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3500);
     }, 700);
 
-    // 9. Launch RSVP Confetti celebration
-    if (typeof launchConfetti === 'function') {
-      launchConfetti();
-    }
-
-    // 10. Smoothly scroll down to Section 2 (#biz)
+    // 7. Alohida ekranga animatsiyasiz darhol o'tish (Surish animatsiyasisiz!)
     setTimeout(() => {
-      const bizSection = document.getElementById('biz');
-      if (bizSection) {
-        bizSection.scrollIntoView({ behavior: 'smooth' });
+      document.body.classList.remove('is-locked');
+      document.body.classList.add('is-unlocked');
+      window.scrollTo(0, 0);
+
+      // Launch RSVP Confetti celebration
+      if (typeof launchConfetti === 'function') {
+        launchConfetti();
       }
-    }, 550);
+    }, 240);
   }
 
   function resetSlider() {

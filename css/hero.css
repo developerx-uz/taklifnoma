@@ -236,7 +236,8 @@ body.is-unlocked .desktop-menu {
 .unlock-btn-wrap {
   width: 100%;
   max-width: 325px;
-  margin-top: 22px;
+  margin-top: auto; /* Avtomatik pastga suriladi: boshqa ramkalarga mutlaqo ta'sir qilmaydi! */
+  margin-bottom: 28px; /* Pastdan qulay va nafis masofa (~75% balandlik) */
   position: relative;
   z-index: 5;
 }
