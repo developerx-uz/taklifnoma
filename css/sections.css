@@ -256,8 +256,86 @@
 }
 
 /* ==========================================================================
-   SECTION 6: XOTIRA GALEREYASI (Photo Grid)
+   SECTION 6: XOTIRA GALEREYASI (1080x2200 Asl o'lchamli to'liq tayyor variant)
    ========================================================================== */
+.gallery-card-section {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #080c16;
+  box-sizing: border-box;
+}
+
+.gallery-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.gallery-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 1080 / 2200;
+  display: block;
+  object-fit: contain;
+}
+
+/* 3 ta rasm ustidagi bosiluvchi interaktiv hitboxlar */
+.gallery-hitbox {
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 28px;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  z-index: 2;
+}
+
+.gallery-hitbox:hover {
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.7);
+}
+
+.gallery-hitbox:active {
+  transform: scale(0.98);
+}
+
+/* 1-rasm (Yuqori chap: Nikoh uzuklari) */
+.gallery-hitbox.hitbox-1 {
+  left: 7.6%;
+  top: 35.0%;
+  width: 41.0%;
+  height: 26.6%;
+}
+
+/* 2-rasm (Yuqori o'ng: Kelin uzuk bilan) */
+.gallery-hitbox.hitbox-2 {
+  left: 51.0%;
+  top: 35.0%;
+  width: 41.0%;
+  height: 26.6%;
+}
+
+/* 3-rasm (Pastki: Farruxjon & Marjona) */
+.gallery-hitbox.hitbox-3 {
+  left: 22.0%;
+  top: 63.6%;
+  width: 56.0%;
+  height: 25.0%;
+}
+
+/* Fallback grid styles */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -236,34 +236,123 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const lightboxModal = document.getElementById('lightbox-modal');
   const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
   const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
 
-  if (lightboxModal && lightboxImg) {
-    document.querySelectorAll('.gallery-card img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxModal.classList.add('active');
-      });
+  const galleryItems = [
+    { src: 'assets/images/galereya_full_1.jpg', caption: 'Nikoh uzuklari va baxt gullari' },
+    { src: 'assets/images/galereya_full_2.jpg', caption: 'Orzular sari ilk qadam' },
+    { src: 'assets/images/galereya_full_3.jpg', caption: 'Farruxjon & Marjonaxon — Abadiy muhabbat' }
+  ];
+
+  let currentGalleryIndex = 0;
+
+  function showLightboxIndex(idx) {
+    if (idx < 0) idx = galleryItems.length - 1;
+    if (idx >= galleryItems.length) idx = 0;
+    currentGalleryIndex = idx;
+
+    if (lightboxImg) {
+      lightboxImg.style.opacity = '0.5';
+      lightboxImg.src = galleryItems[idx].src;
+      lightboxImg.onload = () => {
+        lightboxImg.style.opacity = '1';
+      };
+    }
+    if (lightboxCaption) {
+      lightboxCaption.textContent = galleryItems[idx].caption;
+    }
+  }
+
+  // 1. Connect click on .gallery-hitbox (New 1080x2200 card hitboxes)
+  document.querySelectorAll('.gallery-hitbox').forEach((hitbox) => {
+    hitbox.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
+      showLightboxIndex(idx);
+      lightboxModal?.classList.add('active');
     });
 
-    if (lightboxClose) {
-      lightboxClose.addEventListener('click', () => {
-        lightboxModal.classList.remove('active');
-      });
-    }
-
-    lightboxModal.addEventListener('click', (e) => {
-      if (e.target === lightboxModal) {
-        lightboxModal.classList.remove('active');
+    hitbox.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
+        showLightboxIndex(idx);
+        lightboxModal?.classList.add('active');
       }
     });
+  });
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+  // 2. Also support old .gallery-card if any exist
+  document.querySelectorAll('.gallery-card').forEach((card, i) => {
+    card.addEventListener('click', () => {
+      showLightboxIndex(i % galleryItems.length);
+      lightboxModal?.classList.add('active');
+    });
+  });
+
+  // 3. Close button
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', () => {
+      lightboxModal?.classList.remove('active');
+    });
+  }
+
+  // 4. Prev & Next buttons
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightboxIndex(currentGalleryIndex - 1);
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightboxIndex(currentGalleryIndex + 1);
+    });
+  }
+
+  // 5. Click outside image to close
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
         lightboxModal.classList.remove('active');
       }
     });
   }
+
+  // 6. Keyboard navigation (Esc, ArrowLeft, ArrowRight)
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal?.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+      lightboxModal.classList.remove('active');
+    } else if (e.key === 'ArrowLeft') {
+      showLightboxIndex(currentGalleryIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      showLightboxIndex(currentGalleryIndex + 1);
+    }
+  });
+
+  // 7. Mobile Touch Swipe gesture
+  let touchStartX = 0;
+  lightboxModal?.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  lightboxModal?.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        showLightboxIndex(currentGalleryIndex - 1); // Swipe right -> prev
+      } else {
+        showLightboxIndex(currentGalleryIndex + 1); // Swipe left -> next
+      }
+    }
+  }, { passive: true });
 });
 
 // =============================================================================

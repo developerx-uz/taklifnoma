@@ -511,10 +511,13 @@
   </div>
 
   <!-- LIGHTBOX MODAL FOR GALLERY -->
-  <div class="lightbox-modal" id="lightbox-modal">
-    <button class="lightbox-close" id="lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Suratni ko‘rish">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Yopish"><i class="fa-solid fa-xmark"></i></button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Oldingi rasm"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Keyingi rasm"><i class="fa-solid fa-chevron-right"></i></button>
     <div class="lightbox-content">
       <img id="lightbox-img" src="" alt="To'y surati">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
   </div>
 
