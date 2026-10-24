@@ -1,0 +1,10 @@
+/* ==========================================================================
+   FARRUX & MARJONA - LUXURY WEDDING INVITATION (TAKLIFNOMA)
+   Master Stylesheet (css/style.css)
+   ========================================================================== */
+
+@import 'variables.css';
+@import 'header.css';
+@import 'hero.css';
+@import 'sections.css';
+@import 'components.css';
