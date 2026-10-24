@@ -8,35 +8,17 @@
    Rasm asosida 100% qayta yaratilgan o'ta nafis, hashamatli va to'liq tahrirlanadigan dizayn
    ========================================================================== */
 /* ==========================================================================
-   SECTION 2: SHOHONA TAKLIFNOMA KARTASI (Foydalanuvchi taqdim etgan to'liq tayyor variant)
+   SECTION 2: SHOHONA TAKLIFNOMA KARTASI (1080x2200 Asl o'lchamli to'liq tayyor variant)
    ========================================================================== */
 .royal-invitation-section {
-  /* =========================================================================
-     1 TA RAQAM / SO'Z BILAN BOSHQARILADIGAN ASOSIY SOZLAMALAR:
-     --header-height : Header balandligi (qat'iy 54px)
-     --top-shift     : Header ostidan pastga tushirish (masalan: 0px, 10px, 20px, 30px)
-     --img-fit       : Rasm moslashuvi ('fill' - ekranni 100% to'liq yopadi, 'contain' - tabiiy proporsiya)
-     ========================================================================= */
-  --header-height: 54px;
-  --top-shift: 0px; /* <-- O'zingiz xohlagancha sinab ko'rish uchun shu 1 ta raqamni o'zgartiring: 0px, 10px, 20px, 30px */
-  --img-fit: contain; /* <-- 'contain' (tabiiy 1080x2200 proporsiyani saqlaydi) yoki 'fill' */
-
   width: 100%;
-  height: calc(100vh - var(--header-height) - var(--top-shift));
-  height: calc(100dvh - var(--header-height) - var(--top-shift));
-  min-height: calc(100vh - var(--header-height) - var(--top-shift));
-  max-height: calc(100vh - var(--header-height) - var(--top-shift));
-  margin-top: var(--top-shift) !important;
+  margin: 0 !important;
   padding: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  margin-bottom: 0 !important;
   position: relative;
   display: flex;
-  align-items: stretch;
   justify-content: center;
+  align-items: flex-start;
   background: #080c16;
-  overflow: hidden !important; /* Qat'iy 1 ta ekranga sig'dirish, pastga cho'zilib ketmaslik uchun */
   box-sizing: border-box;
 }
 
@@ -44,25 +26,23 @@
 .royal-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  height: 100%;
-  max-height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Foydalanuvchi taqdim etgan to'liq tayyor taklifnoma rasmi */
+/* Foydalanuvchi taqdim etgan to'liq tayyor 1080x2200 taklifnoma rasmi */
 .royal-invitation-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 100%;
-  max-height: 100%;
-  object-fit: var(--img-fit, fill);
-  object-position: center top;
+  aspect-ratio: 1080 / 2200;
   display: block;
+  object-fit: contain;
 }
 
 /* ==========================================================================
