@@ -32,7 +32,7 @@
 .royal-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
   margin: 0 auto;
   padding: 0;
   display: flex;
@@ -52,14 +52,6 @@
 }
 
 /* ==========================================================================
-   SECTION 4: SANA & COUNTDOWN
-   ========================================================================== */
-.countdown-section {
-  padding: 40px 20px;
-  background: var(--section-bg-alt);
-}
-
-/* ==========================================================================
    SECTION 4: SANA & VAQT (2 ta holat: To'y boshlanishidan oldin va To'y vaqtida)
    ========================================================================== */
 .countdown-section {
@@ -76,7 +68,7 @@
 .countdown-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -95,7 +87,7 @@
   display: block;
 }
 
-/* 4 ta ramka ustidagi raqamlar overlayi */
+/* 4 ta ramka ustidagi yirik, aniq raqamlar overlayi */
 .vaqt-numbers-overlay {
   position: absolute;
   top: 0;
@@ -107,8 +99,8 @@
 
 .vaqt-box-num {
   position: absolute;
-  top: 36.2%;
-  height: 6.8%;
+  top: 34.8%;
+  height: 8.2%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,8 +114,8 @@
 
 .vaqt-box-num span {
   font-family: var(--font-title);
-  font-size: clamp(1.35rem, 5.8vw, 2.2rem);
-  font-weight: 700;
+  font-size: clamp(2.1rem, 9.2vw, 3.6rem);
+  font-weight: 800;
   color: #111e33;
   line-height: 1;
   letter-spacing: 0.5px;
