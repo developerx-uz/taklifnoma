@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function calculateMaxSlide() {
-    // 4px padding on each side of the track
-    return Math.max(0, unlockSlider.clientWidth - unlockHandle.offsetWidth - 8);
+    // 3px padding on each side of the track
+    return Math.max(0, unlockSlider.clientWidth - unlockHandle.offsetWidth - 6);
   }
 
   // =========================================================================
