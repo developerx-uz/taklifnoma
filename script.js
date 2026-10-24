@@ -829,8 +829,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calculateMaxSlide() {
-      // 5px padding on each side
-      return Math.max(0, unlockSlider.clientWidth - unlockHandle.offsetWidth - 10);
+      // 4px padding on each side
+      return Math.max(0, unlockSlider.clientWidth - unlockHandle.offsetWidth - 8);
     }
 
     function triggerUnlock() {
@@ -839,6 +839,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       unlocked = true;
+
+      // Unlock body to reveal all invitation sections and enable scrolling
+      document.body.classList.remove('is-locked');
+      document.body.classList.add('is-unlocked');
 
       // Update ARIA
       unlockSlider.setAttribute('aria-valuenow', '100');
