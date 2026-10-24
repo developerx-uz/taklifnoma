@@ -229,6 +229,21 @@ body {
   transform: scale(1.08);
 }
 
+#sound-toggle-top {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+#sound-toggle-top.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
 /* ==========================================================================
    SECTION COMMON STYLES
    ========================================================================== */
@@ -1997,7 +2012,7 @@ body {
 }
 
 /* ==========================================================================
-   FLOATING MUSIC PLAYER WIDGET
+   FLOATING MUSIC PLAYER WIDGET (Hidden initially; revealed only after unlock)
    ========================================================================== */
 .floating-music-widget {
   position: fixed;
@@ -2007,6 +2022,18 @@ body {
   display: flex;
   align-items: center;
   cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.6) translateY(25px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.5s ease;
+}
+
+.floating-music-widget.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
 }
 
 .music-disc-wrap {

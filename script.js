@@ -766,16 +766,6 @@ document.addEventListener('DOMContentLoaded', () => {
   floatingMusic?.addEventListener('click', toggleAudio);
   soundToggleTop?.addEventListener('click', toggleAudio);
 
-  // Show tooltip on load for 4 seconds
-  setTimeout(() => {
-    if (!isAudioPlaying) {
-      musicTooltip?.classList.add('show');
-      setTimeout(() => {
-        musicTooltip?.classList.remove('show');
-      }, 4000);
-    }
-  }, 1500);
-
   // 4. Load Guestbook
   loadWishes();
 
@@ -883,10 +873,22 @@ document.addEventListener('DOMContentLoaded', () => {
       // Play soft chime
       playUnlockChime();
 
-      // Start romantic wedding music on interaction
+      // Reveal music player widgets only after unlocking
+      floatingMusic?.classList.add('visible');
+      soundToggleTop?.classList.add('visible');
+
+      // Automatically start romantic wedding music upon unlocking
       if (!isAudioPlaying) {
         toggleAudio();
       }
+
+      // Show gentle guide tooltip on the music widget
+      setTimeout(() => {
+        musicTooltip?.classList.add('show');
+        setTimeout(() => {
+          musicTooltip?.classList.remove('show');
+        }, 3500);
+      }, 700);
 
       // Confetti celebration burst
       if (typeof launchConfetti === 'function') {
