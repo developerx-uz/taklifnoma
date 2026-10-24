@@ -39,13 +39,17 @@ body.is-locked .desktop-menu {
   opacity: 0.35;
 }
 
-/* UNLOCKED STATE: Re-enables full vertical scroll */
+/* UNLOCKED STATE: Re-enables full vertical scroll & hides the opening screen */
 body.is-unlocked {
   overflow-y: auto !important;
   height: auto !important;
   max-height: none !important;
   position: static !important;
   touch-action: auto !important;
+}
+
+body.is-unlocked .hero-section {
+  display: none !important;
 }
 
 body.is-unlocked .desktop-menu {
@@ -62,10 +66,10 @@ body.is-unlocked .desktop-menu {
   height: calc(100dvh - 54px);
   min-height: calc(100vh - 54px);
   max-height: calc(100vh - 54px);
-  padding: 0 16px 18px;
+  padding: 10px 16px 18px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
   position: relative;
@@ -101,69 +105,72 @@ body.is-unlocked .desktop-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  gap: 10px;
-  transform: translateY(-20px);
+  padding-top: 6px;
+  box-sizing: border-box;
 }
 
-/* Hero Incoming Subtitle Tag */
+/* Hero Incoming Subtitle Tag (Header ostida eng teppada) */
 .hero-incoming-tag {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 3.5px;
   color: var(--gold-light);
   text-transform: uppercase;
   opacity: 0.95;
   font-weight: 600;
-  margin: 0;
+  margin: 2px 0 0 0;
+  text-align: center;
 }
 
-/* Bismillah & Quran Verse Card: Yuqoriga ko'tarilgan ramka */
+/* Bismillah & Quran Verse Card (Tagdan 20dp pastroqda va kattaroq) */
 .bismillah-block {
-  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 0;
   width: 95%;
-  max-width: 410px;
-  background: rgba(11, 16, 29, 0.82);
+  max-width: 445px;
+  background: rgba(11, 16, 29, 0.84);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1.2px solid rgba(212, 175, 55, 0.35);
-  padding: 10px 18px;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55),
-              inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(212, 175, 55, 0.42);
+  padding: 14px 22px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+              inset 0 0 14px rgba(212, 175, 55, 0.12);
   text-align: center;
 }
 
 .arabic-verse {
   font-family: 'Amiri', 'Traditional Arabic', serif;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   color: var(--gold-light);
   direction: rtl;
   letter-spacing: 1px;
-  line-height: 1.3;
-  margin-bottom: 3px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.35;
+  margin-bottom: 5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8),
+               0 0 16px rgba(212, 175, 55, 0.35);
 }
 
 .quran-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #f1f5f9;
   margin: 0;
 }
 
 .quote-source {
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.74rem;
   color: var(--gold-primary);
-  margin-top: 3px;
+  margin-top: 5px;
   font-family: var(--font-sans);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 /* Couple Names: Farruxjon & Marjonaxon — Eng markazda, kattaroq va yanada chiroyli */
@@ -172,7 +179,8 @@ body.is-unlocked .desktop-menu {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2px 0 4px;
+  margin-top: 18px;
+  margin-bottom: 0;
   text-align: center;
 }
 
@@ -222,13 +230,13 @@ body.is-unlocked .desktop-menu {
 }
 
 /* ==========================================================================
-   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock (Enlarged & Lifted Higher)
+   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock
    ========================================================================== */
 .unlock-slider-wrap,
 .unlock-btn-wrap {
   width: 100%;
   max-width: 325px;
-  margin: 30px 0 0; /* Yana 20px (jami 30px) pastga tushirildi, ekran balandligining ~75% qismida */
+  margin-top: 22px;
   position: relative;
   z-index: 5;
 }
