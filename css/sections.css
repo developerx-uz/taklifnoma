@@ -59,235 +59,99 @@
   background: var(--section-bg-alt);
 }
 
-.countdown-card-ivory {
+/* ==========================================================================
+   SECTION 4: SANA & VAQT (2 ta holat: To'y boshlanishidan oldin va To'y vaqtida)
+   ========================================================================== */
+.countdown-section {
   width: 100%;
-  max-width: 400px;
-  background: linear-gradient(170deg, #fdfbf7 0%, #f5f0e4 100%);
-  color: #2c251e;
-  border-radius: 24px;
-  padding: 32px 20px 26px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(212, 175, 55, 0.3);
-  text-align: center;
-  position: relative;
-  margin: 0 auto;
-}
-
-.sana-badge {
-  font-family: var(--font-title);
-  font-size: 0.78rem;
-  letter-spacing: 5px;
-  color: #9f7922;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.sana-date-big {
-  font-family: var(--font-title);
-  font-size: 2.2rem;
-  letter-spacing: 6px;
-  color: #8c6b1b;
-  font-weight: 500;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.heart-divider {
+  padding: 0 !important;
+  margin: 0 !important;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 12px;
-  width: 120px;
-  margin: 0 auto 10px;
+  align-items: flex-start;
+  background: #080c16;
+  box-sizing: border-box;
 }
 
-.heart-divider .line {
-  flex: 1;
-  height: 1px;
-  background: #d4af37;
-  opacity: 0.65;
-}
-
-.heart-divider i {
-  font-size: 0.65rem;
-  color: #9f7922;
-}
-
-.countdown-label-sm {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: #71695f;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-/* 4 Ivory Pills Countdown */
-.ivory-timer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.ivory-timer-box {
-  background: #ffffff;
-  border: 1px solid rgba(226, 218, 204, 0.75);
-  border-radius: 14px;
-  padding: 12px 4px 10px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: var(--transition-smooth);
-}
-
-.ivory-timer-box:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(212, 175, 55, 0.18);
-  border-color: rgba(212, 175, 55, 0.6);
-}
-
-.ivory-timer-val {
-  font-family: var(--font-title);
-  font-size: 1.55rem;
-  font-weight: 500;
-  color: #2b2621;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.ivory-timer-label {
-  font-family: var(--font-sans);
-  font-size: 0.58rem;
-  letter-spacing: 1.5px;
-  color: #8c8275;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* Calendar Table & Button */
-.calendar-sparkle {
-  color: #c59b27;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-}
-
-.calendar-month-name {
-  font-family: var(--font-title);
-  font-size: 0.9rem;
-  letter-spacing: 3px;
-  color: #2b2621;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.calendar-table-wrap {
-  max-width: 280px;
-  margin: 0 auto 16px;
-}
-
-.calendar-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.calendar-table th {
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  color: #8c8275;
-  font-weight: 600;
-  padding: 5px 2px;
-  text-align: center;
-}
-
-.calendar-table td {
-  font-family: var(--font-title);
-  font-size: 0.85rem;
-  color: #3f3933;
-  padding: 5px 2px;
-  text-align: center;
-  height: 30px;
+.countdown-card-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.calendar-table td.empty {
+.vaqt-card {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vaqt-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* 4 ta ramka ustidagi raqamlar overlayi */
+.vaqt-numbers-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
-.calendar-table td.wedding-day {
-  color: #8c6b1b;
-  font-weight: 700;
-}
-
-.calendar-table td.wedding-day .day-circle {
+.vaqt-box-num {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1.5px solid #c59b27;
+  top: 36.2%;
+  height: 6.8%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8c6b1b;
-  animation: pulseRingSoft 2.5s infinite;
+  text-align: center;
 }
 
-@keyframes pulseRingSoft {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.4); }
-  50% { box-shadow: 0 0 0 5px rgba(197, 155, 39, 0); }
-}
+.vaqt-box-num.box-kun    { left: 4.8%;  width: 20%; }
+.vaqt-box-num.box-soat   { left: 28.3%; width: 20%; }
+.vaqt-box-num.box-daqiqa { left: 51.7%; width: 20%; }
+.vaqt-box-num.box-soniya { left: 75.2%; width: 20%; }
 
-.calendar-bottom-line {
-  width: 70%;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.3);
-  margin: 0 auto 10px;
-}
-
-.wedding-start-time {
+.vaqt-box-num span {
   font-family: var(--font-title);
-  font-size: 0.78rem;
-  letter-spacing: 2.5px;
-  color: #9f7922;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 14px;
+  font-size: clamp(1.35rem, 5.8vw, 2.2rem);
+  font-weight: 700;
+  color: #111e33;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
-.calendar-btn-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.countdown-card-ivory .calendar-btn {
-  background: #fdfbf7;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  color: #9f7922;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  padding: 10px 22px;
-  border-radius: 25px;
+/* Rasm ustidagi "Taqvimga qo'shish" interaktiv tugmasi */
+.vaqt-cal-hitbox {
+  position: absolute;
+  left: 20.83%;
+  width: 58.33%;
+  top: 54.8%;
+  height: 6.61%;
+  background: transparent;
+  border: none;
+  border-radius: 40px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition: var(--transition-smooth);
+  outline: none;
+  pointer-events: auto;
+  transition: background-color 0.25s ease, transform 0.15s ease;
 }
 
-.countdown-card-ivory .calendar-btn:hover {
-  background: var(--gold-gradient);
-  color: #12151e;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+.vaqt-cal-hitbox:hover {
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.vaqt-cal-hitbox:active {
+  transform: scale(0.98);
 }
 
 /* ==========================================================================
