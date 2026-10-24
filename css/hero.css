@@ -66,14 +66,24 @@ body.is-unlocked .desktop-menu {
   height: calc(100dvh - 54px);
   min-height: calc(100vh - 54px);
   max-height: calc(100vh - 54px);
-  padding: 10px 16px 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  width: 100%;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
+
+  /* ==========================================================================
+     HAR BIR RAMKA UCHUN MUSTAQIL SOZLAMALAR (INDEPENDENT SETTINGS)
+     Har bir element o'zining mustaqil koordinatasiga ega.
+     Biri o'zgarganda boshqalari zarracha ham o'zgarmaydi!
+     ========================================================================== */
+  --ramka1-top: 14px;        /* 1-RAMKA: SIZGA TAKLIFNOMA KELDI */
+  --ramka2-top: 50px;        /* 2-RAMKA: QUR'ON OYATI (1-ramkadan 20dp pastroqda) */
+  --ramka2-max-width: 440px;
+  --ramka-crest-top: 32%;    /* 2.5-RAMKA: OYAT VA ISMLAR ORASIDAGI NAFIS ROYAL CREST */
+  --ramka3-top: 46%;         /* 3-RAMKA: FARRUXJON & MARJONAXON (Bir oz tepparoqda) */
+  --ramka-badge-top: 64%;    /* 3.5-RAMKA: ISMLAR VA SURISH ORASIDAGI NIKOH TO'YI BADGE */
+  --ramka4-top: 79%;         /* 4-RAMKA: SURIB OCHISH RAMKASI */
+  --ramka4-max-width: 325px;
 }
 
 /* Floral Frame Background (Shifted higher to elevate top arch) */
@@ -99,14 +109,20 @@ body.is-unlocked .desktop-menu {
   z-index: 2;
 }
 
+/* Hero Content: Butun ekran bo'ylab 100% mustaqil balandlikka ega konteyner */
 .hero-content {
-  position: relative;
-  z-index: 3;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   max-width: 520px;
   height: 100%;
   margin: 0 auto;
+  z-index: 3;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 /* ==========================================================================
@@ -114,7 +130,7 @@ body.is-unlocked .desktop-menu {
    ========================================================================== */
 .hero-incoming-tag {
   position: absolute;
-  top: 12px;
+  top: var(--ramka1-top, 14px);
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -128,28 +144,31 @@ body.is-unlocked .desktop-menu {
   margin: 0;
   text-align: center;
   pointer-events: none;
+  z-index: 4;
 }
 
 /* ==========================================================================
-   RAMKA 2: QUR'ON OYATI RAMKASI (Tagdan 20dp pastroqda — Alohida sozlama)
+   RAMKA 2: QUR'ON OYATI RAMKASI (1-ramkadan 20dp pastroqda — Alohida sozlama)
    ========================================================================== */
 .bismillah-block {
   position: absolute;
-  top: 44px; /* Tag ostidan 20dp pastroqda */
+  top: var(--ramka2-top, 50px);
   left: 50%;
   transform: translateX(-50%);
-  width: 95%;
-  max-width: 445px;
-  background: rgba(11, 16, 29, 0.84);
+  width: 92%;
+  max-width: var(--ramka2-max-width, 440px);
+  background: rgba(11, 16, 29, 0.86);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid rgba(212, 175, 55, 0.42);
-  padding: 14px 22px;
+  padding: 13px 20px;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
               inset 0 0 14px rgba(212, 175, 55, 0.12);
   text-align: center;
   margin: 0;
+  z-index: 4;
+  pointer-events: auto;
 }
 
 .arabic-verse {
@@ -167,27 +186,68 @@ body.is-unlocked .desktop-menu {
 .quran-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.92rem;
-  line-height: 1.45;
+  font-size: 0.90rem;
+  line-height: 1.42;
   color: #f1f5f9;
   margin: 0;
 }
 
 .quote-source {
   display: block;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: var(--gold-primary);
-  margin-top: 5px;
+  margin-top: 4px;
   font-family: var(--font-sans);
   letter-spacing: 0.8px;
 }
 
 /* ==========================================================================
-   RAMKA 3: ISMLAR — Farruxjon & Marjonaxon (Qoq markazda — Alohida sozlama)
+   RAMKA 2.5: ROYAL CREST / MONOGRAM (Qur'on oyati va Ismlar orasidagi bezak)
+   ========================================================================== */
+.hero-royal-crest {
+  position: absolute;
+  top: var(--ramka-crest-top, 32%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 240px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.88;
+}
+
+.crest-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 40%, rgba(212, 175, 55, 0.85) 100%);
+}
+
+.crest-line.right {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.85) 0%, rgba(212, 175, 55, 0.4) 60%, transparent 100%);
+}
+
+.crest-diamond {
+  font-size: 0.65rem;
+  color: var(--gold-light);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.7));
+}
+
+.crest-symbol {
+  font-size: 0.95rem;
+  color: var(--gold-primary);
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+}
+
+/* ==========================================================================
+   RAMKA 3: ISMLAR — Farruxjon & Marjonaxon (Bir oz tepparoqda — Alohida sozlama)
    ========================================================================== */
 .hero-names-wrap {
   position: absolute;
-  top: 52%;
+  top: var(--ramka3-top, 46%);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -198,6 +258,7 @@ body.is-unlocked .desktop-menu {
   margin: 0;
   text-align: center;
   pointer-events: none;
+  z-index: 4;
 }
 
 .couple-names {
@@ -246,18 +307,82 @@ body.is-unlocked .desktop-menu {
 }
 
 /* ==========================================================================
-   RAMKA 4: OCHISH RAMKASI (Slide to Unlock — 75% balandlikda — Alohida sozlama)
+   RAMKA 3.5: NIKOH TO'YI VA BAXT OQSHOMI BADGE (Ismlar va Surish orasida)
+   ========================================================================== */
+.hero-invitation-badge {
+  position: absolute;
+  top: var(--ramka-badge-top, 64%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  text-align: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(14, 21, 38, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55),
+              inset 0 0 10px rgba(212, 175, 55, 0.12);
+}
+
+.badge-ring-icon {
+  color: var(--gold-primary);
+  font-size: 0.82rem;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6));
+}
+
+.badge-text {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, #fcedc7 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.badge-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: rgba(241, 245, 249, 0.92);
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* ==========================================================================
+   RAMKA 4: OCHISH RAMKASI (Slide to Unlock — Alohida sozlama)
    ========================================================================== */
 .unlock-slider-wrap,
 .unlock-btn-wrap {
   position: absolute;
-  top: 75%;
+  top: var(--ramka4-top, 79%);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 325px;
+  max-width: var(--ramka4-max-width, 325px);
   margin: 0;
   z-index: 5;
+  pointer-events: auto;
 }
 
 .unlock-slider {
@@ -390,7 +515,7 @@ body.is-unlocked .desktop-menu {
 /* Draggable Slider Handle / Thumb (Qoq markazda: top: 50% va margin-top: -24px) */
 .unlock-slider-handle {
   position: absolute;
-  left: 3px;
+  left: 4px;
   top: 50%;
   margin-top: -24px;
   width: 48px;
