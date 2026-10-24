@@ -194,145 +194,40 @@
         </div>
       </section>
 
-      <!-- SECTION 4: SANA & ORTGA HISOBLASH (Countdown & Calendar matching screenshot) -->
+      <!-- SECTION 4: SANA & VAQT (2 ta holat: To'y boshlanishidan oldin va To'y vaqtida) -->
       <section class="section countdown-section" id="sana">
-        <div class="countdown-card-ivory">
-          <div class="countdown-card-split">
-            <!-- Left Side: Date & Countdown Timer -->
-            <div class="countdown-left-col">
-              <!-- SANA badge -->
-              <p class="sana-badge" data-key="sana_label">SANA</p>
-              
-              <!-- Large Date: 30 10 2026 -->
-              <h2 class="sana-date-big">30 &nbsp; 10 &nbsp; 2026</h2>
-              
-              <!-- Delicate Heart Divider -->
-              <div class="heart-divider">
-                <span class="line"></span>
-                <i class="fa-regular fa-heart"></i>
-                <span class="line"></span>
-              </div>
-              
-              <!-- Subtitle: TO'YGACHA QOLGAN VAQT -->
-              <p class="countdown-label-sm" data-key="countdown_title">TO'YGACHA QOLGAN VAQT</p>
-
-              <!-- 4 Ivory Pills Countdown -->
-              <div class="ivory-timer-grid">
-                <div class="ivory-timer-box">
-                  <span class="ivory-timer-val" id="days">00</span>
-                  <span class="ivory-timer-label" data-key="timer_days">KUN</span>
-                </div>
-                <div class="ivory-timer-box">
-                  <span class="ivory-timer-val" id="hours">00</span>
-                  <span class="ivory-timer-label" data-key="timer_hours">SOAT</span>
-                </div>
-                <div class="ivory-timer-box">
-                  <span class="ivory-timer-val" id="minutes">00</span>
-                  <span class="ivory-timer-label" data-key="timer_minutes">DAQIQA</span>
-                </div>
-                <div class="ivory-timer-box">
-                  <span class="ivory-timer-val" id="seconds">00</span>
-                  <span class="ivory-timer-label" data-key="timer_seconds">SONIYA</span>
-                </div>
-              </div>
-
-              <!-- Start Time -->
-              <p class="wedding-start-time" data-key="cal_start_time">BOSHLANISHI 18:00</p>
-
-              <!-- Calendar Integration Button -->
-              <div class="calendar-btn-wrap">
-                <button class="calendar-btn" id="calendar-btn">
-                  <i class="fa-regular fa-calendar-plus"></i>
-                  <span data-key="add_calendar">Taqvimga qo‘shish</span>
-                </button>
-              </div>
+        <div class="countdown-card-wrapper">
+          <!-- 1. TO'Y BOSHLANISHIDAN OLDIN (Ortga hisoblash & Taqvim) -->
+          <div class="vaqt-card vaqt-before" id="vaqt-before">
+            <img
+              src="assets/images/vaqt_before.jpg?v=2"
+              alt="To'yimizga qolgan vaqt va taqvim"
+              class="vaqt-card-img"
+              width="1536"
+              height="2752"
+              loading="lazy"
+            />
+            <!-- 4 ta ramka ichidagi real-vaqtda o'zgaruvchi raqamlar -->
+            <div class="vaqt-numbers-overlay">
+              <div class="vaqt-box-num box-kun"><span id="days">00</span></div>
+              <div class="vaqt-box-num box-soat"><span id="hours">00</span></div>
+              <div class="vaqt-box-num box-daqiqa"><span id="minutes">00</span></div>
+              <div class="vaqt-box-num box-soniya"><span id="seconds">00</span></div>
             </div>
+            <!-- Taqvimga qo'shish interaktiv tugmasi (Rasm ustidagi tugma maydoni) -->
+            <button class="vaqt-cal-hitbox" id="calendar-btn" aria-label="Taqvimga qo‘shish" title="Taqvimga qo‘shish"></button>
+          </div>
 
-            <!-- Divider Line (visible on desktop) -->
-            <div class="countdown-split-divider"></div>
-
-            <!-- Right Side: Interactive Calendar -->
-            <div class="countdown-right-col">
-              <!-- Sparkle separator -->
-              <div class="calendar-sparkle">✦</div>
-
-              <!-- Month & Year -->
-              <h3 class="calendar-month-name" data-key="cal_month">OKTYABR 2026</h3>
-
-              <!-- Calendar Table for October 2026 -->
-              <div class="calendar-table-wrap">
-                <table class="calendar-table">
-                  <thead>
-                    <tr>
-                      <th>Mon</th>
-                      <th>Tue</th>
-                      <th>Wed</th>
-                      <th>Thu</th>
-                      <th>Fri</th>
-                      <th>Sat</th>
-                      <th>Sun</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Week 1: Oct 1 is Thursday -->
-                    <tr>
-                      <td class="empty"></td>
-                      <td class="empty"></td>
-                      <td class="empty"></td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>3</td>
-                      <td>4</td>
-                    </tr>
-                    <!-- Week 2 -->
-                    <tr>
-                      <td>5</td>
-                      <td>6</td>
-                      <td>7</td>
-                      <td>8</td>
-                      <td>9</td>
-                      <td>10</td>
-                      <td>11</td>
-                    </tr>
-                    <!-- Week 3 -->
-                    <tr>
-                      <td>12</td>
-                      <td>13</td>
-                      <td>14</td>
-                      <td>15</td>
-                      <td>16</td>
-                      <td>17</td>
-                      <td>18</td>
-                    </tr>
-                    <!-- Week 4 -->
-                    <tr>
-                      <td>19</td>
-                      <td>20</td>
-                      <td>21</td>
-                      <td>22</td>
-                      <td>23</td>
-                      <td>24</td>
-                      <td>25</td>
-                    </tr>
-                    <!-- Week 5: Day 30 Highlighted -->
-                    <tr>
-                      <td>26</td>
-                      <td>27</td>
-                      <td>28</td>
-                      <td>29</td>
-                      <td class="wedding-day">
-                        <span class="day-circle">30</span>
-                      </td>
-                      <td>31</td>
-                      <td class="empty"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Bottom Line -->
-              <div class="calendar-bottom-line"></div>
-            </div>
+          <!-- 2. TO'Y VAQTIDA (To'y boshlanganda chiquvchi hashamatli tabrik) -->
+          <div class="vaqt-card vaqt-started" id="vaqt-started" style="display: none;">
+            <img
+              src="assets/images/vaqt_started.png?v=2"
+              alt="To'y boshlandi!"
+              class="vaqt-card-img"
+              width="879"
+              height="1790"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
