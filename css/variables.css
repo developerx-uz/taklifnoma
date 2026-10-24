@@ -1,0 +1,167 @@
+/* ==========================================================================
+   VARIABLES & DESIGN TOKENS (css/variables.css)
+   Farrux & Marjona - Luxury Wedding Invitation
+   ========================================================================== */
+
+:root {
+  /* Color Palette — harmonized midnight-blue + royal gold */
+  --bg-dark: #06090f;
+  --bg-card: rgba(12, 17, 30, 0.82);
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border-gold: rgba(212, 175, 55, 0.28);
+  --border-gold-bright: #d4af37;
+  
+  --gold-primary: #d4af37;
+  --gold-light: #f6e5a6;
+  --gold-dark: #9f7922;
+  --gold-gradient: linear-gradient(135deg, #dfba48 0%, #fff3cd 50%, #b8860b 100%);
+  --gold-gradient-text: linear-gradient(135deg, #f3d478 0%, #ffffff 50%, #d4af37 100%);
+  
+  --text-primary: #f1f5f9;
+  --text-muted: #8b9bb5;
+  --text-gold: #e2c068;
+  
+  --ivory-card-bg: #faf7f0;
+  --ivory-card-text: #2c251e;
+  --ivory-card-sub: #635b52;
+  
+  --section-bg-alt: #090d18;
+  
+  /* Typography */
+  --font-calligraphy: 'Great Vibes', 'Alex Brush', cursive;
+  --font-serif: 'Cormorant Garamond', 'Cinzel', serif;
+  --font-title: 'Cinzel', serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Transitions & Shadows */
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --gold-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+  --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-dark);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Layout Wrapper & Responsive Invitation Card */
+.site-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 10%, #151f38 0%, #070a12 60%, #05070d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invitation-container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background-color: #0b0f1d;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(212, 175, 55, 0.25);
+  transition: max-width 0.3s ease;
+}
+
+/* Section Common Utilities */
+.section {
+  position: relative;
+  padding: 55px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.glass-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-gold);
+  border-radius: 26px;
+  padding: 36px 24px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: var(--gold-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+
+.section-title.cursive-title {
+  font-family: var(--font-calligraphy);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  background: var(--gold-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sub-heading {
+  display: inline-block;
+  font-size: 0.74rem;
+  letter-spacing: 3px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.gold-divider-sm {
+  width: 70px;
+  height: 2px;
+  background: var(--gold-gradient);
+  margin: 14px auto 26px auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.gold-divider-sm::after {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0f1627;
+  padding: 0 5px;
+  color: var(--gold-primary);
+  font-size: 0.7rem;
+}

@@ -1,0 +1,503 @@
+/* ==========================================================================
+   HERO COVER & SLIDE-TO-UNLOCK (css/hero.css)
+   Farrux & Marjona - Luxury Wedding Invitation
+   ========================================================================== */
+
+/* ==========================================================================
+   1. LOCKED / UNLOCKED SCROLL CONTROLLER
+   Strictly prevents any page scrolling until slide-to-unlock is completed
+   ========================================================================== */
+body.is-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100vh !important;
+  max-height: 100dvh !important;
+  position: fixed !important;
+  width: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  touch-action: none !important;
+}
+
+body.is-locked .invitation-container {
+  overflow: hidden !important;
+  height: calc(100vh - 54px) !important;
+  height: calc(100dvh - 54px) !important;
+  max-height: calc(100vh - 54px) !important;
+  max-height: calc(100dvh - 54px) !important;
+}
+
+/* Hide all subsequent sections and footer while locked */
+body.is-locked .section:not(.hero-section),
+body.is-locked footer {
+  display: none !important;
+}
+
+body.is-locked .desktop-menu {
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* UNLOCKED STATE: Re-enables full vertical scroll */
+body.is-unlocked {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  position: static !important;
+  touch-action: auto !important;
+}
+
+body.is-unlocked .desktop-menu {
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* ==========================================================================
+   2. HERO COVER SECTION (Strict 1 Screen / 100vh Fit)
+   ========================================================================== */
+.hero-section {
+  height: calc(100vh - 54px);
+  height: calc(100dvh - 54px);
+  min-height: calc(100vh - 54px);
+  max-height: calc(100vh - 54px);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Floral Frame Background with top spacing & crop adjustment */
+.floral-frame-bg {
+  position: absolute;
+  top: 14px; /* Lowered gracefully from the header bar */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 14px);
+  background-image: url('../assets/images/floral_frame.jpg');
+  background-size: cover;
+  background-position: center top;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(7, 10, 18, 0.42) 0%, rgba(7, 10, 18, 0.85) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  gap: 8px;
+}
+
+/* Hero Incoming Subtitle Tag */
+.hero-incoming-tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 3.5px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  opacity: 0.92;
+  font-weight: 600;
+  margin: 4px 0 0;
+}
+
+/* Couple Names & Date */
+.hero-names-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.couple-names {
+  font-family: var(--font-title);
+  font-size: clamp(1.7rem, 4.2vw, 2.15rem);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.groom-name, .bride-name {
+  background: var(--gold-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.ampersand {
+  font-family: var(--font-calligraphy);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: var(--gold-primary);
+  -webkit-text-fill-color: var(--gold-primary);
+  margin: -4px 0;
+  font-weight: 400;
+}
+
+.hero-date {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  letter-spacing: 4px;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Bismillah & Quran Verse Card (Anfol surasi, 63) */
+.bismillah-block {
+  margin: 2px 0;
+  width: 95%;
+  max-width: 390px;
+  background: rgba(11, 16, 29, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  padding: 10px 18px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.arabic-verse {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.18rem;
+  color: var(--gold-light);
+  direction: rtl;
+  letter-spacing: 1px;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.quran-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.quote-source {
+  display: block;
+  font-size: 0.66rem;
+  color: var(--gold-primary);
+  margin-top: 3px;
+  font-family: var(--font-sans);
+}
+
+/* Delicate Heart in Center */
+.hero-mid-heart {
+  margin: 0;
+  color: var(--gold-primary);
+  font-size: 0.85rem;
+  opacity: 0.85;
+  animation: heartPulse 1.8s infinite;
+}
+
+/* ==========================================================================
+   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock (Drag Left to Right)
+   ========================================================================== */
+.unlock-slider-wrap,
+.unlock-btn-wrap {
+  width: 100%;
+  max-width: 290px;
+  margin-top: 4px;
+  position: relative;
+  z-index: 5;
+}
+
+.unlock-slider {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  background: rgba(14, 18, 26, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 50px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+              inset 0 2px 6px rgba(0, 0, 0, 0.5),
+              0 0 20px rgba(212, 175, 55, 0.15);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  cursor: grab;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.unlock-slider.is-dragging {
+  cursor: grabbing;
+  border-color: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.7),
+              0 0 25px rgba(212, 175, 55, 0.35);
+}
+
+.unlock-slider:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 3px;
+}
+
+.unlock-slider:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65),
+              inset 0 2px 6px rgba(0, 0, 0, 0.5),
+              0 0 25px rgba(212, 175, 55, 0.22);
+}
+
+/* Shimmer beam across the track */
+.unlock-slider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.15) 50%, transparent 100%);
+  animation: trackShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes trackShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Dynamic glowing gold fill that tracks the handle */
+.unlock-slider-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: 50px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 100%);
+  box-shadow: inset 0 0 14px rgba(212, 175, 55, 0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Label & Arrow instructions centered in the track */
+.unlock-slider-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 44px;
+  padding-right: 12px;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+.unlock-slider-label .unlock-text {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 2.8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45) 0%, #ffffff 50%, rgba(212, 175, 55, 0.45) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 2.5s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes textShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.unlock-chevrons {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--gold-light);
+  font-size: 0.72rem;
+}
+
+.unlock-chevrons .ch-1 { animation: chevronFade 1.5s infinite ease-in-out; }
+.unlock-chevrons .ch-2 { animation: chevronFade 1.5s infinite ease-in-out 0.25s; }
+.unlock-chevrons .ch-3 { animation: chevronFade 1.5s infinite ease-in-out 0.5s; }
+
+@keyframes chevronFade {
+  0%, 100% { opacity: 0.25; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(4px); }
+}
+
+/* Draggable Slider Handle / Thumb */
+.unlock-slider-handle {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  z-index: 4;
+  will-change: transform;
+}
+
+.unlock-slider.is-dragging .unlock-slider-handle,
+.unlock-slider-handle:active {
+  cursor: grabbing;
+}
+
+@keyframes handleHintBounce {
+  0%, 100% { transform: translateX(0); }
+  35% { transform: translateX(38px); }
+  60% { transform: translateX(10px); }
+  80% { transform: translateX(24px); }
+}
+
+.unlock-slider.hinting .unlock-slider-handle {
+  animation: handleHintBounce 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.unlock-slider-handle .lock-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fcedc7 0%, #d4af37 50%, #8f6a00 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b0e17;
+  font-size: 0.98rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.65),
+              inset 0 1px 2px rgba(255, 255, 255, 0.7);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.2s ease,
+              background 0.3s ease;
+}
+
+.unlock-slider:hover .lock-icon-circle {
+  transform: scale(1.05);
+  box-shadow: 0 4px 22px rgba(212, 175, 55, 0.8),
+              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.handle-pulse-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.7);
+  animation: handlePulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes handlePulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.unlock-slider.is-dragging .handle-pulse-ring {
+  display: none;
+}
+
+/* UNLOCKED STATE */
+.unlock-slider.unlocked {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.7),
+              inset 0 0 20px rgba(212, 175, 55, 0.3);
+  cursor: pointer;
+}
+
+.unlock-slider.unlocked .unlock-slider-handle {
+  cursor: pointer;
+}
+
+.unlock-slider.unlocked .unlock-slider-fill {
+  width: 100% !important;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.55) 0%, rgba(255, 215, 0, 0.35) 100%);
+}
+
+.unlock-slider.unlocked .unlock-slider-label {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.unlock-slider.unlocked .lock-icon-circle {
+  background: linear-gradient(135deg, #ffffff 0%, #ffd700 60%, #e6a100 100%);
+  transform: scale(1.1);
+  box-shadow: 0 0 28px rgba(255, 215, 0, 0.95);
+  color: #05070a;
+}
+
+.unlock-slider.unlocked .handle-pulse-ring {
+  display: none;
+}
+
+.scroll-prompt {
+  margin-bottom: 10px;
+}
+
+.open-invite-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  background: rgba(14, 21, 38, 0.85);
+  border: 1px solid var(--border-gold);
+  padding: 12px 26px;
+  border-radius: 25px;
+  color: var(--gold-light);
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: var(--transition-smooth);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.open-invite-btn:hover {
+  background: var(--gold-gradient);
+  color: #12151e;
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+}
+
+.bounce-icon {
+  animation: bounceDown 2s infinite;
+  font-size: 0.78rem;
+}
