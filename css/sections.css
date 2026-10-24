@@ -149,8 +149,41 @@
 }
 
 /* ==========================================================================
-   SECTION 5: KUN TARTIBI (Schedule Timeline)
+   SECTION 5: KUN TARTIBI (1080x2200 Asl o'lchamli to'liq tayyor variant)
    ========================================================================== */
+.schedule-card-section {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #080c16;
+  box-sizing: border-box;
+}
+
+.schedule-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.schedule-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 1080 / 2200;
+  display: block;
+  object-fit: contain;
+}
+
+/* Fallback timeline styles */
 .timeline {
   display: flex;
   flex-direction: column;
