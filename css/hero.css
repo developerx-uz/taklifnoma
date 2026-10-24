@@ -106,7 +106,7 @@ body.is-unlocked .desktop-menu {
   max-width: 520px;
   margin: 0 auto;
   gap: 10px;
-  transform: translateY(-45px); /* 45dp yuqoriga, markazga yaqin ko'tarildi */
+  transform: translateY(-35px);
 }
 
 /* Hero Incoming Subtitle Tag */
@@ -228,7 +228,7 @@ body.is-unlocked .desktop-menu {
 .unlock-btn-wrap {
   width: 100%;
   max-width: 325px;
-  margin: 10px 0 0; /* 10dp (10px) pastga tushirildi */
+  margin: 30px 0 0; /* Yana 20px (jami 30px) pastga tushirildi, ekran balandligining ~75% qismida */
   position: relative;
   z-index: 5;
 }
