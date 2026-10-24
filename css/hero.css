@@ -102,19 +102,22 @@ body.is-unlocked .desktop-menu {
 .hero-content {
   position: relative;
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
   max-width: 520px;
+  height: 100%;
   margin: 0 auto;
-  padding-top: 6px;
   box-sizing: border-box;
 }
 
-/* Hero Incoming Subtitle Tag (Header ostida eng teppada) */
+/* ==========================================================================
+   RAMKA 1: SUBTITLE TAG (Header ostida eng teppada — Alohida sozlama)
+   ========================================================================== */
 .hero-incoming-tag {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   font-family: var(--font-sans);
   font-size: 0.72rem;
   letter-spacing: 3.5px;
@@ -122,14 +125,19 @@ body.is-unlocked .desktop-menu {
   text-transform: uppercase;
   opacity: 0.95;
   font-weight: 600;
-  margin: 2px 0 0 0;
+  margin: 0;
   text-align: center;
+  pointer-events: none;
 }
 
-/* Bismillah & Quran Verse Card (Tagdan 20dp pastroqda va kattaroq) */
+/* ==========================================================================
+   RAMKA 2: QUR'ON OYATI RAMKASI (Tagdan 20dp pastroqda — Alohida sozlama)
+   ========================================================================== */
 .bismillah-block {
-  margin-top: 20px;
-  margin-bottom: 0;
+  position: absolute;
+  top: 44px; /* Tag ostidan 20dp pastroqda */
+  left: 50%;
+  transform: translateX(-50%);
   width: 95%;
   max-width: 445px;
   background: rgba(11, 16, 29, 0.84);
@@ -141,6 +149,7 @@ body.is-unlocked .desktop-menu {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
               inset 0 0 14px rgba(212, 175, 55, 0.12);
   text-align: center;
+  margin: 0;
 }
 
 .arabic-verse {
@@ -173,15 +182,22 @@ body.is-unlocked .desktop-menu {
   letter-spacing: 0.8px;
 }
 
-/* Couple Names: Farruxjon & Marjonaxon — Eng markazda, kattaroq va yanada chiroyli */
+/* ==========================================================================
+   RAMKA 3: ISMLAR — Farruxjon & Marjonaxon (Qoq markazda — Alohida sozlama)
+   ========================================================================== */
 .hero-names-wrap {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
-  margin-bottom: 0;
+  margin: 0;
   text-align: center;
+  pointer-events: none;
 }
 
 .couple-names {
@@ -230,15 +246,17 @@ body.is-unlocked .desktop-menu {
 }
 
 /* ==========================================================================
-   3. UNLOCK SLIDER — Luxury Wedding Slide to Unlock
+   RAMKA 4: OCHISH RAMKASI (Slide to Unlock — 75% balandlikda — Alohida sozlama)
    ========================================================================== */
 .unlock-slider-wrap,
 .unlock-btn-wrap {
-  width: 100%;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
   max-width: 325px;
-  margin-top: auto; /* Avtomatik pastga suriladi: boshqa ramkalarga mutlaqo ta'sir qilmaydi! */
-  margin-bottom: 28px; /* Pastdan qulay va nafis masofa (~75% balandlik) */
-  position: relative;
+  margin: 0;
   z-index: 5;
 }
 
