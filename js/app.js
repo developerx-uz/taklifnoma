@@ -242,27 +242,83 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxNext = document.getElementById('lightbox-next');
 
   const galleryItems = [
-    { src: 'assets/images/galereya_full_1.jpg', caption: 'Nikoh uzuklari va baxt gullari' },
-    { src: 'assets/images/galereya_full_2.jpg', caption: 'Orzular sari ilk qadam' },
-    { src: 'assets/images/galereya_full_3.jpg', caption: 'Farruxjon & Marjonaxon — Abadiy muhabbat' }
+    {
+      src: 'assets/images/galereya_full_1.jpg',
+      caption: 'Nikoh uzuklari va baxt gullari',
+      caption_ru: 'Обручальные кольца и цветы счастья',
+      caption_en: 'Wedding rings & flowers of happiness'
+    },
+    {
+      src: 'assets/images/galereya_full_2.jpg',
+      caption: 'Orzular sari ilk qadam',
+      caption_ru: 'Первый шаг к заветной мечте',
+      caption_en: 'First step towards dreams'
+    },
+    {
+      src: 'assets/images/galereya_full_3.jpg',
+      caption: 'Farruxjon & Marjonaxon — Abadiy muhabbat',
+      caption_ru: 'Фаррухджон и Маржонахон — Вечная любовь',
+      caption_en: 'Farruxjon & Marjonaxon — Eternal Love'
+    }
   ];
 
-  let currentGalleryIndex = 0;
+  const venueItems = [
+    {
+      src: 'assets/images/toyxona_full_1.jpg',
+      caption: 'Sohil Tantanalar Saroyi — Tashqi fasad va tantanali kirish',
+      caption_ru: 'Дворец торжеств «Сохил» — Фасад и парадный вход',
+      caption_en: 'Sohil Celebration Palace — Exterior facade & grand entrance'
+    },
+    {
+      src: 'assets/images/toyxona_full_2.jpg',
+      caption: 'Sohil Saroyi — Shohona zal va billur qandillar',
+      caption_ru: 'Дворец «Сохил» — Роскошный зал и хрустальные люстры',
+      caption_en: 'Sohil Palace — Luxurious ballroom & crystal chandeliers'
+    },
+    {
+      src: 'assets/images/toyxona_full_3.jpg',
+      caption: 'Kelin-kuyov shohsupasi va tantanali yo‘lak',
+      caption_ru: 'Подиум жениха и невесты и торжественная дорожка',
+      caption_en: 'Bride & Groom royal dais and celebration walkway'
+    },
+    {
+      src: 'assets/images/toyxona_full_4.jpg',
+      caption: 'Tantanali bayram dasturxoni va shou sahnasi',
+      caption_ru: 'Праздничный свадебный стол и сцена для торжеств',
+      caption_en: 'Festive wedding banquet tables & show stage'
+    }
+  ];
 
-  function showLightboxIndex(idx) {
-    if (idx < 0) idx = galleryItems.length - 1;
-    if (idx >= galleryItems.length) idx = 0;
-    currentGalleryIndex = idx;
+  let currentItems = galleryItems;
+  let currentIndex = 0;
 
-    if (lightboxImg) {
+  function showLightboxIndex(items, idx) {
+    if (Array.isArray(items)) {
+      currentItems = items;
+    } else if (typeof items === 'number') {
+      idx = items;
+    }
+    if (!currentItems || currentItems.length === 0) currentItems = galleryItems;
+
+    if (idx < 0) idx = currentItems.length - 1;
+    if (idx >= currentItems.length) idx = 0;
+    currentIndex = idx;
+
+    const item = currentItems[idx];
+    if (lightboxImg && item) {
       lightboxImg.style.opacity = '0.5';
-      lightboxImg.src = galleryItems[idx].src;
+      lightboxImg.src = item.src;
       lightboxImg.onload = () => {
         lightboxImg.style.opacity = '1';
       };
     }
-    if (lightboxCaption) {
-      lightboxCaption.textContent = galleryItems[idx].caption;
+    if (lightboxCaption && item) {
+      let cap = item.caption;
+      if (typeof currentLang !== 'undefined') {
+        if (currentLang === 'ru' && item.caption_ru) cap = item.caption_ru;
+        else if (currentLang === 'en' && item.caption_en) cap = item.caption_en;
+      }
+      lightboxCaption.textContent = cap;
     }
   }
 
@@ -271,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hitbox.addEventListener('click', (e) => {
       e.stopPropagation();
       const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
-      showLightboxIndex(idx);
+      showLightboxIndex(galleryItems, idx);
       lightboxModal?.classList.add('active');
     });
 
@@ -279,43 +335,62 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
-        showLightboxIndex(idx);
+        showLightboxIndex(galleryItems, idx);
         lightboxModal?.classList.add('active');
       }
     });
   });
 
-  // 2. Also support old .gallery-card if any exist
+  // 2. Connect click on .venue-hitbox (New 1080x2200 To'yxona card hitboxes)
+  document.querySelectorAll('.venue-hitbox').forEach((hitbox) => {
+    hitbox.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
+      showLightboxIndex(venueItems, idx);
+      lightboxModal?.classList.add('active');
+    });
+
+    hitbox.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const idx = parseInt(hitbox.getAttribute('data-index') || '0', 10);
+        showLightboxIndex(venueItems, idx);
+        lightboxModal?.classList.add('active');
+      }
+    });
+  });
+
+  // 3. Also support old .gallery-card / .venue-card if any exist
   document.querySelectorAll('.gallery-card').forEach((card, i) => {
     card.addEventListener('click', () => {
-      showLightboxIndex(i % galleryItems.length);
+      showLightboxIndex(galleryItems, i % galleryItems.length);
       lightboxModal?.classList.add('active');
     });
   });
 
-  // 3. Close button
+  // 4. Close button
   if (lightboxClose) {
     lightboxClose.addEventListener('click', () => {
       lightboxModal?.classList.remove('active');
     });
   }
 
-  // 4. Prev & Next buttons
+  // 5. Prev & Next buttons
   if (lightboxPrev) {
     lightboxPrev.addEventListener('click', (e) => {
       e.stopPropagation();
-      showLightboxIndex(currentGalleryIndex - 1);
+      showLightboxIndex(currentItems, currentIndex - 1);
     });
   }
 
   if (lightboxNext) {
     lightboxNext.addEventListener('click', (e) => {
       e.stopPropagation();
-      showLightboxIndex(currentGalleryIndex + 1);
+      showLightboxIndex(currentItems, currentIndex + 1);
     });
   }
 
-  // 5. Click outside image to close
+  // 6. Click outside image to close
   if (lightboxModal) {
     lightboxModal.addEventListener('click', (e) => {
       if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
@@ -324,19 +399,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Keyboard navigation (Esc, ArrowLeft, ArrowRight)
+  // 7. Keyboard navigation (Esc, ArrowLeft, ArrowRight)
   window.addEventListener('keydown', (e) => {
     if (!lightboxModal?.classList.contains('active')) return;
     if (e.key === 'Escape') {
       lightboxModal.classList.remove('active');
     } else if (e.key === 'ArrowLeft') {
-      showLightboxIndex(currentGalleryIndex - 1);
+      showLightboxIndex(currentItems, currentIndex - 1);
     } else if (e.key === 'ArrowRight') {
-      showLightboxIndex(currentGalleryIndex + 1);
+      showLightboxIndex(currentItems, currentIndex + 1);
     }
   });
 
-  // 7. Mobile Touch Swipe gesture
+  // 8. Mobile Touch Swipe gesture
   let touchStartX = 0;
   lightboxModal?.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].clientX;
@@ -347,9 +422,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const diff = touchEndX - touchStartX;
     if (Math.abs(diff) > 40) {
       if (diff > 0) {
-        showLightboxIndex(currentGalleryIndex - 1); // Swipe right -> prev
+        showLightboxIndex(currentItems, currentIndex - 1); // Swipe right -> prev
       } else {
-        showLightboxIndex(currentGalleryIndex + 1); // Swipe left -> next
+        showLightboxIndex(currentItems, currentIndex + 1); // Swipe left -> next
       }
     }
   }, { passive: true });
@@ -362,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyAddressBtn = document.getElementById('copy-address-btn');
   if (copyAddressBtn) {
     copyAddressBtn.addEventListener('click', () => {
-      const address = "Sohil Tantanalar Saroyi, Toshkent viloyati, Yangiyo'l tumani";
+      const address = "Termiz shahri, Fidokor ko'chasi 90G, Sohil to'yxonasi";
       if (navigator.clipboard) {
         navigator.clipboard.writeText(address).then(() => {
           showToast(currentLang === 'ru' ? 'Адрес скопирован в буфер!' : currentLang === 'en' ? 'Address copied to clipboard!' : 'Manzil nusxalandi!');
