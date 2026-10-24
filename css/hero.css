@@ -303,9 +303,9 @@ body.is-unlocked .desktop-menu {
   top: 0;
   bottom: 0;
   width: 0;
-  border-radius: 50px;
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 100%);
-  box-shadow: inset 0 0 14px rgba(212, 175, 55, 0.3);
+  border-radius: 60px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.5) 0%, rgba(212, 175, 55, 0.2) 100%);
+  box-shadow: inset 0 0 16px rgba(212, 175, 55, 0.35);
   pointer-events: none;
   z-index: 1;
 }
@@ -317,8 +317,8 @@ body.is-unlocked .desktop-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 44px;
-  padding-right: 12px;
+  padding-left: 54px;
+  padding-right: 14px;
   gap: 8px;
   pointer-events: none;
   z-index: 2;
@@ -327,11 +327,11 @@ body.is-unlocked .desktop-menu {
 
 .unlock-slider-label .unlock-text {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  letter-spacing: 2.8px;
+  font-size: 0.88rem;
+  letter-spacing: 3px;
   font-weight: 600;
   text-transform: uppercase;
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45) 0%, #ffffff 50%, rgba(212, 175, 55, 0.45) 100%);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.5) 0%, #ffffff 50%, rgba(212, 175, 55, 0.5) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -347,9 +347,9 @@ body.is-unlocked .desktop-menu {
 .unlock-chevrons {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   color: var(--gold-light);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
 }
 
 .unlock-chevrons .ch-1 { animation: chevronFade 1.5s infinite ease-in-out; }
@@ -361,13 +361,13 @@ body.is-unlocked .desktop-menu {
   50% { opacity: 1; transform: translateX(4px); }
 }
 
-/* Draggable Slider Handle / Thumb */
+/* Draggable Slider Handle / Thumb (Kattalashtirilgan va qoq markazda joylashgan) */
 .unlock-slider-handle {
   position: absolute;
   left: 4px;
-  top: calc(50% - 22px);
-  width: 44px;
-  height: 44px;
+  top: 4px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -386,9 +386,9 @@ body.is-unlocked .desktop-menu {
 
 @keyframes handleHintBounce {
   0%, 100% { transform: translateX(0); }
-  35% { transform: translateX(38px); }
-  60% { transform: translateX(10px); }
-  80% { transform: translateX(24px); }
+  35% { transform: translateX(42px); }
+  60% { transform: translateX(12px); }
+  80% { transform: translateX(28px); }
 }
 
 .unlock-slider.hinting .unlock-slider-handle {
@@ -396,17 +396,17 @@ body.is-unlocked .desktop-menu {
 }
 
 .unlock-slider-handle .lock-icon-circle {
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: linear-gradient(135deg, #fcedc7 0%, #d4af37 50%, #8f6a00 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #0b0e17;
-  font-size: 0.98rem;
+  font-size: 1.15rem;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.65),
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.7),
               inset 0 1px 2px rgba(255, 255, 255, 0.7);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.2s ease,
@@ -414,16 +414,16 @@ body.is-unlocked .desktop-menu {
 }
 
 .unlock-slider:hover .lock-icon-circle {
-  transform: scale(1.05);
-  box-shadow: 0 4px 22px rgba(212, 175, 55, 0.8),
-              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transform: scale(1.06);
+  box-shadow: 0 4px 24px rgba(212, 175, 55, 0.85),
+              inset 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
 .handle-pulse-ring {
   position: absolute;
-  inset: -3px;
+  inset: -4px;
   border-radius: 50%;
-  border: 2px solid rgba(212, 175, 55, 0.7);
+  border: 2px solid rgba(212, 175, 55, 0.75);
   animation: handlePulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
   pointer-events: none;
 }
