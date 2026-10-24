@@ -361,7 +361,7 @@ body.is-unlocked .desktop-menu {
 .unlock-slider-handle {
   position: absolute;
   left: 4px;
-  top: 4px;
+  top: calc(50% - 22px);
   width: 44px;
   height: 44px;
   display: flex;
