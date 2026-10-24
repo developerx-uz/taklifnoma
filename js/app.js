@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const initialWishes = [
   {
     author: "Elnur & Jasmina",
-    text: "Farrux & Marjona, baxtingizga aslo ko'z tegmasin! Ilohim qo'sha qaringlar, xonadoningizdan fayz arimasin! 🎉",
+    text: "Farruxjon & Marjonaxon, baxtingizga aslo ko'z tegmasin! Ilohim qo'sha qaringlar, xonadoningizdan fayz arimasin! 🎉",
     time: "20-Oktyabr"
   },
   {
@@ -288,8 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function shareInvitation() {
     const shareData = {
-      title: "Farrux & Marjona | To'y Taklifnomasi",
-      text: "Farrux va Marjonaning nikoh to'yi munosabati bilan 'Visol oqshomi' dasturxoniga lutfan taklif etamiz! 30-Oktyabr, 2026",
+      title: "Farruxjon & Marjonaxon | To'y Taklifnomasi",
+      text: "Farruxjon va Marjonaxonning nikoh to'yi munosabati bilan 'Visol oqshomi' dasturxoniga lutfan taklif etamiz! 30-Oktyabr, 2026",
       url: window.location.href
     };
 

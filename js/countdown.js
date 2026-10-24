@@ -36,8 +36,8 @@ function updateCountdown() {
 }
 
 function addToCalendar() {
-  const title = encodeURIComponent("Farrux & Marjona Nikoh To'yi");
-  const details = encodeURIComponent("Farrux & Marjonaning nikoh to'yi tantanasi va 'Visol oqshomi' dasturxoni.");
+  const title = encodeURIComponent("Farruxjon & Marjonaxon Nikoh To'yi");
+  const details = encodeURIComponent("Farruxjon & Marjonaxonning nikoh to'yi tantanasi va 'Visol oqshomi' dasturxoni.");
   const location = encodeURIComponent("Sohil Tantanalar Saroyi, Yangiyo'l");
   const start = "20261030T130000Z"; // 18:00 Tashkent time
   const end = "20261030T180000Z";
