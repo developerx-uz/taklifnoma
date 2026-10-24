@@ -62,7 +62,7 @@ body.is-unlocked .desktop-menu {
   height: calc(100dvh - 54px);
   min-height: calc(100vh - 54px);
   max-height: calc(100vh - 54px);
-  padding: 16px 16px 14px;
+  padding: 4px 16px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -72,13 +72,13 @@ body.is-unlocked .desktop-menu {
   box-sizing: border-box;
 }
 
-/* Floral Frame Background with top spacing & crop adjustment */
+/* Floral Frame Background (No top gap, seamless under header like 2-rasm) */
 .floral-frame-bg {
   position: absolute;
-  top: 14px; /* Lowered gracefully from the header bar */
+  top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 14px);
+  height: 100%;
   background-image: url('../assets/images/floral_frame.jpg');
   background-size: cover;
   background-position: center top;
@@ -107,7 +107,7 @@ body.is-unlocked .desktop-menu {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  gap: 8px;
+  gap: 6px;
 }
 
 /* Hero Incoming Subtitle Tag */
@@ -119,7 +119,7 @@ body.is-unlocked .desktop-menu {
   text-transform: uppercase;
   opacity: 0.92;
   font-weight: 600;
-  margin: 4px 0 0;
+  margin: 0;
 }
 
 /* Couple Names & Date */
