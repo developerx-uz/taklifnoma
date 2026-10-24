@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Farrux & Marjona | To'y Taklifnomasi</title>
+  
+  <!-- Open Graph Meta Tags for Telegram / WhatsApp sharing -->
+  <meta property="og:title" content="Farrux & Marjona | Nikoh To'yi Taklifnomasi">
+  <meta property="og:description" content="30-Oktyabr, 2026-yil. Sizni baxt to'yimizga lutfan taklif etamiz!">
+  <meta property="og:image" content="assets/images/couple_biz.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Luxury Serif, Calligraphy and Modern Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for Wedding Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Audio Player (Background Wedding Melody) -->
+  <audio id="wedding-audio" loop preload="auto">
+    <source src="assets/audio/music.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Desktop Ambient Background Wrapper -->
+  <div class="site-wrapper">
+
+    <!-- Sticky Desktop & Mobile Navigation Header -->
+    <header class="top-nav" id="top-nav">
+      <div class="nav-container">
+        <!-- Logo / Monogram -->
+        <a href="#hero" class="nav-monogram">
+          <span>F</span><span class="mono-amp">&</span><span>M</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="desktop-menu" id="desktop-menu">
+          <a href="#hero" class="nav-link" data-key="nav_home">Bosh sahifa</a>
+          <a href="#biz" class="nav-link" data-key="nav_biz">Biz</a>
+          <a href="#taklifnoma" class="nav-link" data-key="nav_invite">Taklifnoma</a>
+          <a href="#sana" class="nav-link" data-key="nav_countdown">Sana</a>
+          <a href="#tartib" class="nav-link" data-key="nav_schedule">Dastur</a>
+          <a href="#galereya" class="nav-link" data-key="nav_gallery">Galereya</a>
+          <a href="#toyxona" class="nav-link" data-key="nav_venue">To'yxona</a>
+          <a href="#joylashuv" class="nav-link" data-key="nav_location">Manzil</a>
+          <a href="#rsvp" class="nav-link" data-key="nav_rsvp">RSVP</a>
+          <a href="#mehmonlar" class="nav-link" data-key="nav_guestbook">Tilaklar</a>
+        </nav>
+
+        <!-- Right Side: Language Switcher & Controls -->
+        <div class="nav-controls">
+          <div class="lang-selector">
+            <button class="lang-btn active" data-lang="uz">UZ</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+          <div class="top-actions">
+            <button class="icon-btn" id="share-btn" title="Ulashish">
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+            <button class="icon-btn" id="sound-toggle-top" title="Musiqa">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container (Responsive for Mobile & Desktop) -->
+    <main class="invitation-container" id="invitation-container">
+
+      <!-- SECTION 1: HERO / MUQOVA -->
+      <section class="section hero-section" id="hero">
+        <div class="floral-frame-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+          <!-- Top Heart Line -->
+          <div class="hero-top-heart">
+            <span class="line"></span>
+            <i class="fa-regular fa-heart"></i>
+            <span class="line"></span>
+          </div>
+
+          <!-- Subtitle Tag -->
+          <p class="hero-incoming-tag" data-key="hero_incoming">SIZGA TAKLIFNOMA KELDI</p>
+
+          <!-- Couple Names -->
+          <div class="hero-names-wrap">
+            <h1 class="couple-names">
+              <span class="groom-name">Farrux</span>
+              <span class="ampersand">&</span>
+              <span class="bride-name">Marjona</span>
+            </h1>
+            <p class="hero-date">30 &nbsp;•&nbsp; 10 &nbsp;•&nbsp; 2026</p>
+          </div>
+
+          <!-- Arabic Quran Verse: Anfol surasi, 63 -->
+          <div class="bismillah-block">
+            <p class="arabic-verse">وَأَلَّفَ بَيْنَ قُلُوبِهِمْ</p>
+            <p class="quran-quote" data-key="hero_quote">
+              "Va U ularning qalblarini sevgi ila birlashtirdi"
+            </p>
+            <span class="quote-source" data-key="hero_source">Anfol surasi, 63</span>
+          </div>
+
+          <!-- Delicate Heart -->
+          <div class="hero-mid-heart">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+
+          <!-- Slide to Unlock: [ 🔒 —————— SURIB OCHISH ➔➔➔ ] -->
+          <div class="unlock-slider-wrap">
+            <div
+              class="unlock-slider"
+              id="unlock-slider"
+              role="slider"
+              aria-label="Taklifnomani ochish uchun o'ng tomonga suring"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              tabindex="0"
+            >
+              <div class="unlock-slider-fill" id="unlock-slider-fill"></div>
+              <div class="unlock-slider-label" id="unlock-slider-label">
+                <span class="unlock-text" data-key="btn_unlock">SURIB OCHISH</span>
+                <span class="unlock-chevrons" aria-hidden="true">
+                  <i class="fa-solid fa-chevron-right ch-1"></i>
+                  <i class="fa-solid fa-chevron-right ch-2"></i>
+                  <i class="fa-solid fa-chevron-right ch-3"></i>
+                </span>
+              </div>
+              <div class="unlock-slider-handle" id="unlock-slider-handle" aria-hidden="true">
+                <span class="lock-icon-circle">
+                  <i class="fa-solid fa-lock" id="lock-icon"></i>
+                </span>
+                <span class="handle-pulse-ring" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: BIZ (Story & Welcome) -->
+      <section class="section biz-section" id="biz">
+        <div class="section-bg-image" style="background-image: url('assets/images/couple_biz.jpg');"></div>
+        <div class="dark-gradient-overlay"></div>
+
+        <div class="biz-content">
+          <!-- Double gold border matching 2-rasm -->
+          <div class="biz-card-border"></div>
+
+          <div class="biz-card-inner">
+            <div class="badge-ornament">
+              <span class="sparkle">✦</span>
+            </div>
+            <h2 class="biz-title" data-key="biz_title">Biz</h2>
+            <div class="gold-divider-sm"></div>
+            
+            <p class="biz-intro-text" data-key="biz_text">
+              AZIZ VA QADRLI INSONLAR!<br>
+              SIZNI TO‘YIMIZGA TAKLIF QILISHDAN MAMNUNMIZ
+            </p>
+
+            <div class="quote-heart">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: RASMIY TAKLIFNOMA (Formal Ivory Card) -->
+      <section class="section formal-card-section" id="taklifnoma">
+        <div class="ivory-card">
+          <div class="ivory-card-border"></div>
+          
+          <div class="ivory-card-inner">
+            <div class="card-ornament top-ornament">
+              <svg viewBox="0 0 100 20" class="ornament-svg">
+                <path d="M0,10 Q25,0 50,10 T100,10" fill="none" stroke="#c59b27" stroke-width="1.2"/>
+                <circle cx="50" cy="10" r="3" fill="#c59b27"/>
+              </svg>
+            </div>
+
+            <h3 class="card-title" data-key="card_title">AZIZ MEHMONLAR</h3>
+            
+            <p class="card-message" data-key="card_message">
+              Sizni aziz farzandlarimiz ning nikoh to'yi munosabati bilan yoziladigan
+              <strong class="highlight-visol">"Visol oqshomi"</strong>
+              dasturxoniga lutfan taklif etamiz.
+            </p>
+
+            <div class="calligraphy-names">
+              <span>Farrux</span>
+              <span class="and-sym">&</span>
+              <span>Marjona</span>
+            </div>
+
+            <p class="parents-respect" data-key="card_parents">Hurmat bilan: Ota-onalar</p>
+
+            <div class="card-ornament bottom-ornament">
+              <svg viewBox="0 0 100 20" class="ornament-svg flipped">
+                <path d="M0,10 Q25,0 50,10 T100,10" fill="none" stroke="#c59b27" stroke-width="1.2"/>
+                <circle cx="50" cy="10" r="3" fill="#c59b27"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: SANA & ORTGA HISOBLASH (Countdown & Calendar matching screenshot) -->
+      <section class="section countdown-section" id="sana">
+        <div class="countdown-card-ivory">
+          <div class="countdown-card-split">
+            <!-- Left Side: Date & Countdown Timer -->
+            <div class="countdown-left-col">
+              <!-- SANA badge -->
+              <p class="sana-badge" data-key="sana_label">SANA</p>
+              
+              <!-- Large Date: 30 10 2026 -->
+              <h2 class="sana-date-big">30 &nbsp; 10 &nbsp; 2026</h2>
+              
+              <!-- Delicate Heart Divider -->
+              <div class="heart-divider">
+                <span class="line"></span>
+                <i class="fa-regular fa-heart"></i>
+                <span class="line"></span>
+              </div>
+              
+              <!-- Subtitle: TO'YGACHA QOLGAN VAQT -->
+              <p class="countdown-label-sm" data-key="countdown_title">TO'YGACHA QOLGAN VAQT</p>
+
+              <!-- 4 Ivory Pills Countdown -->
+              <div class="ivory-timer-grid">
+                <div class="ivory-timer-box">
+                  <span class="ivory-timer-val" id="days">00</span>
+                  <span class="ivory-timer-label" data-key="timer_days">KUN</span>
+                </div>
+                <div class="ivory-timer-box">
+                  <span class="ivory-timer-val" id="hours">00</span>
+                  <span class="ivory-timer-label" data-key="timer_hours">SOAT</span>
+                </div>
+                <div class="ivory-timer-box">
+                  <span class="ivory-timer-val" id="minutes">00</span>
+                  <span class="ivory-timer-label" data-key="timer_minutes">DAQIQA</span>
+                </div>
+                <div class="ivory-timer-box">
+                  <span class="ivory-timer-val" id="seconds">00</span>
+                  <span class="ivory-timer-label" data-key="timer_seconds">SONIYA</span>
+                </div>
+              </div>
+
+              <!-- Start Time -->
+              <p class="wedding-start-time" data-key="cal_start_time">BOSHLANISHI 18:00</p>
+
+              <!-- Calendar Integration Button -->
+              <div class="calendar-btn-wrap">
+                <button class="calendar-btn" id="calendar-btn">
+                  <i class="fa-regular fa-calendar-plus"></i>
+                  <span data-key="add_calendar">Taqvimga qo‘shish</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Divider Line (visible on desktop) -->
+            <div class="countdown-split-divider"></div>
+
+            <!-- Right Side: Interactive Calendar -->
+            <div class="countdown-right-col">
+              <!-- Sparkle separator -->
+              <div class="calendar-sparkle">✦</div>
+
+              <!-- Month & Year -->
+              <h3 class="calendar-month-name" data-key="cal_month">OKTYABR 2026</h3>
+
+              <!-- Calendar Table for October 2026 -->
+              <div class="calendar-table-wrap">
+                <table class="calendar-table">
+                  <thead>
+                    <tr>
+                      <th>Mon</th>
+                      <th>Tue</th>
+                      <th>Wed</th>
+                      <th>Thu</th>
+                      <th>Fri</th>
+                      <th>Sat</th>
+                      <th>Sun</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Week 1: Oct 1 is Thursday -->
+                    <tr>
+                      <td class="empty"></td>
+                      <td class="empty"></td>
+                      <td class="empty"></td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                    </tr>
+                    <!-- Week 2 -->
+                    <tr>
+                      <td>5</td>
+                      <td>6</td>
+                      <td>7</td>
+                      <td>8</td>
+                      <td>9</td>
+                      <td>10</td>
+                      <td>11</td>
+                    </tr>
+                    <!-- Week 3 -->
+                    <tr>
+                      <td>12</td>
+                      <td>13</td>
+                      <td>14</td>
+                      <td>15</td>
+                      <td>16</td>
+                      <td>17</td>
+                      <td>18</td>
+                    </tr>
+                    <!-- Week 4 -->
+                    <tr>
+                      <td>19</td>
+                      <td>20</td>
+                      <td>21</td>
+                      <td>22</td>
+                      <td>23</td>
+                      <td>24</td>
+                      <td>25</td>
+                    </tr>
+                    <!-- Week 5: Day 30 Highlighted -->
+                    <tr>
+                      <td>26</td>
+                      <td>27</td>
+                      <td>28</td>
+                      <td>29</td>
+                      <td class="wedding-day">
+                        <span class="day-circle">30</span>
+                      </td>
+                      <td>31</td>
+                      <td class="empty"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Bottom Line -->
+              <div class="calendar-bottom-line"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: KUN TARTIBI (Schedule) -->
+      <section class="section schedule-section" id="tartib">
+        <div class="glass-container">
+          <h2 class="section-title" data-key="schedule_title">KUN TARTIBI</h2>
+          <p class="section-subtitle" data-key="schedule_subtitle">Marosim va bayram vaqtlari</p>
+          <div class="gold-divider-sm"></div>
+
+          <div class="timeline">
+            <!-- 18:00 -->
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fa-solid fa-martini-glass-citron"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-time">18:00</span>
+                <h4 class="timeline-heading" data-key="sch_1">MEHMONLARNI KUTIB OLISH</h4>
+                <p class="timeline-desc" data-key="sch_1_desc">Yorqin tabassumlar va yoqimli musiqa ostida uchrashuv</p>
+              </div>
+            </div>
+
+            <!-- 19:00 -->
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fa-solid fa-ring"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-time">19:00</span>
+                <h4 class="timeline-heading" data-key="sch_2">NIKOH MAROSIMI</h4>
+                <p class="timeline-desc" data-key="sch_2_desc">Kelin va kuyovning qutlug' qadamlari va nikoh tantanasi</p>
+              </div>
+            </div>
+
+            <!-- 20:00 -->
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-time">20:00</span>
+                <h4 class="timeline-heading" data-key="sch_3">ZIYOFAT VA TABRIKLAR</h4>
+                <p class="timeline-desc" data-key="sch_3_desc">Shohona dasturxon, qutlovlar va unutilmas shou</p>
+              </div>
+            </div>
+
+            <!-- 23:00 -->
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fa-solid fa-sparkles"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-time">23:00</span>
+                <h4 class="timeline-heading" data-key="sch_4">KECHANING YAKUNI</h4>
+                <p class="timeline-desc" data-key="sch_4_desc">Kelin-kuyovga samimiy oq yo'l va bayram xotimasi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: XOTIRA GALEREYASI (Photo Gallery) -->
+      <section class="section gallery-section" id="galereya">
+        <div class="glass-container">
+          <span class="sub-heading" data-key="gallery_sub">BIZNING XOTIRALARIMIZ</span>
+          <h2 class="section-title cursive-title" data-key="gallery_title">Xotira Galereyasi</h2>
+          <div class="gold-divider-sm"></div>
+
+          <div class="gallery-grid">
+            <div class="gallery-card" data-src="assets/images/gallery_1.jpg">
+              <img src="assets/images/gallery_1.jpg" alt="Farrux & Marjona" loading="lazy">
+              <div class="gallery-hover-overlay">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+            <div class="gallery-card" data-src="assets/images/gallery_2.jpg">
+              <img src="assets/images/gallery_2.jpg" alt="Nikoh uzuklari" loading="lazy">
+              <div class="gallery-hover-overlay">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+            <div class="gallery-card" data-src="assets/images/gallery_3.jpg">
+              <img src="assets/images/gallery_3.jpg" alt="Kelin guldastasi" loading="lazy">
+              <div class="gallery-hover-overlay">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+            <div class="gallery-card" data-src="assets/images/gallery_4.jpg">
+              <img src="assets/images/gallery_4.jpg" alt="Muhabbat onlari" loading="lazy">
+              <div class="gallery-hover-overlay">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: TO'YXONA (Venue Showcase) -->
+      <section class="section venue-section" id="toyxona">
+        <div class="glass-container">
+          <span class="sub-heading" data-key="venue_sub">TANTANALI MANZIL</span>
+          <h2 class="section-title" data-key="venue_title">To'yxona</h2>
+          <div class="gold-divider-sm"></div>
+
+          <div class="venue-showcase">
+            <div class="venue-cards-grid">
+              <!-- Interior Hall Card -->
+              <div class="venue-card">
+                <div class="venue-img-wrap">
+                  <img src="assets/images/sohil_hall.jpg" alt="Sohil Saroyi zali" loading="lazy">
+                </div>
+              </div>
+
+              <!-- Exterior Facade Card -->
+              <div class="venue-card">
+                <div class="venue-img-wrap">
+                  <img src="assets/images/sohil_exterior.jpg" alt="Sohil Saroyi fasadi" loading="lazy">
+                </div>
+              </div>
+            </div>
+
+            <!-- Palace Name & Badge -->
+            <div class="venue-info-box">
+              <div class="crown-icon">
+                <i class="fa-solid fa-crown"></i>
+              </div>
+              <h3 class="venue-name">SOHIL</h3>
+              <p class="venue-type" data-key="venue_type">Tantanalar Saroyi</p>
+              <p class="venue-detail" data-key="venue_detail">Har bir lahza unutilmas bo‘ladigan go‘zal saroy</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: JOYLASHUV (Location & Map) -->
+      <section class="section location-section" id="joylashuv">
+        <div class="glass-container">
+          <h2 class="section-title" data-key="loc_title">Joylashuv</h2>
+          <p class="section-subtitle" data-key="loc_subtitle">Sevgi va baxt uchrashadigan manzil</p>
+          <div class="gold-divider-sm"></div>
+
+          <!-- Location Map Visual -->
+          <div class="map-card">
+            <div class="map-preview">
+              <div class="map-pin-pulse">
+                <div class="pin"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="pulse-ring"></div>
+              </div>
+              <div class="map-text-overlay">
+                <span class="venue-tag">Sohil Tantanalar Saroyi</span>
+                <span class="address-text" data-key="address_text">Toshkent viloyati, Yangiyo'l tumani</span>
+              </div>
+            </div>
+
+            <!-- Navigation Action Buttons -->
+            <div class="location-actions">
+              <a href="https://maps.app.goo.gl/UYrrhsPyq9Dfcx1h8" target="_blank" rel="noopener noreferrer" class="map-btn google-map-btn">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span data-key="btn_google_map">Google Xaritada ochish</span>
+              </a>
+              
+              <button class="map-btn copy-btn" id="copy-address-btn">
+                <i class="fa-regular fa-copy"></i>
+                <span data-key="btn_copy_address">Manzilni nusxalash</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: R.S.V.P. (Confirmation Form) -->
+      <section class="section rsvp-section" id="rsvp">
+        <div class="glass-container rsvp-glass">
+          <span class="sub-heading">R . S . V . P .</span>
+          <h2 class="section-title" data-key="rsvp_title">Iltimos, ishtirokingizni tasdiqlang</h2>
+          <p class="section-subtitle gold-glow" data-key="rsvp_subtitle">BIZ BILAN BO‘LING</p>
+          <div class="gold-divider-sm"></div>
+
+          <form id="rsvp-form" class="rsvp-form">
+            <div class="form-row-desktop">
+              <!-- Full Name Input -->
+              <div class="form-group">
+                <label for="guest-name" data-key="label_name">Mehmon ismi:</label>
+                <div class="input-wrapper">
+                  <i class="fa-regular fa-user"></i>
+                  <input type="text" id="guest-name" required placeholder="To‘liq ismingizni kiriting" data-key-ph="ph_name">
+                </div>
+              </div>
+
+              <!-- Side Selection (Kelin / Kuyov) -->
+              <div class="form-group">
+                <label for="guest-side" data-key="label_side">Kim tomondan mehmonsiz?</label>
+                <div class="select-wrapper">
+                  <i class="fa-solid fa-users"></i>
+                  <select id="guest-side">
+                    <option value="Kuyov tomondan" data-key="side_groom">Kuyov tomondan</option>
+                    <option value="Kelin tomondan" data-key="side_bride">Kelin tomondan</option>
+                    <option value="Qadrdon do‘stlar" data-key="side_friends">Qadrdon do‘stlar</option>
+                    <option value="Hamkasblar / Boshqa" data-key="side_colleagues">Hamkasblar / Boshqa</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attendance Radio Options -->
+            <div class="form-group">
+              <label data-key="label_attend">Qatnashasizmi?</label>
+              <div class="radio-options">
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="Ha, albatta boraman!" checked>
+                  <span class="radio-custom"></span>
+                  <span class="radio-text" data-key="opt_attend_yes">Ha, albatta boraman! ✨</span>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="Ha, mehmon bilan boraman">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text" data-key="opt_attend_plus">Ha, mehmon bilan boraman 👥</span>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="Afsus, kela olmayman">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text" data-key="opt_attend_no">Afsus, kela olmayman 💌</span>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="Hali aniq emas">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text" data-key="opt_attend_maybe">Hali aniq emas 🤔</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn" id="rsvp-submit-btn">
+              <span data-key="btn_rsvp_send">Javob yuborish</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+
+          <!-- RSVP Success Modal / Message -->
+          <div class="rsvp-success-box" id="rsvp-success" style="display: none;">
+            <div class="success-icon-wrap">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h4 data-key="rsvp_thanks">Rahmat, javobingiz qabul qilindi!</h4>
+            <p data-key="rsvp_welcome">Sizni to'yimizda ko'rishdan bag'oyat mamnunmiz!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: MEHMONLAR KITOBI (Guestbook & Wishes) -->
+      <section class="section guestbook-section" id="mehmonlar">
+        <div class="glass-container">
+          <h2 class="section-title cursive-title" data-key="gb_title">Mehmonlar Kitobi</h2>
+          <p class="section-subtitle" data-key="gb_subtitle">Kelin va kuyovga samimiy tilaklaringiz</p>
+          <div class="gold-divider-sm"></div>
+
+          <!-- Desktop 2-column layout: Form left, Wishes list right -->
+          <div class="guestbook-desktop-layout">
+            <!-- Wish Submission Form -->
+            <div class="gb-form-column">
+              <form id="wish-form" class="wish-form">
+                <div class="form-group">
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="wish-author" required placeholder="Ismingizni kiriting" data-key-ph="ph_name">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <textarea id="wish-text" rows="4" required placeholder="Xabaringizni yozing..." data-key-ph="ph_wish"></textarea>
+                  </div>
+                </div>
+
+                <button type="submit" class="submit-btn secondary-btn">
+                  <span data-key="btn_send_wish">Tilak yuborish</span>
+                  <i class="fa-solid fa-heart"></i>
+                </button>
+              </form>
+            </div>
+
+            <!-- Live Wishes List Column -->
+            <div class="gb-list-column">
+              <div class="wishes-list" id="wishes-list">
+                <!-- Dynamically populated from JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 11: YAKUNIY MINNATDORCHILIK (Footer) -->
+      <footer class="section footer-section" id="yakun">
+        <div class="floral-frame-footer"></div>
+        <div class="footer-overlay"></div>
+
+        <div class="footer-content">
+          <span class="sub-heading" data-key="footer_sub">SIZNING ISHTIROKINGIZ...</span>
+          <h2 class="footer-calligraphy" data-key="footer_quote">biz uchun eng qimmatli sovg'a</h2>
+
+          <div class="gold-ring-decor">
+            <span class="ring-left"></span>
+            <i class="fa-solid fa-heart"></i>
+            <span class="ring-right"></span>
+          </div>
+
+          <p class="footer-couple">Farrux & Marjona</p>
+          <p class="footer-date">30.10.2026</p>
+
+          <button class="footer-share-btn" id="footer-share-btn">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span data-key="share_invite">Taklifnomani ulashish</span>
+          </button>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- FLOATING MUSIC PLAYER (Vinyl record button) -->
+  <div class="floating-music-widget" id="floating-music">
+    <div class="music-disc-wrap" id="music-disc-wrap">
+      <div class="vinyl-disc" id="vinyl-disc">
+        <div class="vinyl-center">
+          <i class="fa-solid fa-music"></i>
+        </div>
+      </div>
+      <div class="music-bars">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="music-tooltip" id="music-tooltip" data-key="music_tooltip">
+      Musiqani yoqish 🎵
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR GALLERY -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <button class="lightbox-close" id="lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="To'y surati">
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION POPUP -->
+  <div class="toast-notification" id="toast">
+    <span id="toast-message">Xabar</span>
+  </div>
+
+  <!-- Confetti Canvas for RSVP Celebration -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
