@@ -11,10 +11,16 @@
    SECTION 2: SHOHONA TAKLIFNOMA KARTASI (1080x2200 Asl o'lchamli to'liq tayyor variant)
    ========================================================================== */
 .royal-invitation-section {
+  /* Headerning aynan o'zining ostiga ham kirib, eng tepadan boshlanishi (54px) */
+  --header-overlap: 54px;
   width: 100%;
-  margin: 0 !important;
+  margin-top: calc(-1 * var(--header-overlap)) !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   padding: 0 !important;
   position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
