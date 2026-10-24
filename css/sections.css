@@ -84,6 +84,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  aspect-ratio: 1080 / 2200;
   display: block;
 }
 
@@ -99,23 +100,24 @@
 
 .vaqt-box-num {
   position: absolute;
-  top: 34.8%;
-  height: 8.2%;
+  top: 36.2%;
+  height: 7.5%;
+  width: 18.5%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-.vaqt-box-num.box-kun    { left: 4.8%;  width: 20%; }
-.vaqt-box-num.box-soat   { left: 28.3%; width: 20%; }
-.vaqt-box-num.box-daqiqa { left: 51.7%; width: 20%; }
-.vaqt-box-num.box-soniya { left: 75.2%; width: 20%; }
+.vaqt-box-num.box-kun    { left: 7.0%; }
+.vaqt-box-num.box-soat   { left: 29.6%; }
+.vaqt-box-num.box-daqiqa { left: 52.1%; }
+.vaqt-box-num.box-soniya { left: 74.6%; }
 
 .vaqt-box-num span {
-  font-family: var(--font-title);
+  font-family: 'Playfair Display', 'Cinzel', serif;
   font-size: clamp(2.1rem, 9.2vw, 3.6rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #111e33;
   line-height: 1;
   letter-spacing: 0.5px;
@@ -125,10 +127,10 @@
 /* Rasm ustidagi "Taqvimga qo'shish" interaktiv tugmasi */
 .vaqt-cal-hitbox {
   position: absolute;
-  left: 20.83%;
-  width: 58.33%;
-  top: 54.8%;
-  height: 6.61%;
+  left: 17.6%;
+  width: 64.8%;
+  top: 55.0%;
+  height: 6.8%;
   background: transparent;
   border: none;
   border-radius: 40px;
