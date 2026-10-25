@@ -8,6 +8,29 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // =========================================================================
+  // XUDDI MUSIQADEK OLDINDAN YUKLASH (GPU Image Preloader & Decoder)
+  // Foydalanuvchi qulfni ochishdan oldin barcha ichki rasmlarni GPU xotirasiga yuklaydi
+  // =========================================================================
+  const cardImagesToPreload = [
+    'assets/images/taklifnoma_card.webp?v=fast_v4',
+    'assets/images/vaqt_before.webp?v=fast_v4',
+    'assets/images/vaqt_started.webp?v=fast_v4',
+    'assets/images/kun_tartibi.webp?v=fast_v4',
+    'assets/images/toyxona_card.webp?v=fast_v4',
+    'assets/images/galereya_card.webp?v=fast_v4',
+    'assets/images/joylashuv_card_bg.webp?v=fast_v4',
+    'assets/images/couple_biz.webp'
+  ];
+
+  cardImagesToPreload.forEach(src => {
+    const preImg = new Image();
+    preImg.src = src;
+    if (preImg.decode) {
+      preImg.decode().catch(() => {});
+    }
+  });
+
   const unlockSlider = document.getElementById('unlock-slider');
   const unlockHandle = document.getElementById('unlock-slider-handle');
   const unlockFill = document.getElementById('unlock-slider-fill');
