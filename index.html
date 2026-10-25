@@ -283,29 +283,50 @@
 
       <!-- SECTION 8: JOYLASHUV (Location & Map) -->
       <section class="section location-section" id="joylashuv">
-        <div class="glass-container">
+        <div class="glass-container location-glass">
+          <span class="sub-heading" data-key="loc_subtitle">SEVGI VA BAXT UCHRASHADIGAN MANZIL</span>
           <h2 class="section-title" data-key="loc_title">Joylashuv</h2>
-          <p class="section-subtitle" data-key="loc_subtitle">Sevgi va baxt uchrashadigan manzil</p>
           <div class="gold-divider-sm"></div>
 
-          <!-- Location Map Visual -->
+          <!-- Location Venue Info & Interactive Google Map -->
           <div class="map-card">
-            <div class="map-preview">
-              <div class="map-pin-pulse">
-                <div class="pin"><i class="fa-solid fa-location-dot"></i></div>
-                <div class="pulse-ring"></div>
+            <!-- Address details banner -->
+            <div class="venue-address-banner">
+              <div class="venue-address-icon">
+                <i class="fa-solid fa-location-dot"></i>
               </div>
-              <div class="map-text-overlay">
-                <span class="venue-tag">Sohil Tantanalar Saroyi</span>
-                <span class="address-text" data-key="address_text">Termiz shahri, Fidokor ko'chasi 90G</span>
+              <div class="venue-address-details">
+                <h3 class="venue-tag">SOHIL Tantanalar Saroyi</h3>
+                <p class="address-text" data-key="address_text">Termiz shahri, Fidokor ko'chasi 90G</p>
+                <span class="address-landmark"><i class="fa-solid fa-compass"></i> Mo'ljal: 17-maktab yaqinida</span>
               </div>
+            </div>
+
+            <!-- Live Interactive Google Maps Iframe -->
+            <div class="map-interactive-wrap">
+              <iframe
+                id="google-map-iframe"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.8!2d67.31361!3d37.234846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f352d278e9546bd%3A0x30c82e97e56c7dc5!2sSohil%20tantanalar%20saroyi!5e0!3m2!1suz!2suz!4v1729890000000!5m2!1suz!2suz"
+                width="100%"
+                height="320"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Sohil Tantanalar Saroyi joylashuvi — Google Xarita"
+              ></iframe>
             </div>
 
             <!-- Navigation Action Buttons -->
             <div class="location-actions">
-              <a href="https://www.google.com/maps/search/?api=1&query=Sohil+tantanalar+saroyi+Termiz" target="_blank" rel="noopener noreferrer" class="map-btn google-map-btn">
+              <a href="https://maps.app.goo.gl/5P1n1ZXuFCtsWy3Z6" target="_blank" rel="noopener noreferrer" class="map-btn google-map-btn">
                 <i class="fa-solid fa-map-location-dot"></i>
                 <span data-key="btn_google_map">Google Xaritada ochish</span>
+              </a>
+
+              <a href="https://yandex.com/maps/?text=37.234846,67.31361" target="_blank" rel="noopener noreferrer" class="map-btn yandex-map-btn">
+                <i class="fa-solid fa-route"></i>
+                <span data-key="btn_yandex_map">Yandex Xaritada ochish</span>
               </a>
               
               <button class="map-btn copy-btn" id="copy-address-btn">

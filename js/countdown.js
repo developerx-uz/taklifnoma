@@ -60,8 +60,8 @@ window.setWeddingState = function(state) {
 
 function addToCalendar() {
   const title = encodeURIComponent("Farruxjon & Marjonaxon Nikoh To'yi");
-  const details = encodeURIComponent("Farruxjon & Marjonaxonning nikoh to'yi tantanasi va 'Visol oqshomi' dasturxoni.");
-  const location = encodeURIComponent("Termiz Shahar Soxil To'yxonasi");
+  const details = encodeURIComponent("Farruxjon & Marjonaxonning nikoh to'yi tantanasi va 'Visol oqshomi' dasturxoni. Xarita: https://maps.app.goo.gl/5P1n1ZXuFCtsWy3Z6");
+  const location = encodeURIComponent("Sohil tantanalar saroyi, Termiz, Fidokor ko'chasi 90G");
   const start = "20261030T130000Z"; // 18:00 Tashkent time (UTC 13:00)
   const end = "20261030T180000Z";
 

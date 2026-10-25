@@ -555,85 +555,104 @@
 /* ==========================================================================
    SECTION 8: JOYLASHUV (Location & Map)
    ========================================================================== */
+.location-glass {
+  background: rgba(14, 21, 38, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 24px;
+}
+
 .map-card {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   margin-top: 10px;
 }
 
-.map-preview {
-  height: 180px;
-  background: linear-gradient(135deg, #111a2e 0%, #172442 100%);
-  border-radius: 20px;
-  border: 1px solid var(--border-gold);
-  position: relative;
+/* Venue Address Banner */
+.venue-address-banner {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  gap: 16px;
+  background: rgba(11, 16, 29, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 18px;
+  padding: 16px 18px;
+  text-align: left;
+  box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
 }
 
-.map-preview::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.18) 0%, transparent 65%);
-}
-
-.map-pin-pulse {
-  position: relative;
-  margin-bottom: 12px;
-}
-
-.map-pin-pulse .pin {
-  font-size: 2.4rem;
-  color: #ef4444;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-}
-
-.map-pin-pulse .pulse-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.venue-address-icon {
   width: 48px;
   height: 48px;
+  min-width: 48px;
   border-radius: 50%;
-  background: rgba(239, 68, 68, 0.4);
-  animation: pulseRing 1.8s infinite;
-  z-index: 1;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+  border: 1px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 8px rgba(239, 68, 68, 0.4));
 }
 
-.map-text-overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
+.venue-address-details {
+  flex: 1;
 }
 
-.venue-tag {
-  display: block;
+.venue-address-details .venue-tag {
   font-family: var(--font-title);
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+  margin-bottom: 3px;
+  display: block;
 }
 
-.address-text {
-  font-size: 0.82rem;
+.venue-address-details .address-text {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.venue-address-details .address-landmark {
+  font-size: 0.8rem;
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.venue-address-details .address-landmark i {
+  color: var(--gold-primary);
+  font-size: 0.75rem;
+}
+
+/* Interactive Live Google Maps Container */
+.map-interactive-wrap {
+  width: 100%;
+  height: 320px;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  background: #0d1322;
+}
+
+.map-interactive-wrap iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .location-actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .map-btn {
@@ -641,7 +660,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 22px;
+  padding: 13px 20px;
   border-radius: 25px;
   font-family: var(--font-sans);
   font-size: 0.88rem;
@@ -663,6 +682,19 @@
   box-shadow: 0 8px 26px rgba(212, 175, 55, 0.5);
 }
 
+.yandex-map-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+
+.yandex-map-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
 .copy-btn {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-gold);
@@ -672,6 +704,7 @@
 .copy-btn:hover {
   background: rgba(212, 175, 55, 0.15);
   border-color: var(--gold-primary);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================================
@@ -1286,18 +1319,20 @@
     font-size: 2rem;
   }
 
-  .map-preview {
-    height: 220px;
+  .map-interactive-wrap {
+    height: 380px;
   }
 
   .location-actions {
     flex-direction: row;
     justify-content: center;
-    gap: 18px;
+    gap: 14px;
+    flex-wrap: wrap;
   }
 
   .map-btn {
-    min-width: 220px;
+    min-width: 190px;
+    flex: 1;
   }
 
   .form-row-desktop {
