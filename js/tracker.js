@@ -1,31 +1,35 @@
 /**
- * Farrux & Marjona Nikoh To'yi - Mehmonlarni hisoblash va statistika skripti (js/tracker.js)
- * Tashrifchilarni, qurilma turini va harakatlarni avtomatik qayd etadi.
+ * Farrux & Marjona Nikoh To'yi - Mehmonlarni hisoblash, Jonli Onlayn va Tilaklar skripti (js/tracker.js)
  */
 
 (function () {
   'use strict';
 
-  // API bazaviy manzilini aniqlash
   function getApiBase() {
     const host = window.location.hostname;
     if (host === 'developerx.uz' || host === 'www.developerx.uz') {
       return '/farrux-marjona-nikoh-toyi/api';
     } else if (host === 'localhost' || host === '127.0.0.1') {
-      // Mahalliy sinov paytida server.js yoki to'g'ridan-to'g'ri developerx.uz API
       return window.location.port === '8097' ? '/api' : 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
     } else {
-      // GitHub Pages yoki boshqa xostinglarda jonli developerx.uz API ga ulanadi
       return 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
     }
   }
 
   const API_BASE = getApiBase();
 
+  // Har bir mehmon uchun yagona sessiya ID yaratish
+  let sessionId = sessionStorage.getItem('taklifnoma_session_id');
+  if (!sessionId) {
+    sessionId = 'sess_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
+    sessionStorage.setItem('taklifnoma_session_id', sessionId);
+  }
+
   function sendEvent(action, extraData) {
     try {
       const payload = {
         action: action || 'pageview',
+        session_id: sessionId,
         user_agent: navigator.userAgent,
         screen: `${window.screen.width}x${window.screen.height}`,
         lang: document.documentElement.lang || navigator.language || 'uz',
@@ -35,31 +39,87 @@
 
       const url = `${API_BASE}/track`;
 
-      // navigator.sendBeacon or fetch
-      if (navigator.sendBeacon) {
-        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        navigator.sendBeacon(url, blob);
-      } else {
-        fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          keepalive: true
-        }).catch(() => {});
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.online_count) {
+          updateOnlineBadge(data.online_count);
+        }
+      })
+      .catch(() => {});
+    } catch (_) {}
+  }
+
+  function updateOnlineBadge(count) {
+    const badge = document.getElementById('live-online-badge');
+    if (badge) {
+      badge.innerHTML = `<span class="live-dot-pulse"></span> <span id="online-num">${count}</span> kishi onlayn`;
+      badge.style.display = 'inline-flex';
+    }
+  }
+
+  // ===========================================================================
+  // 1. TILAKLARNI SERVERDAN YUKLASH VA CHIQARISH
+  // ===========================================================================
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  async function fetchAndRenderWishes() {
+    const wishesList = document.getElementById('wishes-list');
+    if (!wishesList) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/wishes`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.wishes && data.wishes.length > 0) {
+          wishesList.innerHTML = '';
+          data.wishes.forEach(item => {
+            const wishEl = document.createElement('div');
+            wishEl.className = 'wish-item';
+            wishEl.innerHTML = `
+              <div class="wish-header">
+                <span class="wish-name"><i class="fa-regular fa-user" style="margin-right: 5px; opacity: 0.7;"></i>${escapeHtml(item.author)}</span>
+                <span class="wish-date">${escapeHtml(item.created_at ? item.created_at.slice(5, 16) : 'Hozirgina')}</span>
+              </div>
+              <p class="wish-body">${escapeHtml(item.text)}</p>
+            `;
+            wishesList.appendChild(wishEl);
+          });
+          return;
+        }
       }
     } catch (_) {}
   }
 
-  // 1. Sahifaga kirganda bir marta "pageview" yuborish
+  // ===========================================================================
+  // 2. DOM YUKLANGANDAGI TINGLOVCHILAR
+  // ===========================================================================
   window.addEventListener('DOMContentLoaded', () => {
-    // Session ichida har sekund spam bo'lmasligi uchun
-    const sessionKey = 'taklifnoma_session_tracked';
-    if (!sessionStorage.getItem(sessionKey)) {
-      sendEvent('pageview');
-      sessionStorage.setItem(sessionKey, '1');
-    }
+    // A) Birinchi marta kirganda Pageview
+    sendEvent('pageview');
 
-    // 2. Taklifnoma qulfi surilganda (ochilganda) "unlock" yuborish
+    // B) Jonli Onlayn kuzatuvchilar uchun Heartbeat (har 20 soniyada)
+    setInterval(() => {
+      sendEvent('heartbeat');
+    }, 20000);
+
+    // C) Tilaklarni serverdan yuklash
+    fetchAndRenderWishes();
+
+    // D) Qulf ochilganda
     const unlockKey = 'taklifnoma_unlock_tracked';
     const checkUnlockInterval = setInterval(() => {
       if (!document.body.classList.contains('is-locked')) {
@@ -71,7 +131,7 @@
       }
     }, 400);
 
-    // 3. Musiqa birinchi bor yangraganda "music_play" yuborish
+    // E) Musiqa tinglanganda
     const audioEl = document.getElementById('wedding-audio');
     if (audioEl) {
       const musicTrackedKey = 'taklifnoma_music_tracked';
@@ -83,21 +143,27 @@
       }, { once: true });
     }
 
-    // 4. RSVP Formasini kuzatish va serverga yuborish
+    // F) RSVP FORMASI — Ishtirokni to'liq serverga yozish
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
       rsvpForm.addEventListener('submit', (e) => {
         try {
-          const nameInput = document.getElementById('rsvp-name');
-          const attendSelect = document.getElementById('rsvp-attendance');
-          const countInput = document.getElementById('rsvp-count');
-          const wishInput = document.getElementById('rsvp-wishes');
+          const guestName = document.getElementById('guest-name')?.value.trim();
+          const guestSide = document.getElementById('guest-side')?.value || 'Kuyov tomondan';
+          const attendance = document.querySelector('input[name="attendance"]:checked')?.value || 'Ha, albatta boraman!';
+
+          let guestsCount = 1;
+          if (attendance.includes('Mehmon bilan') || attendance.includes('mehmon')) {
+            guestsCount = 2;
+          } else if (attendance.includes('Kela olmayman') || attendance.includes('kela olmayman')) {
+            guestsCount = 0;
+          }
 
           const rsvpPayload = {
-            name: nameInput ? nameInput.value : 'Nomaʼlum mehmon',
-            attendance: attendSelect ? attendSelect.value : 'yes',
-            guests: countInput ? parseInt(countInput.value) || 1 : 1,
-            wishes: wishInput ? wishInput.value : ''
+            name: guestName || 'Hurmatli Mehmon',
+            side: guestSide,
+            attendance: attendance,
+            guests: guestsCount
           };
 
           fetch(`${API_BASE}/rsvp`, {
@@ -108,11 +174,37 @@
         } catch (_) {}
       });
     }
+
+    // G) TILAKLAR FORMASI — Serverga yozish va darhol ro'yxatga qo'shish
+    const wishForm = document.getElementById('wish-form');
+    if (wishForm) {
+      wishForm.addEventListener('submit', (e) => {
+        try {
+          const authorInput = document.getElementById('wish-author');
+          const textInput = document.getElementById('wish-text');
+          const author = authorInput ? authorInput.value.trim() : '';
+          const text = textInput ? textInput.value.trim() : '';
+
+          if (!author || !text) return;
+
+          fetch(`${API_BASE}/wish`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ author: author, text: text })
+          })
+          .then(res => res.json())
+          .then(saved => {
+            fetchAndRenderWishes();
+          })
+          .catch(() => {});
+        } catch (_) {}
+      });
+    }
   });
 
-  // Global ob'ekt sifatida eksport qilish
   window.TaklifnomaTracker = {
     sendEvent: sendEvent,
+    fetchAndRenderWishes: fetchAndRenderWishes,
     getApiBase: getApiBase
   };
 })();

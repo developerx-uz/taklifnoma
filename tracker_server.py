@@ -1,5 +1,5 @@
 """
-Farrux & Marjona Nikoh To'yi - Mehmonlar statistikasi va Admin paneli serveri
+Farrux & Marjona Nikoh To'yi - Mehmonlar statistikasi, Onlayn kuzatuvchilar, RSVP va Tilaklar API
 Port: 8097
 Ma'lumotlar bazasi: stats.db (SQLite)
 Zero dependencies (Standard library only: http.server, sqlite3, json)
@@ -10,7 +10,6 @@ import socketserver
 import json
 import sqlite3
 import os
-import re
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime, timezone, timedelta
 
@@ -28,6 +27,7 @@ def get_db():
 
 def init_db():
     with get_db() as conn:
+        # Tashriflar jurnali
         conn.execute("""
             CREATE TABLE IF NOT EXISTS visits (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,13 +45,37 @@ def init_db():
         conn.execute("CREATE INDEX IF NOT EXISTS idx_visits_ip ON visits(ip)")
         conn.execute("CREATE INDEX IF NOT EXISTS idx_visits_created ON visits(created_at)")
 
+        # Ayni damda onlayn mehmonlar (Heartbeat)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS active_sessions (
+                session_id TEXT PRIMARY KEY,
+                ip TEXT,
+                device_type TEXT,
+                browser TEXT,
+                last_seen TEXT
+            )
+        """)
+
+        # RSVP — Ishtirokni tasdiqlash
         conn.execute("""
             CREATE TABLE IF NOT EXISTS rsvps (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                guest_name TEXT,
-                attendance TEXT,
+                guest_name TEXT NOT NULL,
+                guest_side TEXT DEFAULT 'Kuyov tomondan',
+                attendance TEXT DEFAULT 'Ha, albatta boraman!',
                 guests_count INTEGER DEFAULT 1,
-                wishes TEXT,
+                wishes TEXT DEFAULT '',
+                ip TEXT,
+                created_at TEXT
+            )
+        """)
+
+        # Mehmonlar Tilaklari
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS wishes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                author TEXT NOT NULL,
+                text TEXT NOT NULL,
                 ip TEXT,
                 created_at TEXT
             )
@@ -97,10 +121,17 @@ def parse_device_browser(user_agent):
 
     return device, browser
 
+def clean_old_sessions():
+    """60 soniyadan beri faol bo'lmagan sessiyalarni tozalash"""
+    cutoff = (datetime.now(UZB_TZ) - timedelta(seconds=60)).strftime("%Y-%m-%d %H:%M:%S")
+    with get_db() as conn:
+        conn.execute("DELETE FROM active_sessions WHERE last_seen < ?", (cutoff,))
+        conn.commit()
+
 class StatsHandler(http.server.BaseHTTPRequestHandler):
     def send_cors_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
 
     def do_OPTIONS(self):
@@ -142,32 +173,58 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
         ip = self.get_client_ip()
         now_str = datetime.now(UZB_TZ).strftime("%Y-%m-%d %H:%M:%S")
 
-        # 1. Mehmon tashrifini yozib olish (Track Visit)
+        # 1. Mehmon tashrifi va Jonli Onlayn Heartbeat (Track Visit & Heartbeat)
         if path.endswith("/api/track") or path.endswith("/api/visit"):
             data = self.read_json_body()
             ua = self.headers.get("User-Agent", data.get("user_agent", ""))
             device, browser = parse_device_browser(ua)
             
             action = data.get("action", "pageview")
+            session_id = data.get("session_id", f"{ip}_{device}")
             screen = data.get("screen", "")
             lang = data.get("lang", "uz")
             referrer = data.get("referrer", "")
 
             with get_db() as conn:
+                # Agar faqat heartbeat bo'lmasa, visits jadvaliga yozamiz
+                if action != "heartbeat":
+                    conn.execute("""
+                        INSERT INTO visits (ip, user_agent, device_type, browser, action, screen_res, language, referrer, created_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (ip, ua, device, browser, action, screen, lang, referrer, now_str))
+
+                # Onlayn faoliyatni yangilaymiz
                 conn.execute("""
-                    INSERT INTO visits (ip, user_agent, device_type, browser, action, screen_res, language, referrer, created_at)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (ip, ua, device, browser, action, screen, lang, referrer, now_str))
+                    INSERT OR REPLACE INTO active_sessions (session_id, ip, device_type, browser, last_seen)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (session_id, ip, device, browser, now_str))
                 conn.commit()
 
-            return self.respond_json(200, {"success": True, "action": action, "timestamp": now_str})
+            clean_old_sessions()
+            with get_db() as conn:
+                online_count = conn.execute("SELECT COUNT(DISTINCT ip) FROM active_sessions").fetchone()[0]
 
-        # 2. RSVP (Mehmon ishtirokini tasdiqlash)
+            return self.respond_json(200, {
+                "success": True, 
+                "action": action, 
+                "online_count": max(1, online_count),
+                "timestamp": now_str
+            })
+
+        # 2. RSVP — Ishtirokni to'liq hisoblash (Men boraman / Kelaman)
         elif path.endswith("/api/rsvp"):
             data = self.read_json_body()
             name = (data.get("name") or "").strip()
-            attendance = data.get("attendance", "yes")
+            side = data.get("side", "Kuyov tomondan")
+            attendance = data.get("attendance", "Ha, albatta boraman!")
+            
+            # Agar "+ Mehmon bilan" bo'lsa, avtomatik 2 kishi deb hisoblaymiz
             guests_count = int(data.get("guests", 1))
+            if "mehmon bilan" in attendance.lower():
+                guests_count = max(2, guests_count)
+            elif "kela olmayman" in attendance.lower():
+                guests_count = 0
+
             wishes = (data.get("wishes") or data.get("message") or "").strip()
 
             if not name:
@@ -175,14 +232,44 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
 
             with get_db() as conn:
                 conn.execute("""
-                    INSERT INTO rsvps (guest_name, attendance, guests_count, wishes, ip, created_at)
-                    VALUES (?, ?, ?, ?, ?, ?)
-                """, (name, attendance, guests_count, wishes, ip, now_str))
+                    INSERT INTO rsvps (guest_name, guest_side, attendance, guests_count, wishes, ip, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (name, side, attendance, guests_count, wishes, ip, now_str))
                 conn.commit()
 
-            return self.respond_json(200, {"success": True, "message": "RSVP saqlandi!"})
+            return self.respond_json(200, {
+                "success": True, 
+                "message": "Ishtirokingiz qabul qilindi! Rahmat!",
+                "name": name,
+                "attendance": attendance
+            })
 
-        # 3. Statistikani tozalash (Faqat admin uchun)
+        # 3. Tilak qoldirish (Mehmonlar Kitobi)
+        elif path.endswith("/api/wish"):
+            data = self.read_json_body()
+            author = (data.get("author") or data.get("name") or "").strip()
+            text = (data.get("text") or data.get("wishes") or "").strip()
+
+            if not author or not text:
+                return self.respond_json(400, {"error": "Ism va tilak matni kiritilishi shart"})
+
+            with get_db() as conn:
+                cursor = conn.execute("""
+                    INSERT INTO wishes (author, text, ip, created_at)
+                    VALUES (?, ?, ?, ?)
+                """, (author, text, ip, now_str))
+                wish_id = cursor.lastrowid
+                conn.commit()
+
+            return self.respond_json(200, {
+                "success": True, 
+                "id": wish_id,
+                "author": author,
+                "text": text,
+                "created_at": now_str
+            })
+
+        # 4. Statistikani tozalash (Admin PIN bilan)
         elif path.endswith("/api/reset"):
             params = parse_qs(parsed.query)
             pin = params.get("pin", [""])[0]
@@ -205,32 +292,40 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
 
         # 1. Health check
         if path.endswith("/api/health"):
-            return self.respond_json(200, {"status": "ok", "app": "Taklifnoma Analytics API"})
+            return self.respond_json(200, {"status": "ok", "app": "Taklifnoma Analytics & RSVP API"})
 
-        # 2. Ochiq qisqacha hisoblagich (Public Counter)
-        elif path.endswith("/api/public-count"):
+        # 2. Hozirgi jonli onlayn kuzatuvchilar soni (Public Live Online Count)
+        elif path.endswith("/api/online"):
+            clean_old_sessions()
             with get_db() as conn:
-                total = conn.execute("SELECT COUNT(*) FROM visits WHERE action='pageview'").fetchone()[0]
-                unique = conn.execute("SELECT COUNT(DISTINCT ip) FROM visits WHERE action='pageview'").fetchone()[0]
-            return self.respond_json(200, {"total_views": total, "unique_visitors": unique})
+                online = conn.execute("SELECT COUNT(DISTINCT ip) FROM active_sessions").fetchone()[0]
+            return self.respond_json(200, {"online_visitors": max(1, online)})
 
-        # 3. To'liq Admin Statistikasi
+        # 3. Barcha jamoat tilaklarini olish (Saytda ko'rsatish uchun)
+        elif path.endswith("/api/wishes"):
+            with get_db() as conn:
+                rows = conn.execute("SELECT id, author, text, created_at FROM wishes ORDER BY id DESC LIMIT 50").fetchall()
+                wishes = [dict(row) for row in rows]
+            return self.respond_json(200, {"wishes": wishes})
+
+        # 4. To'liq Admin Statistikasi va Ishtirok hisobi
         elif path.endswith("/api/stats"):
             pin = params.get("pin", [""])[0]
             if pin != ADMIN_PIN:
                 return self.respond_json(403, {"error": "PIN kod talab qilinadi yoki noto'g'ri"})
 
+            clean_old_sessions()
             today_str = datetime.now(UZB_TZ).strftime("%Y-%m-%d")
 
             with get_db() as conn:
+                # Jonli onlayn
+                online_visitors = conn.execute("SELECT COUNT(DISTINCT ip) FROM active_sessions").fetchone()[0]
+
                 # Jami sahifa ko'rishlar
                 total_views = conn.execute("SELECT COUNT(*) FROM visits WHERE action='pageview'").fetchone()[0]
-                
-                # Jami barcha harakatlar
-                total_actions = conn.execute("SELECT COUNT(*) FROM visits").fetchone()[0]
 
                 # Unikal mehmonlar (IP bo'yicha)
-                unique_visitors = conn.execute("SELECT COUNT(DISTINCT ip) FROM visits").fetchone()[0]
+                unique_visitors = conn.execute("SELECT COUNT(DISTINCT ip) FROM visits WHERE action='pageview'").fetchone()[0]
 
                 # Bugungi tashriflar
                 today_views = conn.execute("SELECT COUNT(*) FROM visits WHERE action='pageview' AND created_at LIKE ?", (f"{today_str}%",)).fetchone()[0]
@@ -239,10 +334,51 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
                 # Taklifnomani ochganlar (slide unlock)
                 unlocked_count = conn.execute("SELECT COUNT(*) FROM visits WHERE action='unlock'").fetchone()[0]
 
-                # Musiqani eshitganlar
+                # Musiqani tinglaganlar
                 music_count = conn.execute("SELECT COUNT(*) FROM visits WHERE action='music_play'").fetchone()[0]
 
-                # Qurilmalar bo'yicha taqsimot
+                # =============================================================
+                # ISHTIROK (RSVP) TO'LIQ HISOBI
+                # =============================================================
+                rsvp_rows = conn.execute("""
+                    SELECT id, guest_name, guest_side, attendance, guests_count, wishes, created_at
+                    FROM rsvps
+                    ORDER BY id DESC
+                """).fetchall()
+                rsvps = [dict(row) for row in rsvp_rows]
+
+                # Boraman / Mehmon bilan / Borolmayman / Aniq emas hisoblari
+                attending_yes = 0       # "Ha, albatta!"
+                attending_plus = 0      # "+ Mehmon bilan"
+                attending_no = 0        # "Kela olmayman"
+                attending_maybe = 0     # "Aniq emas"
+                total_attending_heads = 0 # Jami kelishi kutilayotgan odam soni
+
+                side_counts = {"Kuyov tomondan": 0, "Kelin tomondan": 0, "Qadrdon do‘stlar": 0, "Hamkasblar / Boshqa": 0}
+
+                for r in rsvps:
+                    att = (r["attendance"] or "").lower()
+                    side = r.get("guest_side", "Kuyov tomondan")
+                    side_counts[side] = side_counts.get(side, 0) + 1
+
+                    if "mehmon bilan" in att or "+ mehmon" in att:
+                        attending_plus += 1
+                        total_attending_heads += max(2, r.get("guests_count", 2))
+                    elif "ha" in att or "boraman" in att or "albatta" in att:
+                        attending_yes += 1
+                        total_attending_heads += max(1, r.get("guests_count", 1))
+                    elif "kela olmayman" in att or "borolmayman" in att or "afsus" in att:
+                        attending_no += 1
+                    else:
+                        attending_maybe += 1
+
+                # =============================================================
+                # TILAKLAR RO'YXATI
+                # =============================================================
+                wish_rows = conn.execute("SELECT id, author, text, created_at FROM wishes ORDER BY id DESC").fetchall()
+                wishes = [dict(row) for row in wish_rows]
+
+                # Qurilmalar taqsimoti
                 devices_rows = conn.execute("""
                     SELECT device_type, COUNT(*) as cnt 
                     FROM visits 
@@ -252,7 +388,7 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
                 """).fetchall()
                 devices = {row["device_type"]: row["cnt"] for row in devices_rows}
 
-                # Brauzerlar bo'yicha taqsimot
+                # Brauzerlar taqsimoti
                 browsers_rows = conn.execute("""
                     SELECT browser, COUNT(*) as cnt 
                     FROM visits 
@@ -271,36 +407,76 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
                 """).fetchall()
                 recent_visits = [dict(row) for row in recent_rows]
 
-                # RSVP javoblari
-                rsvp_rows = conn.execute("""
-                    SELECT id, guest_name, attendance, guests_count, wishes, created_at
-                    FROM rsvps
-                    ORDER BY id DESC
-                """).fetchall()
-                rsvps = [dict(row) for row in rsvp_rows]
-
-                total_attending = sum(r["guests_count"] for r in rsvps if r["attendance"] == "yes")
-
             stats_data = {
                 "server_time": datetime.now(UZB_TZ).strftime("%Y-%m-%d %H:%M:%S"),
+                "online_visitors": max(1, online_visitors),
                 "summary": {
                     "total_views": total_views,
-                    "total_actions": total_actions,
                     "unique_visitors": unique_visitors,
                     "today_views": today_views,
                     "today_unique": today_unique,
                     "unlocked_count": unlocked_count,
                     "music_count": music_count,
                     "total_rsvps": len(rsvps),
-                    "total_attending_guests": total_attending
+                    "total_wishes": len(wishes)
+                },
+                "attendance": {
+                    "attending_yes": attending_yes,
+                    "attending_plus": attending_plus,
+                    "attending_no": attending_no,
+                    "attending_maybe": attending_maybe,
+                    "total_confirmed_guests": attending_yes + attending_plus,
+                    "total_attending_heads": total_attending_heads,
+                    "by_side": side_counts
                 },
                 "devices": devices,
                 "browsers": browsers,
-                "recent_visits": recent_visits,
-                "rsvps": rsvps
+                "rsvps": rsvps,
+                "wishes": wishes,
+                "recent_visits": recent_visits
             }
 
             return self.respond_json(200, stats_data)
+
+        else:
+            return self.respond_json(404, {"error": "Not Found"})
+
+    def do_DELETE(self):
+        parsed = urlparse(self.path)
+        path = parsed.path.rstrip("/")
+        params = parse_qs(parsed.query)
+
+        # Tilakni o'chirish (Admin PIN bilan)
+        if path.endswith("/api/wish"):
+            pin = params.get("pin", [""])[0]
+            if pin != ADMIN_PIN:
+                return self.respond_json(403, {"error": "Noto'g'ri PIN kod"})
+
+            wish_id = params.get("id", [""])[0]
+            if not wish_id:
+                return self.respond_json(400, {"error": "Tilak ID ko'rsatilishi shart"})
+
+            with get_db() as conn:
+                conn.execute("DELETE FROM wishes WHERE id = ?", (wish_id,))
+                conn.commit()
+
+            return self.respond_json(200, {"success": True, "message": "Tilak o'chirildi"})
+
+        # RSVP yozuvini o'chirish
+        elif path.endswith("/api/rsvp"):
+            pin = params.get("pin", [""])[0]
+            if pin != ADMIN_PIN:
+                return self.respond_json(403, {"error": "Noto'g'ri PIN kod"})
+
+            rsvp_id = params.get("id", [""])[0]
+            if not rsvp_id:
+                return self.respond_json(400, {"error": "RSVP ID ko'rsatilishi shart"})
+
+            with get_db() as conn:
+                conn.execute("DELETE FROM rsvps WHERE id = ?", (rsvp_id,))
+                conn.commit()
+
+            return self.respond_json(200, {"success": True, "message": "RSVP o'chirildi"})
 
         else:
             return self.respond_json(404, {"error": "Not Found"})
