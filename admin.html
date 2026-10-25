@@ -974,7 +974,7 @@
       const att = data.attendance || {};
 
       // 1. Jonli Onlayn va Tashriflar
-      document.getElementById('stat-online-visitors').innerText = data.online_visitors || 1;
+      document.getElementById('stat-online-visitors').innerText = (data.online_visitors !== undefined && data.online_visitors !== null) ? data.online_visitors : 0;
       document.getElementById('stat-total-views').innerText = s.total_views || 0;
       document.getElementById('stat-unique-visitors').innerText = s.unique_visitors || 0;
       document.getElementById('stat-today-views').innerText = s.today_views || 0;
