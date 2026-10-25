@@ -80,6 +80,13 @@ def init_db():
                 created_at TEXT
             )
         """)
+
+        # Migration: Mavjud jadvalda guest_side ustuni bo'lmasa qo'shish
+        try:
+            conn.execute("ALTER TABLE rsvps ADD COLUMN guest_side TEXT DEFAULT 'Kuyov tomondan'")
+        except Exception:
+            pass
+
         conn.commit()
 
 init_db()
