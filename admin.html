@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Farrux & Marjona Nikoh To'yi</title>
+  <link rel="icon" href="assets/images/floral_frame.jpg" type="image/jpeg">
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #070b19;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(22, 34, 61, 0.85);
+      --border-gold: rgba(212, 175, 55, 0.35);
+      --border-gold-bright: rgba(212, 175, 55, 0.8);
+      --gold-primary: #d4af37;
+      --gold-light: #f5e6a8;
+      --gold-gradient: linear-gradient(135deg, #f5e6a8 0%, #d4af37 50%, #aa8214 100%);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-green: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-rose: #f43f5e;
+      --accent-purple: #a855f7;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.15), transparent),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.08), transparent);
+      background-attachment: fixed;
+      padding-bottom: 50px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Header */
+    .admin-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #070b19;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #070b19;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--gold-primary);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.25);
+    }
+
+    /* KPI STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-gold-bright);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .stat-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ANALYTICS SECTION (Devices & Browsers) */
+    .analytics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .panel-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .bar-track {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: var(--gold-gradient);
+      transition: width 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    /* TABS */
+    .tabs-header {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+    .tab-btn.active {
+      color: var(--gold-primary);
+      border-bottom-color: var(--gold-primary);
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* TABLE */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px 14px;
+      font-weight: 600;
+      color: var(--gold-light);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-pageview { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; }
+    .badge-unlock { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+    .badge-music { background: rgba(212, 175, 55, 0.15); color: #fde047; }
+    .badge-yes { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .badge-no { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+
+    /* LOGIN MODAL */
+    .login-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 11, 25, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 36px 28px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .login-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: #070b19;
+      font-size: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .login-card h2 {
+      font-size: 22px;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pin-input {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-md);
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 4px;
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .pin-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .pin-error {
+      color: var(--accent-rose);
+      font-size: 13px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .empty-state i {
+      font-size: 36px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 640px) {
+      .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .stat-value {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PIN ENTRY MODAL (Parolli kirish) -->
+  <div class="login-modal" id="login-modal">
+    <div class="login-card">
+      <div class="login-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h2>Admin Paneli</h2>
+      <p>Farrux & Marjona Nikoh To'yi taklifnoma statistikasi uchun PIN kodni kiriting:</p>
+      
+      <form id="pin-form" onsubmit="handlePinSubmit(event)">
+        <input 
+          type="password" 
+          id="pin-input" 
+          class="pin-input" 
+          placeholder="••••" 
+          maxlength="10" 
+          autocomplete="off" 
+          autofocus
+        >
+        <div class="pin-error" id="pin-error">Noto'g'ri PIN kod! Qayta urinib ko'ring.</div>
+        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; padding: 13px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Kirish
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD -->
+  <div class="container" id="dashboard" style="display: none;">
+    
+    <!-- HEADER -->
+    <header class="admin-header">
+      <div class="brand-wrap">
+        <div class="brand-logo">F & M</div>
+        <div class="brand-text">
+          <h1>Farrux & Marjona — Boshqaruv Paneli</h1>
+          <p><span class="live-dot"></span> Jonli tashriflar monitoringi faol</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="./" class="btn btn-outline" target="_blank">
+          <i class="fa-solid fa-external-link"></i> Taklifnomani ochish
+        </a>
+        <button class="btn btn-gold" onclick="loadStats()">
+          <i class="fa-solid fa-rotate"></i> <span id="refresh-label">Yangilash</span>
+        </button>
+        <button class="btn btn-outline" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+        </button>
+      </div>
+    </header>
+
+    <!-- KPI STAT CARDS -->
+    <div class="stats-grid">
+      <!-- 1. Jami ko'rishlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Jami Tashriflar</span>
+          <div class="stat-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-total-views">0</div>
+        <div class="stat-sub">Barcha sahifa ochilishlari</div>
+      </div>
+
+      <!-- 2. Unikal Mehmonlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Noyob Mehmonlar</span>
+          <div class="stat-icon" style="background: rgba(212, 175, 55, 0.15); color: #d4af37;">
+            <i class="fa-solid fa-users"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-unique-visitors">0</div>
+        <div class="stat-sub">Alohida qurilma / IP egalari</div>
+      </div>
+
+      <!-- 3. Bugungi Tashriflar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Bugungi Tashrif</span>
+          <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+            <i class="fa-solid fa-calendar-day"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-today-views">0</div>
+        <div class="stat-sub"><span id="stat-today-unique">0</span> ta unikal mehmon bugun</div>
+      </div>
+
+      <!-- 4. Taklifnomani Ochganlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Qulfni Ochganlar</span>
+          <div class="stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">
+            <i class="fa-solid fa-lock-open"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-unlocked">0</div>
+        <div class="stat-sub">Surib to'liq ochganlar</div>
+      </div>
+
+      <!-- 5. Musiqa tinglaganlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Musiqa Tinglaganlar</span>
+          <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">
+            <i class="fa-solid fa-music"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-music">0</div>
+        <div class="stat-sub">"Yoningdaman" qo'shig'ini eshitganlar</div>
+      </div>
+
+      <!-- 6. RSVP Tasdiqlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">RSVP Javoblari</span>
+          <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-rsvps">0</div>
+        <div class="stat-sub"><span id="stat-attending-count">0</span> ta mehmon kelishini bildirdi</div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS ROWS (Devices & Browsers) -->
+    <div class="analytics-row">
+      <div class="panel-card">
+        <h3 class="panel-title"><i class="fa-solid fa-mobile-screen-button"></i> Qurilmalar Taqsimoti</h3>
+        <div class="bar-list" id="devices-list">
+          <!-- Dinamik to'ldiriladi -->
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3 class="panel-title"><i class="fa-brands fa-telegram"></i> Ilova va Brauzerlar</h3>
+        <div class="bar-list" id="browsers-list">
+          <!-- Dinamik to'ldiriladi -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS: Recent Visits / RSVP Guests -->
+    <div class="panel-card">
+      <div class="tabs-header">
+        <button class="tab-btn active" onclick="switchTab('visits')">
+          <i class="fa-solid fa-list-check"></i> Oxirgi Tashriflar Jurnali (<span id="visits-count-badge">0</span>)
+        </button>
+        <button class="tab-btn" onclick="switchTab('rsvps')">
+          <i class="fa-solid fa-heart"></i> Kelin-kuyovga Tilaklar va RSVP (<span id="rsvps-count-badge">0</span>)
+        </button>
+      </div>
+
+      <!-- TAB 1: VISITS TABLE -->
+      <div class="tab-content active" id="tab-visits">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Sana & Vaqt</th>
+                <th>Qurilma</th>
+                <th>Brauzer / Ilova</th>
+                <th>Harakat</th>
+                <th>IP Manzil</th>
+              </tr>
+            </thead>
+            <tbody id="visits-table-body">
+              <tr>
+                <td colspan="6" class="empty-state">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                  <p>Ma'lumotlar yuklanmoqda...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: RSVP GUESTS TABLE -->
+      <div class="tab-content" id="tab-rsvps">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 14px;">
+          <button class="btn btn-outline" onclick="exportRsvpsCsv()">
+            <i class="fa-solid fa-file-csv"></i> Excel/CSV Yuklab olish
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mehmon Ismi</th>
+                <th>Ishtiroki</th>
+                <th>Mehmonlar Soni</th>
+                <th>Samimiy Tilagi</th>
+                <th>Vaqti</th>
+              </tr>
+            </thead>
+            <tbody id="rsvps-table-body">
+              <!-- Dinamik to'ldiriladi -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: var(--radius-md);">
+      <div>
+        <div style="font-weight: 600; color: #f87171; font-size: 14px;">Statistikani tozalash</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Sinov tashriflarini nollash uchun barcha tashrif jurnallarini o'chirish</div>
+      </div>
+      <button class="btn btn-danger" onclick="resetStats()">
+        <i class="fa-solid fa-trash-can"></i> Tozalash
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    let currentPin = sessionStorage.getItem('taklifnoma_admin_pin') || '';
+    let cachedStats = null;
+
+    function getApiBase() {
+      const host = window.location.hostname;
+      if (host === 'developerx.uz' || host === 'www.developerx.uz') {
+        return '/farrux-marjona-nikoh-toyi/api';
+      } else if (host === 'localhost' || host === '127.0.0.1') {
+        return window.location.port === '8097' ? '/api' : 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
+      } else {
+        return 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
+      }
+    }
+
+    const API_BASE = getApiBase();
+
+    function handlePinSubmit(e) {
+      if (e) e.preventDefault();
+      const pin = document.getElementById('pin-input').value.trim();
+      if (!pin) return;
+
+      currentPin = pin;
+      verifyAndLoad(pin);
+    }
+
+    async function verifyAndLoad(pin) {
+      const errEl = document.getElementById('pin-error');
+      try {
+        const res = await fetch(`${API_BASE}/stats?pin=${encodeURIComponent(pin)}`);
+        if (!res.ok) {
+          errEl.style.display = 'block';
+          return;
+        }
+        const data = await res.json();
+        sessionStorage.setItem('taklifnoma_admin_pin', pin);
+        document.getElementById('login-modal').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        renderDashboard(data);
+      } catch (err) {
+        errEl.innerText = "Server bilan bog'lanishda xatolik. Birozdan so'ng urinib ko'ring.";
+        errEl.style.display = 'block';
+      }
+    }
+
+    async function loadStats() {
+      if (!currentPin) return;
+      const refLabel = document.getElementById('refresh-label');
+      if (refLabel) refLabel.innerText = "Yuklanmoqda...";
+      try {
+        const res = await fetch(`${API_BASE}/stats?pin=${encodeURIComponent(currentPin)}`);
+        if (res.ok) {
+          const data = await res.json();
+          renderDashboard(data);
+        }
+      } catch (_) {}
+      if (refLabel) refLabel.innerText = "Yangilash";
+    }
+
+    function renderDashboard(data) {
+      cachedStats = data;
+      const s = data.summary || {};
+
+      document.getElementById('stat-total-views').innerText = s.total_views || 0;
+      document.getElementById('stat-unique-visitors').innerText = s.unique_visitors || 0;
+      document.getElementById('stat-today-views').innerText = s.today_views || 0;
+      document.getElementById('stat-today-unique').innerText = s.today_unique || 0;
+      document.getElementById('stat-unlocked').innerText = s.unlocked_count || 0;
+      document.getElementById('stat-music').innerText = s.music_count || 0;
+      document.getElementById('stat-rsvps').innerText = s.total_rsvps || 0;
+      document.getElementById('stat-attending-count').innerText = s.total_attending_guests || 0;
+
+      // Badges count
+      document.getElementById('visits-count-badge').innerText = (data.recent_visits || []).length;
+      document.getElementById('rsvps-count-badge').innerText = (data.rsvps || []).length;
+
+      // Render Devices Breakdown
+      renderBars('devices-list', data.devices, s.total_views || 1);
+
+      // Render Browsers Breakdown
+      renderBars('browsers-list', data.browsers, s.total_views || 1);
+
+      // Render Visits Table
+      renderVisitsTable(data.recent_visits || []);
+
+      // Render RSVPs Table
+      renderRsvpsTable(data.rsvps || []);
+    }
+
+    function renderBars(containerId, obj, total) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+      if (!obj || Object.keys(obj).length === 0) {
+        container.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">Hozircha maʼlumot yoʻq</div>';
+        return;
+      }
+
+      for (const [name, count] of Object.entries(obj)) {
+        const pct = Math.round((count / (total || 1)) * 100);
+        const item = document.createElement('div');
+        item.className = 'bar-item';
+        item.innerHTML = `
+          <div class="bar-header">
+            <span>${escapeHtml(name)}</span>
+            <span style="color: var(--gold-light); font-weight: 600;">${count} ta (${pct}%)</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: ${pct}%;"></div>
+          </div>
+        `;
+        container.appendChild(item);
+      }
+    }
+
+    function renderVisitsTable(visits) {
+      const tbody = document.getElementById('visits-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (visits.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <i class="fa-regular fa-folder-open"></i>
+              <p>Hali tashriflar qayd etilmagan.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      visits.forEach((v, idx) => {
+        const tr = document.createElement('tr');
+        
+        let actionBadge = `<span class="badge badge-pageview">Kirish</span>`;
+        if (v.action === 'unlock') actionBadge = `<span class="badge badge-unlock">Qulf ochildi</span>`;
+        if (v.action === 'music_play') actionBadge = `<span class="badge badge-music">Musiqa tingladi</span>`;
+
+        // Qurilma ikonkasi
+        let devIcon = 'fa-desktop';
+        if (v.device_type === 'iPhone' || v.device_type === 'Android') devIcon = 'fa-mobile-screen';
+        if (v.device_type === 'iPad') devIcon = 'fa-tablet-screen-button';
+
+        tr.innerHTML = `
+          <td style="color: var(--text-muted);">${idx + 1}</td>
+          <td style="white-space: nowrap;"><i class="fa-regular fa-clock" style="margin-right: 4px; opacity: 0.6;"></i> ${escapeHtml(v.created_at || '')}</td>
+          <td><i class="fa-solid ${devIcon}" style="color: var(--gold-primary); margin-right: 6px;"></i> ${escapeHtml(v.device_type || 'Nomaʼlum')}</td>
+          <td>${escapeHtml(v.browser || 'Brauzer')}</td>
+          <td>${actionBadge}</td>
+          <td style="font-family: monospace; color: var(--text-muted);">${escapeHtml(v.ip || '—')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderRsvpsTable(rsvps) {
+      const tbody = document.getElementById('rsvps-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (rsvps.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <i class="fa-regular fa-envelope-open"></i>
+              <p>Hozircha mehmonlar tomonidan javob yozilmagan.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      rsvps.forEach((r, idx) => {
+        const tr = document.createElement('tr');
+        const badge = r.attendance === 'yes' 
+          ? `<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Boradi</span>`
+          : `<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Borolmaydi</span>`;
+
+        tr.innerHTML = `
+          <td style="color: var(--text-muted);">${idx + 1}</td>
+          <td style="font-weight: 600; color: #fff;">${escapeHtml(r.guest_name || 'Nomaʼlum')}</td>
+          <td>${badge}</td>
+          <td style="text-align: center; font-weight: 600; color: var(--gold-light);">${r.guests_count || 1} kishi</td>
+          <td style="max-width: 320px; font-style: italic;">"${escapeHtml(r.wishes || '—')}"</td>
+          <td style="white-space: nowrap; font-size: 12px; color: var(--text-muted);">${escapeHtml(r.created_at || '')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      if (tabName === 'visits') {
+        document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+        document.getElementById('tab-visits').classList.add('active');
+      } else {
+        document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+        document.getElementById('tab-rsvps').classList.add('active');
+      }
+    }
+
+    function exportRsvpsCsv() {
+      if (!cachedStats || !cachedStats.rsvps || cachedStats.rsvps.length === 0) {
+        alert("Eksport qilish uchun javoblar mavjud emas");
+        return;
+      }
+
+      let csv = "ID,Mehmon Ismi,Ishtiroki,Mehmonlar Soni,Tilagi,Vaqti\n";
+      cachedStats.rsvps.forEach(r => {
+        const ism = `"${(r.guest_name || '').replace(/"/g, '""')}"`;
+        const holat = r.attendance === 'yes' ? 'Boradi' : 'Borolmaydi';
+        const soni = r.guests_count || 1;
+        const tilak = `"${(r.wishes || '').replace(/"/g, '""')}"`;
+        const vaqt = r.created_at || '';
+        csv += `${r.id},${ism},${holat},${soni},${tilak},${vaqt}\n`;
+      });
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Farrux_Marjona_RSVP_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    async function resetStats() {
+      if (!confirm("Haqiqatan ham barcha tashrif statistikasini tozalashni xohlaysizmi?")) return;
+      if (!confirm("Diqqat! Barcha ko'rishlar jurnali o'chiriladi. Davom etilsinmi?")) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/reset?pin=${encodeURIComponent(currentPin)}`, { method: 'POST' });
+        if (res.ok) {
+          alert("Statistika tozalandi!");
+          loadStats();
+        } else {
+          alert("Statistikani tozalashda xatolik");
+        }
+      } catch (e) {
+        alert("Xatolik: " + e.message);
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('taklifnoma_admin_pin');
+      currentPin = '';
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('login-modal').style.display = 'flex';
+      document.getElementById('pin-input').value = '';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Auto-login if session exists
+    window.addEventListener('DOMContentLoaded', () => {
+      if (currentPin) {
+        verifyAndLoad(currentPin);
+      }
+      // Auto-refresh every 25 seconds if dashboard is open
+      setInterval(() => {
+        if (document.getElementById('dashboard').style.display !== 'none') {
+          loadStats();
+        }
+      }, 25000);
+    });
+  </script>
+</body>
+</html>
