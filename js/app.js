@@ -137,24 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // =============================================================================
 // 4. GUESTBOOK / MEHMONLAR KITOBI
 // =============================================================================
-const initialWishes = [
-  {
-    author: "Elnur & Jasmina",
-    text: "Farruxjon & Marjonaxon, baxtingizga aslo ko'z tegmasin! Ilohim qo'sha qaringlar, xonadoningizdan fayz arimasin! 🎉",
-    time: "20-Oktyabr"
-  },
-  {
-    author: "Dilnoza opa",
-    text: "Ikkala yoshga ham tuganmas muhabbat va quvonch tilayman! Mustahkam va totuv oila bo'linglar! ✨",
-    time: "20-Oktyabr"
-  },
-  {
-    author: "Sardor & Shahnoza",
-    text: "Tantanangiz muborak bo'lsin, eng chiroyli juftlik! Baxtli onlar abadiy bo'lsin! 💍",
-    time: "19-Oktyabr"
-  }
-];
-
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/[&<>'"]/g, 
@@ -173,10 +155,24 @@ function loadWishes() {
     stored = [];
   }
 
-  const allWishes = [...stored, ...initialWishes];
   wishesList.innerHTML = '';
 
-  allWishes.forEach(item => {
+  if (!Array.isArray(stored) || stored.length === 0) {
+    const emptyEl = document.createElement('div');
+    emptyEl.className = 'empty-wishes-state';
+    const lang = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'uz';
+    const emptyMsg = (typeof translations !== 'undefined' && translations[lang]?.no_wishes_yet)
+      ? translations[lang].no_wishes_yet
+      : "Hozircha tilaklar yo‘q. Birinchi bo‘lib samimiy tilagingizni qoldiring! 💌";
+    emptyEl.innerHTML = `
+      <div class="empty-icon"><i class="fa-regular fa-envelope-open"></i></div>
+      <p class="empty-text" data-key="no_wishes_yet">${emptyMsg}</p>
+    `;
+    wishesList.appendChild(emptyEl);
+    return;
+  }
+
+  stored.forEach(item => {
     const wishEl = document.createElement('div');
     wishEl.className = 'wish-item';
     wishEl.innerHTML = `
