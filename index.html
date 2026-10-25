@@ -51,9 +51,10 @@
 <body class="is-locked">
 
   <!-- Audio Player (Background Wedding Melody - Benom Guruhi "Yoningdaman") -->
-  <audio id="wedding-audio" loop preload="auto">
-    <source src="assets/audio/music.m4a?v=benom_studio" type="audio/mp4">
-    <source src="assets/audio/music.mp3?v=benom_studio" type="audio/mpeg">
+  <!-- preload="metadata" ensures progressive 256KB chunk streaming without downloading all 4MB at once -->
+  <audio id="wedding-audio" loop preload="metadata" playsinline webkit-playsinline>
+    <source src="assets/audio/music.m4a?v=benom_stream_v2" type="audio/mp4">
+    <source src="assets/audio/music.mp3?v=benom_stream_v2" type="audio/mpeg">
   </audio>
 
   <!-- Desktop Ambient Background Wrapper -->

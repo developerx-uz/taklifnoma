@@ -211,6 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   function handleDragStart(clientX) {
     if (unlocked) return;
+    if (typeof prepareAudioWarmup === 'function') {
+      prepareAudioWarmup();
+    }
     isDragging = true;
     hasMoved = false;
     startX = clientX;

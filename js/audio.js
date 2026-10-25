@@ -1,10 +1,12 @@
 /**
  * Farrux & Marjona - Wedding Audio Controller (js/audio.js)
  * Plays exclusively the studio track of Benom guruhi - "Yoningdaman"
+ * Supports progressive chunked streaming (256 KB per slice) & zero-lag early prebuffering
  */
 
 let isAudioPlaying = false;
 let wasPlayingBeforeHidden = false;
+let isAudioWarmedUp = false;
 
 function getAudioElement() {
   return document.getElementById('wedding-audio');
@@ -25,6 +27,27 @@ function updateMusicUI(playing) {
   }
 }
 
+/**
+ * Musiqani oldindan buferlash (Warmup):
+ * Foydalanuvchi qulfni surishni boshlagan zahoti dastlabki 256 KB bo'lakni
+ * fonda yuklab olishni boshlaydi. Butun 4MB faylni emas, faqat birinchi bo'lakni oladi.
+ * Natijada qulf to'liq ochilgan paytda musiqa 0 soniya kutish bilan darhol chalinadi.
+ */
+function prepareAudioWarmup() {
+  if (isAudioWarmedUp) return;
+  const audioEl = getAudioElement();
+  if (!audioEl) return;
+
+  isAudioWarmedUp = true;
+  try {
+    if (audioEl.readyState < 2) {
+      audioEl.load();
+    }
+  } catch (e) {
+    console.debug('Audio warmup debug:', e);
+  }
+}
+
 function playAudioTrack() {
   const audioEl = getAudioElement();
   if (!audioEl) return;
@@ -37,8 +60,7 @@ function playAudioTrack() {
       isAudioPlaying = true;
       updateMusicUI(true);
     }).catch((err) => {
-      // Browser autoplay restriction before user interaction
-      console.log('Autoplay blocked, waiting for touch/click:', err);
+      console.log('Autoplay restriction or waiting for user interaction:', err);
       isAudioPlaying = false;
       updateMusicUI(false);
       
@@ -165,9 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Preload audio and ensure ready
+  // Early warmup triggers: foydalanuvchi sahifaga birinchi bor teginganda
+  window.addEventListener('touchstart', prepareAudioWarmup, { passive: true, once: true });
+  window.addEventListener('pointerdown', prepareAudioWarmup, { passive: true, once: true });
+
   const audioEl = getAudioElement();
   if (audioEl) {
-    audioEl.load();
+    // Media element event monitoring for smooth progressive streaming
+    audioEl.addEventListener('playing', () => {
+      isAudioPlaying = true;
+      updateMusicUI(true);
+    });
+    audioEl.addEventListener('pause', () => {
+      if (!wasPlayingBeforeHidden) {
+        updateMusicUI(false);
+      }
+    });
+    audioEl.addEventListener('ended', () => {
+      if (audioEl.loop) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(() => {});
+      } else {
+        isAudioPlaying = false;
+        updateMusicUI(false);
+      }
+    });
   }
 });

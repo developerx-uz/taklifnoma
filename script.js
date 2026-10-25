@@ -366,14 +366,7 @@ function playNextArpeggio() {
 }
 
 function startProceduralMusic() {
-  initAudioContext();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  chordIndex = 0;
-  playNextArpeggio();
-  if (synthInterval) clearInterval(synthInterval);
-  synthInterval = setInterval(playNextArpeggio, 2200);
+  // Disabled: Benom guruhi audio track is used exclusively
 }
 
 function stopProceduralMusic() {
@@ -384,16 +377,10 @@ function stopProceduralMusic() {
 }
 
 function toggleAudio() {
-  initAudioContext();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-
   if (isAudioPlaying) {
     // Stop audio
     isAudioPlaying = false;
     audioElement.pause();
-    stopProceduralMusic();
     vinylDisc.classList.remove('spinning');
     soundToggleTop.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
     showToast(currentLang === 'ru' ? 'Музыка выключена' : currentLang === 'en' ? 'Music paused' : 'Musiqa to‘xtatildi');
@@ -404,19 +391,14 @@ function toggleAudio() {
     soundToggleTop.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
     musicTooltip.classList.remove('show');
 
-    // Try playing MP3 element first
-    const playPromise = audioElement.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        // MP3 plays successfully
-      }).catch(() => {
-        // Fallback to procedural soothing harp synth
-        startProceduralMusic();
+    // Play Benom guruhi studio track
+    if (audioElement) {
+      audioElement.volume = 1.0;
+      audioElement.play().catch((err) => {
+        console.log('Autoplay restriction:', err);
       });
-    } else {
-      startProceduralMusic();
     }
-    showToast(currentLang === 'ru' ? 'Приятного прослушивания 🎵' : currentLang === 'en' ? 'Playing wedding melody 🎵' : 'Musiqa yangramoqda 🎵');
+    showToast(currentLang === 'ru' ? 'Benom guruhi — Yoningdaman 🎵' : currentLang === 'en' ? 'Benom guruhi — Yoningdaman 🎵' : 'Benom guruhi — Yoningdaman 🎵');
   }
 }
 
