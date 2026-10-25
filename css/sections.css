@@ -553,158 +553,294 @@
 }
 
 /* ==========================================================================
-   SECTION 8: JOYLASHUV (Location & Map)
+   SECTION 8: JOYLASHUV (Location & Map Card with Royal Frame)
    ========================================================================== */
-.location-glass {
-  background: rgba(14, 21, 38, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-  border-radius: 24px;
-}
-
-.map-card {
+.location-card-section {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 10px;
-}
-
-/* Venue Address Banner */
-.venue-address-banner {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: rgba(11, 16, 29, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 18px;
-  padding: 16px 18px;
-  text-align: left;
-  box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
-}
-
-.venue-address-icon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
-  border: 1px solid var(--gold-primary);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  color: #ef4444;
-  font-size: 1.4rem;
-  filter: drop-shadow(0 2px 8px rgba(239, 68, 68, 0.4));
+  align-items: flex-start;
+  background: #080c16;
+  box-sizing: border-box;
 }
 
-.venue-address-details {
-  flex: 1;
+.location-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.venue-address-details .venue-tag {
-  font-family: var(--font-title);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--gold-light);
-  margin-bottom: 3px;
+.location-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 1080 / 2200;
   display: block;
 }
 
-.venue-address-details .address-text {
-  font-size: 0.9rem;
-  color: #ffffff;
-  font-weight: 500;
-  margin-bottom: 4px;
+/* Content overlaid precisely inside the ivory parchment frame */
+.location-card-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 8.5% padding on left/right ensures it stays well inside the gold double borders */
+  /* 12.5% on top and 12% on bottom keeps it clear of the rose bouquets in the 4 corners */
+  padding: 12.5% 8.5% 12% 8.5%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
 }
 
-.venue-address-details .address-landmark {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+/* Header */
+.loc-header-block {
+  width: 100%;
+  margin-top: 1%;
+}
+
+.loc-sub-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(0.65rem, 2vw, 0.76rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a87e2b;
+  margin-bottom: 3px;
+}
+
+.loc-main-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 5.5vw, 2.35rem);
+  font-weight: 700;
+  color: #1a2238;
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(212, 175, 55, 0.2);
+}
+
+.loc-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px auto 0;
+  max-width: 140px;
+}
+
+.loc-div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c5a059, transparent);
+}
+
+.loc-div-symbol {
+  color: #b8860b;
+  font-size: 0.68rem;
+}
+
+/* Info Banner */
+.loc-info-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(200, 160, 60, 0.45);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 16px rgba(120, 90, 30, 0.08);
+  box-sizing: border-box;
+}
+
+.loc-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.loc-venue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+  font-weight: 600;
+  color: #b8860b;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.loc-venue-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #1a2238;
+  margin: 0;
+}
+
+.loc-info-body {
+  text-align: left;
+}
+
+.loc-address-line {
+  font-size: clamp(0.78rem, 2.3vw, 0.88rem);
+  color: #2c3345;
+  font-weight: 600;
+  margin: 0 0 3px 0;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.venue-address-details .address-landmark i {
-  color: var(--gold-primary);
+.loc-pin-icon {
+  color: #e11d48;
+  font-size: 0.95rem;
+  filter: drop-shadow(0 1px 3px rgba(225, 29, 72, 0.3));
+}
+
+.loc-landmark-line {
+  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  color: #64748b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loc-landmark-line i {
+  color: #d4af37;
   font-size: 0.75rem;
 }
 
-/* Interactive Live Google Maps Container */
-.map-interactive-wrap {
+/* Map Container - Compact and elegant */
+.loc-map-container {
   width: 100%;
-  height: 320px;
-  border-radius: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.45);
+  height: clamp(190px, 24vw, 240px);
+  max-height: 245px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(200, 160, 60, 0.55);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(60, 45, 15, 0.12);
+  background: #f1ebd9;
   position: relative;
-  background: #0d1322;
+  box-sizing: border-box;
 }
 
-.map-interactive-wrap iframe {
+.loc-map-container iframe {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.location-actions {
+/* Buttons */
+.loc-buttons-grid {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
 
-.map-btn {
+.loc-btn-row-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.loc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.74rem, 2.1vw, 0.82rem);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.loc-action-btn:active {
+  transform: scale(0.97);
+}
+
+.loc-btn-google {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #0b0f19;
+  border: none;
+  box-shadow: 0 3px 12px rgba(184, 134, 11, 0.35);
+}
+
+.loc-btn-google:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(184, 134, 11, 0.45);
+}
+
+.loc-btn-yandex {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #be123c;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.loc-btn-yandex:hover {
+  background: #fff;
+  border-color: #e11d48;
+  color: #e11d48;
+}
+
+.loc-btn-copy {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(200, 160, 60, 0.45);
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.loc-btn-copy i {
+  color: #b8860b;
+}
+
+.loc-btn-copy:hover {
+  background: #ffffff;
+  border-color: #b8860b;
+}
+
+/* Footer Tag */
+.loc-footer-tag {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 13px 20px;
-  border-radius: 25px;
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: var(--transition-smooth);
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.72rem, 2.1vw, 0.82rem);
+  color: #8c6e3b;
+  margin-bottom: 2%;
 }
 
-.google-map-btn {
-  background: var(--gold-gradient);
-  color: #0d111b;
-  border: none;
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
-}
-
-.google-map-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.5);
-}
-
-.yandex-map-btn {
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  color: #fca5a5;
-}
-
-.yandex-map-btn:hover {
-  background: rgba(239, 68, 68, 0.22);
-  border-color: #ef4444;
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.copy-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-gold);
-  color: var(--gold-light);
-}
-
-.copy-btn:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--gold-primary);
-  transform: translateY(-2px);
+.loc-footer-tag span:first-child,
+.loc-footer-tag span:last-child {
+  font-style: normal;
+  font-size: 0.6rem;
+  color: #c5a059;
 }
 
 /* ==========================================================================
