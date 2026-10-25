@@ -52,16 +52,27 @@ const server = http.createServer((req, res) => {
     const totalSize = stats.size;
 
     if (range) {
-      // HTTP 206 Partial Content for streaming audio / video
+      // Kam-kamdan yuklash (Chunked Streaming):
+      // Brauzer butun 4MB faylni birdan yuklab olmaydi. Bir safarda faqat 256 KB bo'lak uzatiladi.
+      // Audio ijro etilgani sari brauzer avtomatik ravishda keyingi bo'lakni yuklab oladi.
+      const MAX_CHUNK_SIZE = 256 * 1024; // 256 KB bo'lak
       const parts = range.replace(/bytes=/, '').split('-');
       const start = parseInt(parts[0], 10);
-      const end = parts[1] ? parseInt(parts[1], 10) : totalSize - 1;
+      let end = parts[1] ? parseInt(parts[1], 10) : start + MAX_CHUNK_SIZE - 1;
 
-      if (start >= totalSize || end >= totalSize) {
+      if (start >= totalSize) {
         res.writeHead(416, {
           'Content-Range': `bytes */${totalSize}`
         });
         return res.end();
+      }
+
+      if (end >= totalSize) {
+        end = totalSize - 1;
+      }
+
+      if ((end - start + 1) > MAX_CHUNK_SIZE) {
+        end = start + MAX_CHUNK_SIZE - 1;
       }
 
       const chunkSize = (end - start) + 1;
@@ -70,7 +81,7 @@ const server = http.createServer((req, res) => {
         'Accept-Ranges': 'bytes',
         'Content-Length': chunkSize,
         'Content-Type': mime,
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'public, max-age=3600'
       });
 
       fs.createReadStream(filePath, { start, end }).pipe(res);
