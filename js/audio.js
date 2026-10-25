@@ -1,193 +1,112 @@
 /**
- * Farrux & Marjona - Romantic Wedding Audio Module (js/audio.js)
- * Features:
- * - Procedural Romantic Synthesizer (Web Audio API)
- * - MP3 Audio Element Fallback
- * - Vinyl disc spinning animation
+ * Farrux & Marjona - Wedding Audio Controller (js/audio.js)
+ * Plays exclusively the studio track of Benom guruhi - "Yoningdaman"
  */
 
-let audioCtx = null;
 let isAudioPlaying = false;
-let synthInterval = null;
+let wasPlayingBeforeHidden = false;
 
-const audioElement = document.getElementById('wedding-audio');
-const vinylDisc = document.getElementById('vinyl-disc');
-const floatingMusic = document.getElementById('floating-music');
-const soundToggleTop = document.getElementById('sound-toggle-top');
-const musicTooltip = document.getElementById('music-tooltip');
-
-// Gentle Romantic Wedding Harmony Chords (D - A - Bm - F#m - G - D - G - A)
-const romanticFrequencies = [
-  [293.66, 369.99, 440.00, 587.33], // D Major
-  [277.18, 329.63, 440.00, 659.25], // A Major
-  [246.94, 293.66, 369.99, 493.88], // B Minor
-  [220.00, 277.18, 369.99, 554.37], // F# Minor
-  [196.00, 246.94, 293.66, 392.00], // G Major
-  [185.00, 220.00, 293.66, 440.00], // D Major
-  [196.00, 246.94, 293.66, 493.88], // G Major
-  [220.00, 277.18, 329.63, 440.00]  // A Major
-];
-
-function initAudioContext() {
-  if (!audioCtx) {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (AudioContext) {
-      audioCtx = new AudioContext();
-    }
-  }
+function getAudioElement() {
+  return document.getElementById('wedding-audio');
 }
 
-// Procedural gentle harp note generator
-function playHarpNote(freq, delaySeconds, durationSeconds = 3.2) {
-  if (!audioCtx) return;
-  const now = audioCtx.currentTime + delaySeconds;
-  
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(freq, now);
-  
-  gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(0.08, now + 0.05);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + durationSeconds);
-  
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  
-  osc.start(now);
-  osc.stop(now + durationSeconds);
-}
-
-let chordIndex = 0;
-function playNextArpeggio() {
-  if (!isAudioPlaying) return;
-  const chord = romanticFrequencies[chordIndex];
-  chordIndex = (chordIndex + 1) % romanticFrequencies.length;
-  
-  chord.forEach((freq, i) => {
-    playHarpNote(freq, i * 0.45, 3.5);
-  });
-}
-
-function startProceduralMusic() {
-  initAudioContext();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  chordIndex = 0;
-  playNextArpeggio();
-  if (synthInterval) clearInterval(synthInterval);
-  synthInterval = setInterval(playNextArpeggio, 2200);
-}
-
-function stopProceduralMusic() {
-  if (synthInterval) {
-    clearInterval(synthInterval);
-    synthInterval = null;
-  }
-}
-
-function toggleAudio() {
-  initAudioContext();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-
+function updateMusicUI(playing) {
   const disc = document.getElementById('vinyl-disc');
   const soundTop = document.getElementById('sound-toggle-top');
   const tooltip = document.getElementById('music-tooltip');
-  const audioEl = document.getElementById('wedding-audio');
 
-  if (isAudioPlaying) {
-    // Stop audio
-    isAudioPlaying = false;
-    wasPlayingBeforeHidden = false;
-    if (audioEl) audioEl.pause();
-    stopProceduralMusic();
-    if (audioCtx && audioCtx.state === 'running') {
-      audioCtx.suspend();
-    }
-    if (disc) disc.classList.remove('spinning');
+  if (playing) {
+    disc?.classList.add('spinning');
+    if (soundTop) soundTop.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    tooltip?.classList.remove('show');
+  } else {
+    disc?.classList.remove('spinning');
     if (soundTop) soundTop.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+  }
+}
+
+function playAudioTrack() {
+  const audioEl = getAudioElement();
+  if (!audioEl) return;
+
+  audioEl.volume = 1.0;
+  const playPromise = audioEl.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      isAudioPlaying = true;
+      updateMusicUI(true);
+    }).catch((err) => {
+      // Browser autoplay restriction before user interaction
+      console.log('Autoplay blocked, waiting for touch/click:', err);
+      isAudioPlaying = false;
+      updateMusicUI(false);
+      
+      // Auto-play on first user touch/click anywhere
+      const unlockListener = () => {
+        if (!isAudioPlaying) {
+          audioEl.play().then(() => {
+            isAudioPlaying = true;
+            updateMusicUI(true);
+          }).catch(() => {});
+        }
+        window.removeEventListener('pointerdown', unlockListener);
+        window.removeEventListener('touchstart', unlockListener);
+        window.removeEventListener('click', unlockListener);
+      };
+      window.addEventListener('pointerdown', unlockListener, { once: true });
+      window.addEventListener('touchstart', unlockListener, { once: true });
+      window.addEventListener('click', unlockListener, { once: true });
+    });
+  }
+}
+
+function pauseAudioTrack() {
+  const audioEl = getAudioElement();
+  if (audioEl) {
+    audioEl.pause();
+  }
+  isAudioPlaying = false;
+  updateMusicUI(false);
+}
+
+function toggleAudio() {
+  const audioEl = getAudioElement();
+  if (!audioEl) return;
+
+  if (isAudioPlaying && !audioEl.paused) {
+    pauseAudioTrack();
     if (typeof showToast === 'function') {
-      showToast(currentLang === 'ru' ? 'Музыка выключена' : currentLang === 'en' ? 'Music paused' : 'Musiqa to‘xtatildi');
+      showToast('Musiqa to‘xtatildi');
     }
   } else {
-    // Start audio
-    isAudioPlaying = true;
-    wasPlayingBeforeHidden = false;
-    if (disc) disc.classList.add('spinning');
-    if (soundTop) soundTop.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-    if (tooltip) tooltip.classList.remove('show');
-
-    if (audioEl) {
-      const playPromise = audioEl.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          // MP3 plays successfully
-        }).catch(() => {
-          // Fallback to procedural acoustic harp synth
-          startProceduralMusic();
-        });
-      } else {
-        startProceduralMusic();
-      }
-    } else {
-      startProceduralMusic();
-    }
-
+    playAudioTrack();
     if (typeof showToast === 'function') {
-      showToast(currentLang === 'ru' ? 'Приятного прослушивания 🎵' : currentLang === 'en' ? 'Playing wedding melody 🎵' : 'Musiqa yangramoqda 🎵');
+      showToast('Benom guruhi — Yoningdaman 🎵');
     }
   }
 }
 
 // ============================================================================
-// BACKGROUND PAUSE / VISIBILITY HANDLER
-// Ilovadan (brauzerdan) chiqib ketganda yoki boshqa ilovaga o'tganda musiqani to'xtatish
+// BACKGROUND VISIBILITY HANDLER
+// Ilovadan (brauzerdan) chiqib ketganda avtomatik to'xtatish, qaytganda davom ettirish
 // ============================================================================
-let wasPlayingBeforeHidden = false;
-
 function pauseAudioBackground() {
-  const audioEl = document.getElementById('wedding-audio');
-  const disc = document.getElementById('vinyl-disc');
-  
+  const audioEl = getAudioElement();
   if (audioEl && !audioEl.paused) {
     audioEl.pause();
   }
-  stopProceduralMusic();
-  if (audioCtx && audioCtx.state === 'running') {
-    audioCtx.suspend();
-  }
-  if (disc) disc.classList.remove('spinning');
+  const disc = document.getElementById('vinyl-disc');
+  disc?.classList.remove('spinning');
 }
 
 function resumeAudioBackground() {
   if (!isAudioPlaying) return;
-  
-  const disc = document.getElementById('vinyl-disc');
-  const audioEl = document.getElementById('wedding-audio');
-  
-  if (disc) disc.classList.add('spinning');
-  
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  
-  if (audioEl) {
-    const playPromise = audioEl.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        // Resumed successfully
-      }).catch(() => {
-        startProceduralMusic();
-      });
-    } else {
-      startProceduralMusic();
-    }
-  } else {
-    startProceduralMusic();
+  const audioEl = getAudioElement();
+  if (audioEl && isAudioPlaying) {
+    audioEl.play().then(() => {
+      updateMusicUI(true);
+    }).catch(() => {});
   }
 }
 
@@ -206,7 +125,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// 2. Window Blur / PageHide / Freeze (Ilova minimallashtirilganda yoki orqa fonga o'tganda)
+// 2. Window Blur / PageHide / Freeze (Ilova orqa fonga o'tganda)
 window.addEventListener('pagehide', () => {
   if (isAudioPlaying) {
     wasPlayingBeforeHidden = true;
@@ -228,7 +147,7 @@ document.addEventListener('freeze', () => {
   }
 });
 
-// Connect listeners
+// Initialize listeners on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   const musicWidget = document.getElementById('floating-music');
   if (musicWidget) {
@@ -244,5 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       toggleAudio();
     });
+  }
+
+  // Preload audio and ensure ready
+  const audioEl = getAudioElement();
+  if (audioEl) {
+    audioEl.load();
   }
 });
