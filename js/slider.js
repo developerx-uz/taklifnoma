@@ -140,18 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
       try { navigator.vibrate([40, 50, 40]); } catch (_) {}
     }
 
-    // 3. Play soft crystal chime
-    playUnlockChime();
-
     // 4. Reveal floating music widgets
     const floatingMusic = document.getElementById('floating-music');
     const soundToggleTop = document.getElementById('sound-toggle-top');
     floatingMusic?.classList.add('visible');
     soundToggleTop?.classList.add('visible');
 
-    // 5. Automatically start romantic melody
-    if (typeof toggleAudio === 'function' && !isAudioPlaying) {
-      toggleAudio();
+    // 5. Automatically start romantic melody directly
+    if (typeof playAudioTrack === 'function') {
+      playAudioTrack();
     }
 
     // 6. Tooltip prompt on the music disc

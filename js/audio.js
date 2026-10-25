@@ -12,7 +12,9 @@ function getAudioElement() {
   return document.getElementById('wedding-audio');
 }
 
-function updateMusicUI(playing) {
+function updateMusicUI(forcePlaying) {
+  const audioEl = getAudioElement();
+  const playing = forcePlaying !== undefined ? forcePlaying : (audioEl && !audioEl.paused && !audioEl.ended && audioEl.currentTime > 0);
   const disc = document.getElementById('vinyl-disc');
   const soundTop = document.getElementById('sound-toggle-top');
   const tooltip = document.getElementById('music-tooltip');
@@ -28,31 +30,24 @@ function updateMusicUI(playing) {
 }
 
 /**
- * Musiqani oldindan buferlash (Warmup):
- * Foydalanuvchi qulfni surishni boshlagan zahoti dastlabki 256 KB bo'lakni
- * fonda yuklab olishni boshlaydi. Butun 4MB faylni emas, faqat birinchi bo'lakni oladi.
- * Natijada qulf to'liq ochilgan paytda musiqa 0 soniya kutish bilan darhol chalinadi.
+ * Musiqani oldindan tayyorlash:
+ * Brauzer audio kontekstini va ovoz darajasini ochadi.
+ * Aslo audioEl.load() chaqirilmaydi (chunki bu buferni nollab, musiqani soqov qilib qo'yadi).
  */
 function prepareAudioWarmup() {
-  if (isAudioWarmedUp) return;
   const audioEl = getAudioElement();
   if (!audioEl) return;
-
-  isAudioWarmedUp = true;
-  try {
-    if (audioEl.readyState < 2) {
-      audioEl.load();
-    }
-  } catch (e) {
-    console.debug('Audio warmup debug:', e);
-  }
+  audioEl.muted = false;
+  audioEl.volume = 1.0;
 }
 
 function playAudioTrack() {
   const audioEl = getAudioElement();
   if (!audioEl) return;
 
+  audioEl.muted = false;
   audioEl.volume = 1.0;
+
   const playPromise = audioEl.play();
 
   if (playPromise !== undefined) {
@@ -60,13 +55,15 @@ function playAudioTrack() {
       isAudioPlaying = true;
       updateMusicUI(true);
     }).catch((err) => {
-      console.log('Autoplay restriction or waiting for user interaction:', err);
+      console.warn('Playback deferred, waiting for tap:', err);
       isAudioPlaying = false;
       updateMusicUI(false);
       
       // Auto-play on first user touch/click anywhere
       const unlockListener = () => {
         if (!isAudioPlaying) {
+          audioEl.muted = false;
+          audioEl.volume = 1.0;
           audioEl.play().then(() => {
             isAudioPlaying = true;
             updateMusicUI(true);
