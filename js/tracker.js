@@ -97,10 +97,20 @@
     // A) Birinchi marta kirganda Pageview
     sendEvent('pageview');
 
-    // B) Jonli Onlayn kuzatuvchilar uchun Heartbeat (har 20 soniyada)
+    // B) Jonli Onlayn kuzatuvchilar uchun Heartbeat (har 15 soniyada)
     setInterval(() => {
       sendEvent('heartbeat');
-    }, 20000);
+    }, 15000);
+
+    // Sahifani yopganda yoki tark etganda onlayn ro'yxatdan o'chirish
+    window.addEventListener('pagehide', function () {
+      try {
+        const payload = JSON.stringify({ session_id: sessionId });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(`${API_BASE}/leave`, new Blob([payload], { type: 'application/json' }));
+        }
+      } catch (_) {}
+    });
 
     // C) Tilaklarni serverdan yuklash
     fetchAndRenderWishes();

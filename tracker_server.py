@@ -129,8 +129,8 @@ def parse_device_browser(user_agent):
     return device, browser
 
 def clean_old_sessions():
-    """60 soniyadan beri faol bo'lmagan sessiyalarni tozalash"""
-    cutoff = (datetime.now(UZB_TZ) - timedelta(seconds=60)).strftime("%Y-%m-%d %H:%M:%S")
+    """35 soniyadan beri faol bo'lmagan sessiyalarni tozalash (Heartbeat har 15 soniyada keladi)"""
+    cutoff = (datetime.now(UZB_TZ) - timedelta(seconds=35)).strftime("%Y-%m-%d %H:%M:%S")
     with get_db() as conn:
         conn.execute("DELETE FROM active_sessions WHERE last_seen < ?", (cutoff,))
         conn.commit()
@@ -217,6 +217,16 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
                 "online_count": online_count,
                 "timestamp": now_str
             })
+
+        # 1.1 Mehmon sahifadan chiqib ketganda darhol sessiyani o'chirish (Instant Leave)
+        elif path.endswith("/api/leave"):
+            data = self.read_json_body()
+            session_id = data.get("session_id")
+            if session_id:
+                with get_db() as conn:
+                    conn.execute("DELETE FROM active_sessions WHERE session_id = ?", (session_id,))
+                    conn.commit()
+            return self.respond_json(200, {"success": True})
 
         # 2. RSVP — Ishtirokni to'liq hisoblash (Men boraman / Kelaman)
         elif path.endswith("/api/rsvp"):
