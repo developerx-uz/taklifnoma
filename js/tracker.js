@@ -128,64 +128,6 @@
         }
       }, { once: true });
     }
-
-    // F) RSVP FORMASI — Ishtirokni to'liq serverga yozish
-    const rsvpForm = document.getElementById('rsvp-form');
-    if (rsvpForm) {
-      rsvpForm.addEventListener('submit', (e) => {
-        try {
-          const guestName = document.getElementById('guest-name')?.value.trim();
-          const guestSide = document.getElementById('guest-side')?.value || 'Kuyov tomondan';
-          const attendance = document.querySelector('input[name="attendance"]:checked')?.value || 'Ha, albatta boraman!';
-
-          let guestsCount = 1;
-          if (attendance.includes('Mehmon bilan') || attendance.includes('mehmon')) {
-            guestsCount = 2;
-          } else if (attendance.includes('Kela olmayman') || attendance.includes('kela olmayman')) {
-            guestsCount = 0;
-          }
-
-          const rsvpPayload = {
-            name: guestName || 'Hurmatli Mehmon',
-            side: guestSide,
-            attendance: attendance,
-            guests: guestsCount
-          };
-
-          fetch(`${API_BASE}/rsvp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(rsvpPayload)
-          }).catch(() => {});
-        } catch (_) {}
-      });
-    }
-
-    // G) TILAKLAR FORMASI — Serverga yozish va darhol ro'yxatga qo'shish
-    const wishForm = document.getElementById('wish-form');
-    if (wishForm) {
-      wishForm.addEventListener('submit', (e) => {
-        try {
-          const authorInput = document.getElementById('wish-author');
-          const textInput = document.getElementById('wish-text');
-          const author = authorInput ? authorInput.value.trim() : '';
-          const text = textInput ? textInput.value.trim() : '';
-
-          if (!author || !text) return;
-
-          fetch(`${API_BASE}/wish`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ author: author, text: text })
-          })
-          .then(res => res.json())
-          .then(saved => {
-            fetchAndRenderWishes();
-          })
-          .catch(() => {});
-        } catch (_) {}
-      });
-    }
   });
 
   window.TaklifnomaTracker = {

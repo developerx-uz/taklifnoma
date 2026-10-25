@@ -124,7 +124,26 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('wedding_rsvp', JSON.stringify(rsvpData));
       } catch (_) {}
 
-      // Hide form, show celebration
+      let guestsCount = 1;
+      if (attendance.includes('Mehmon bilan') || attendance.includes('mehmon')) {
+        guestsCount = 2;
+      } else if (attendance.includes('Kela olmayman') || attendance.includes('kela olmayman')) {
+        guestsCount = 0;
+      }
+
+      // 1. Send RSVP to Server API
+      fetch(`${getWeddingApiBase()}/rsvp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: guestName || 'Hurmatli Mehmon',
+          side: guestSide,
+          attendance: attendance,
+          guests: guestsCount
+        })
+      }).catch(() => {});
+
+      // 2. Hide form, show celebration
       rsvpForm.style.display = 'none';
       if (rsvpSuccess) rsvpSuccess.style.display = 'block';
       launchConfetti();
@@ -135,8 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =============================================================================
-// 4. GUESTBOOK / MEHMONLAR KITOBI
+// 4. GUESTBOOK / MEHMONLAR KITOBI (SERVER BILAN BOG'LANGAN)
 // =============================================================================
+function getWeddingApiBase() {
+  const host = window.location.hostname;
+  if (host === 'developerx.uz' || host === 'www.developerx.uz') {
+    return '/farrux-marjona-nikoh-toyi/api';
+  } else if (host === 'localhost' || host === '127.0.0.1') {
+    return window.location.port === '8097' ? '/api' : 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
+  } else {
+    return 'https://developerx.uz/farrux-marjona-nikoh-toyi/api';
+  }
+}
+
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/[&<>'"]/g, 
@@ -144,20 +174,33 @@ function escapeHtml(str) {
   );
 }
 
-function loadWishes() {
+async function loadWishes() {
   const wishesList = document.getElementById('wishes-list');
   if (!wishesList) return;
 
-  let stored = [];
+  let wishes = [];
   try {
-    stored = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
-  } catch (err) {
-    stored = [];
+    const res = await fetch(`${getWeddingApiBase()}/wishes`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.wishes) && data.wishes.length > 0) {
+        wishes = data.wishes;
+      }
+    }
+  } catch (_) {}
+
+  // Agar server bo'sh bo'lsa yoki oflayn bo'lsa, localStorage'dan tekshirish
+  if (wishes.length === 0) {
+    try {
+      wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+    } catch (_) {
+      wishes = [];
+    }
   }
 
   wishesList.innerHTML = '';
 
-  if (!Array.isArray(stored) || stored.length === 0) {
+  if (wishes.length === 0) {
     const emptyEl = document.createElement('div');
     emptyEl.className = 'empty-wishes-state';
     const lang = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'uz';
@@ -172,13 +215,15 @@ function loadWishes() {
     return;
   }
 
-  stored.forEach(item => {
+  wishes.forEach(item => {
     const wishEl = document.createElement('div');
     wishEl.className = 'wish-item';
+    const authorName = item.author || 'Mehmon';
+    const wishTime = item.created_at ? item.created_at.slice(5, 16) : (item.time || 'Yangi');
     wishEl.innerHTML = `
       <div class="wish-header">
-        <span class="wish-name">${escapeHtml(item.author)}</span>
-        <span class="wish-date">${escapeHtml(item.time || 'Yangi')}</span>
+        <span class="wish-name"><i class="fa-regular fa-user" style="margin-right: 5px; opacity: 0.7;"></i>${escapeHtml(authorName)}</span>
+        <span class="wish-date">${escapeHtml(wishTime)}</span>
       </div>
       <p class="wish-body">${escapeHtml(item.text)}</p>
     `;
@@ -191,34 +236,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const wishForm = document.getElementById('wish-form');
   if (wishForm) {
-    wishForm.addEventListener('submit', (e) => {
+    wishForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const author = document.getElementById('wish-author').value.trim();
-      const text = document.getElementById('wish-text').value.trim();
+      const authorInput = document.getElementById('wish-author');
+      const textInput = document.getElementById('wish-text');
+      const author = authorInput ? authorInput.value.trim() : '';
+      const text = textInput ? textInput.value.trim() : '';
 
       if (!author || !text) return;
 
+      // 1. Maydonlarni darhol tozalash
+      if (authorInput) authorInput.value = '';
+      if (textInput) textInput.value = '';
+
+      // 2. Lokal saqlash (tezkor UI javobi uchun)
       let stored = [];
       try {
         stored = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
-      } catch (err) {
-        stored = [];
-      }
+      } catch (_) { stored = []; }
+      stored.unshift({ author: author, text: text, time: "Hozirgina" });
+      try { localStorage.setItem('wedding_wishes', JSON.stringify(stored)); } catch (_) {}
 
-      const newWish = {
-        author: author,
-        text: text,
-        time: "Hozirgina"
-      };
-
-      stored.unshift(newWish);
+      // 3. Markaziy Serverga yuborish
       try {
-        localStorage.setItem('wedding_wishes', JSON.stringify(stored));
+        await fetch(`${getWeddingApiBase()}/wish`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ author: author, text: text })
+        });
       } catch (_) {}
 
-      document.getElementById('wish-author').value = '';
-      document.getElementById('wish-text').value = '';
-
+      // 4. Ro'yxatni yangilash va animatsiya
       loadWishes();
       launchConfetti();
       showToast(currentLang === 'ru' ? 'Пожелание добавлено!' : currentLang === 'en' ? 'Wish sent successfully!' : 'Tilagingiz qabul qilindi! Rahmat!');
