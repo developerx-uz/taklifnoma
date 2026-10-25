@@ -373,153 +373,227 @@
         </div>
       </section>
 
-      <!-- SECTION 9: R.S.V.P. (Confirmation Form) -->
-      <section class="section rsvp-section" id="rsvp">
-        <div class="glass-container rsvp-glass">
-          <span class="sub-heading">R . S . V . P .</span>
-          <h2 class="section-title" data-key="rsvp_title">Iltimos, ishtirokingizni tasdiqlang</h2>
-          <p class="section-subtitle gold-glow" data-key="rsvp_subtitle">BIZ BILAN BO‘LING</p>
-          <div class="gold-divider-sm"></div>
+      <!-- SECTION 9: R.S.V.P. (Confirmation Form with Royal Card) -->
+      <section class="section rsvp-card-section" id="rsvp">
+        <div class="rsvp-card-wrapper">
+          <img
+            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            alt="Ishtirokingizni tasdiqlang — R.S.V.P."
+            class="rsvp-card-img"
+            width="1080"
+            height="2200"
+            loading="lazy"
+          />
 
-          <form id="rsvp-form" class="rsvp-form">
-            <div class="form-row-desktop">
-              <!-- Full Name Input -->
-              <div class="form-group">
-                <label for="guest-name" data-key="label_name">Mehmon ismi:</label>
-                <div class="input-wrapper">
-                  <i class="fa-regular fa-user"></i>
-                  <input type="text" id="guest-name" required placeholder="To‘liq ismingizni kiriting" data-key-ph="ph_name">
+          <div class="rsvp-card-inner">
+            <!-- Sarlavha bloki -->
+            <div class="rsvp-header-block">
+              <span class="rsvp-sub-badge">R . S . V . P .</span>
+              <h2 class="rsvp-main-title" data-key="rsvp_title">Ishtirokingizni tasdiqlang</h2>
+              <div class="rsvp-divider">
+                <span class="rsvp-div-line"></span>
+                <span class="rsvp-div-symbol">❖</span>
+                <span class="rsvp-div-line"></span>
+              </div>
+            </div>
+
+            <!-- RSVP Form (Ixcham va juda qulay) -->
+            <form id="rsvp-form" class="rsvp-compact-form">
+              <div class="rsvp-fields-container">
+                <!-- Mehmon ismi -->
+                <div class="rsvp-input-group">
+                  <label for="guest-name" class="rsvp-field-label" data-key="label_name">Mehmon ismi:</label>
+                  <div class="rsvp-input-box">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="guest-name" required placeholder="To‘liq ismingizni kiriting" data-key-ph="ph_name">
+                  </div>
+                </div>
+
+                <!-- Kim tomondan mehmonsiz? -->
+                <div class="rsvp-input-group">
+                  <label for="guest-side" class="rsvp-field-label" data-key="label_side">Kim tomondan mehmonsiz?</label>
+                  <div class="rsvp-select-box">
+                    <i class="fa-solid fa-users"></i>
+                    <select id="guest-side">
+                      <option value="Kuyov tomondan" data-key="side_groom">Kuyov tomondan</option>
+                      <option value="Kelin tomondan" data-key="side_bride">Kelin tomondan</option>
+                      <option value="Qadrdon do‘stlar" data-key="side_friends">Qadrdon do‘stlar</option>
+                      <option value="Hamkasblar / Boshqa" data-key="side_colleagues">Hamkasblar / Boshqa</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Qatnashasizmi? (Ixcham 2x2 grid) -->
+                <div class="rsvp-input-group">
+                  <label class="rsvp-field-label" data-key="label_attend">Qatnashasizmi?</label>
+                  <div class="rsvp-options-grid">
+                    <label class="rsvp-option-pill">
+                      <input type="radio" name="attendance" value="Ha, albatta boraman!" checked>
+                      <span class="rsvp-pill-custom"></span>
+                      <span class="rsvp-pill-text" data-key="opt_attend_yes">Ha, albatta! ✨</span>
+                    </label>
+
+                    <label class="rsvp-option-pill">
+                      <input type="radio" name="attendance" value="Ha, mehmon bilan boraman">
+                      <span class="rsvp-pill-custom"></span>
+                      <span class="rsvp-pill-text" data-key="opt_attend_plus">+ Mehmon bilan 👥</span>
+                    </label>
+
+                    <label class="rsvp-option-pill">
+                      <input type="radio" name="attendance" value="Afsus, kela olmayman">
+                      <span class="rsvp-pill-custom"></span>
+                      <span class="rsvp-pill-text" data-key="opt_attend_no">Kela olmayman 💌</span>
+                    </label>
+
+                    <label class="rsvp-option-pill">
+                      <input type="radio" name="attendance" value="Hali aniq emas">
+                      <span class="rsvp-pill-custom"></span>
+                      <span class="rsvp-pill-text" data-key="opt_attend_maybe">Aniq emas 🤔</span>
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <!-- Side Selection (Kelin / Kuyov) -->
-              <div class="form-group">
-                <label for="guest-side" data-key="label_side">Kim tomondan mehmonsiz?</label>
-                <div class="select-wrapper">
-                  <i class="fa-solid fa-users"></i>
-                  <select id="guest-side">
-                    <option value="Kuyov tomondan" data-key="side_groom">Kuyov tomondan</option>
-                    <option value="Kelin tomondan" data-key="side_bride">Kelin tomondan</option>
-                    <option value="Qadrdon do‘stlar" data-key="side_friends">Qadrdon do‘stlar</option>
-                    <option value="Hamkasblar / Boshqa" data-key="side_colleagues">Hamkasblar / Boshqa</option>
-                  </select>
-                </div>
-              </div>
+              <!-- Yuborish tugmasi -->
+              <button type="submit" class="rsvp-submit-btn" id="rsvp-submit-btn">
+                <span data-key="btn_rsvp_send">Javob yuborish</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+
+            <!-- RSVP Success Holati -->
+            <div class="rsvp-success-card" id="rsvp-success" style="display: none;">
+              <div class="rsvp-check-icon"><i class="fa-solid fa-circle-check"></i></div>
+              <h4 data-key="rsvp_thanks">Rahmat, javobingiz qabul qilindi!</h4>
+              <p data-key="rsvp_welcome">Sizni to'yimizda ko'rishdan bag'oyat mamnunmiz!</p>
             </div>
 
-            <!-- Attendance Radio Options -->
-            <div class="form-group">
-              <label data-key="label_attend">Qatnashasizmi?</label>
-              <div class="radio-options">
-                <label class="radio-card">
-                  <input type="radio" name="attendance" value="Ha, albatta boraman!" checked>
-                  <span class="radio-custom"></span>
-                  <span class="radio-text" data-key="opt_attend_yes">Ha, albatta boraman! ✨</span>
-                </label>
-
-                <label class="radio-card">
-                  <input type="radio" name="attendance" value="Ha, mehmon bilan boraman">
-                  <span class="radio-custom"></span>
-                  <span class="radio-text" data-key="opt_attend_plus">Ha, mehmon bilan boraman 👥</span>
-                </label>
-
-                <label class="radio-card">
-                  <input type="radio" name="attendance" value="Afsus, kela olmayman">
-                  <span class="radio-custom"></span>
-                  <span class="radio-text" data-key="opt_attend_no">Afsus, kela olmayman 💌</span>
-                </label>
-
-                <label class="radio-card">
-                  <input type="radio" name="attendance" value="Hali aniq emas">
-                  <span class="radio-custom"></span>
-                  <span class="radio-text" data-key="opt_attend_maybe">Hali aniq emas 🤔</span>
-                </label>
-              </div>
+            <!-- Pastki nozik ezgu tilak -->
+            <div class="rsvp-footer-tag">
+              <span>✦</span>
+              <span>Biz uchun har bir mehmon qadrli</span>
+              <span>✦</span>
             </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="submit-btn" id="rsvp-submit-btn">
-              <span data-key="btn_rsvp_send">Javob yuborish</span>
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </form>
-
-          <!-- RSVP Success Modal / Message -->
-          <div class="rsvp-success-box" id="rsvp-success" style="display: none;">
-            <div class="success-icon-wrap">
-              <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h4 data-key="rsvp_thanks">Rahmat, javobingiz qabul qilindi!</h4>
-            <p data-key="rsvp_welcome">Sizni to'yimizda ko'rishdan bag'oyat mamnunmiz!</p>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 10: MEHMONLAR KITOBI (Guestbook & Wishes) -->
-      <section class="section guestbook-section" id="mehmonlar">
-        <div class="glass-container">
-          <h2 class="section-title cursive-title" data-key="gb_title">Mehmonlar Kitobi</h2>
-          <p class="section-subtitle" data-key="gb_subtitle">Kelin va kuyovga samimiy tilaklaringiz</p>
-          <div class="gold-divider-sm"></div>
+      <!-- SECTION 10: MEHMONLAR KITOBI (Guestbook with Royal Card) -->
+      <section class="section guestbook-card-section" id="mehmonlar">
+        <div class="guestbook-card-wrapper">
+          <img
+            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            alt="Mehmonlar Kitobi — Kelin va kuyovga tilaklar"
+            class="guestbook-card-img"
+            width="1080"
+            height="2200"
+            loading="lazy"
+          />
 
-          <!-- Desktop 2-column layout: Form left, Wishes list right -->
-          <div class="guestbook-desktop-layout">
-            <!-- Wish Submission Form -->
-            <div class="gb-form-column">
-              <form id="wish-form" class="wish-form">
-                <div class="form-group">
-                  <div class="input-wrapper">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" id="wish-author" required placeholder="Ismingizni kiriting" data-key-ph="ph_name">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="input-wrapper">
-                    <i class="fa-regular fa-comment-dots"></i>
-                    <textarea id="wish-text" rows="4" required placeholder="Xabaringizni yozing..." data-key-ph="ph_wish"></textarea>
-                  </div>
-                </div>
-
-                <button type="submit" class="submit-btn secondary-btn">
-                  <span data-key="btn_send_wish">Tilak yuborish</span>
-                  <i class="fa-solid fa-heart"></i>
-                </button>
-              </form>
+          <div class="guestbook-card-inner">
+            <!-- Sarlavha bloki -->
+            <div class="gb-header-block">
+              <span class="gb-sub-badge">MEHMONLAR KITOBI</span>
+              <h2 class="gb-main-title" data-key="gb_title">Tilaklar</h2>
+              <div class="gb-divider">
+                <span class="gb-div-line"></span>
+                <span class="gb-div-symbol">❖</span>
+                <span class="gb-div-line"></span>
+              </div>
             </div>
 
-            <!-- Live Wishes List Column -->
-            <div class="gb-list-column">
-              <div class="wishes-list" id="wishes-list">
+            <!-- Tilak yuborish formasi (Ixcham) -->
+            <form id="wish-form" class="gb-compact-form">
+              <div class="gb-input-box">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="wish-author" required placeholder="Ismingizni kiriting" data-key-ph="ph_name">
+              </div>
+
+              <div class="gb-textarea-box">
+                <i class="fa-regular fa-comment-dots"></i>
+                <textarea id="wish-text" rows="2" required placeholder="Kelin-kuyovga samimiy tilagingiz..." data-key-ph="ph_wish"></textarea>
+              </div>
+
+              <button type="submit" class="gb-submit-btn">
+                <span data-key="btn_send_wish">Tilak yuborish</span>
+                <i class="fa-solid fa-heart"></i>
+              </button>
+            </form>
+
+            <!-- Jonli Tilaklar ro'yxati (Nafis skroller) -->
+            <div class="gb-wishes-container">
+              <div class="wishes-card-list" id="wishes-list">
                 <!-- Dynamically populated from JS -->
               </div>
             </div>
+
+            <!-- Pastki nozik ezgu tilak -->
+            <div class="gb-footer-tag">
+              <span>✦</span>
+              <span>Samimiy tilaklaringiz uchun tashakkur</span>
+              <span>✦</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 11: YAKUNIY MINNATDORCHILIK (Footer) -->
-      <footer class="section footer-section" id="yakun">
-        <div class="floral-frame-footer"></div>
-        <div class="footer-overlay"></div>
+      <!-- SECTION 11: YAKUNIY MINNATDORCHILIK (Royal Card Footer) -->
+      <footer class="section footer-card-section" id="yakun">
+        <div class="footer-card-wrapper">
+          <img
+            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            alt="Tashrifingiz uchun minnatdormiz"
+            class="footer-card-img"
+            width="1080"
+            height="2200"
+            loading="lazy"
+          />
 
-        <div class="footer-content">
-          <span class="sub-heading" data-key="footer_sub">SIZNING ISHTIROKINGIZ...</span>
-          <h2 class="footer-calligraphy" data-key="footer_quote">biz uchun eng qimmatli sovg'a</h2>
+          <div class="footer-card-inner">
+            <!-- Sarlavha bloki -->
+            <div class="footer-header-block">
+              <span class="footer-sub-badge" data-key="footer_sub">SIZNING ISHTIROKINGIZ...</span>
+              <h2 class="footer-main-quote" data-key="footer_quote">biz uchun eng qimmatli sovg'a</h2>
+              <div class="footer-divider">
+                <span class="footer-div-line"></span>
+                <span class="footer-div-symbol">❖</span>
+                <span class="footer-div-line"></span>
+              </div>
+            </div>
 
-          <div class="gold-ring-decor">
-            <span class="ring-left"></span>
-            <i class="fa-solid fa-heart"></i>
-            <span class="ring-right"></span>
+            <!-- Markazdagi shohona uzuk va ismlar ramkasi -->
+            <div class="footer-center-badge">
+              <div class="footer-monogram-circle">
+                <span class="mono-f">F</span>
+                <span class="mono-heart"><i class="fa-solid fa-heart"></i></span>
+                <span class="mono-m">M</span>
+              </div>
+
+              <h3 class="footer-couple-title">Farruxjon & Marjonaxon</h3>
+              <p class="footer-date-text">30 • 10 • 2026</p>
+              <p class="footer-city-text">Termiz shahri, Sohil Saroyi</p>
+            </div>
+
+            <!-- Harakat tugmalari (Ulashish & Tepaga qaytish) -->
+            <div class="footer-buttons-group">
+              <button class="footer-action-btn footer-btn-share" id="footer-share-btn">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span data-key="share_invite">Taklifnomani ulashish</span>
+              </button>
+
+              <a href="#hero" class="footer-action-btn footer-btn-top" id="back-to-top-btn">
+                <i class="fa-solid fa-arrow-up"></i>
+                <span>Boshiga qaytish</span>
+              </a>
+            </div>
+
+            <!-- Pastki nozik ezgu tilak -->
+            <div class="footer-tag-bottom">
+              <span>✦</span>
+              <span>Baxtimizga sherik bo'lganingiz uchun rahmat</span>
+              <span>✦</span>
+            </div>
           </div>
-
-          <p class="footer-couple">Farruxjon & Marjonaxon</p>
-          <p class="footer-date">30.10.2026</p>
-
-          <button class="footer-share-btn" id="footer-share-btn">
-            <i class="fa-solid fa-share-nodes"></i>
-            <span data-key="share_invite">Taklifnomani ulashish</span>
-          </button>
         </div>
       </footer>
 

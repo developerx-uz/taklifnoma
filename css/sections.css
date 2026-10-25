@@ -838,389 +838,816 @@
 }
 
 /* ==========================================================================
-   SECTION 9: R.S.V.P. (Confirmation Form)
+   SHARED CARD SECTION STYLES (RSVP, GUESTBOOK, FOOTER)
    ========================================================================== */
-.rsvp-glass {
-  background: rgba(14, 21, 38, 0.88);
-}
-
-.gold-glow {
-  color: var(--gold-light);
-  font-weight: 600;
-}
-
-.rsvp-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-align: left;
-  margin-top: 10px;
-}
-
-.form-row-desktop {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-group label {
-  font-size: 0.84rem;
-  color: var(--gold-light);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.input-wrapper, .select-wrapper {
+.rsvp-card-section,
+.guestbook-card-section,
+.footer-card-section {
+  padding: 0;
+  min-height: auto;
   position: relative;
-  display: flex;
-  align-items: center;
+  overflow: hidden;
+  background: #080c16;
+  box-sizing: border-box;
 }
 
-.input-wrapper i, .select-wrapper i {
-  position: absolute;
-  left: 16px;
-  color: var(--gold-primary);
-  font-size: 0.95rem;
-  pointer-events: none;
-}
-
-.input-wrapper input, .input-wrapper textarea, .select-wrapper select {
+.rsvp-card-wrapper,
+.guestbook-card-wrapper,
+.footer-card-wrapper {
+  position: relative;
   width: 100%;
-  background: rgba(8, 12, 22, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  border-radius: 14px;
-  padding: 13px 16px 13px 44px;
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  outline: none;
-  transition: var(--transition-smooth);
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.input-wrapper textarea {
-  padding-left: 44px;
-  resize: vertical;
+.rsvp-card-img,
+.guestbook-card-img,
+.footer-card-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 1080 / 2200;
+  display: block;
 }
 
-.input-wrapper input:focus, .input-wrapper textarea:focus, .select-wrapper select:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
-  background: rgba(12, 18, 33, 0.92);
-}
-
-.select-wrapper select option {
-  background: #0f172a;
-  color: #ffffff;
-}
-
-/* Radio Options Cards */
-.radio-options {
+.rsvp-card-inner,
+.guestbook-card-inner,
+.footer-card-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 8.5% padding left/right keeps within inner gold borders */
+  /* 12.5% top and 12% bottom keeps clear of flower bouquets */
+  padding: 12.5% 8.5% 12% 8.5%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.radio-card {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  background: rgba(8, 12, 22, 0.7);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  padding: 12px 16px;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.radio-card:hover {
-  background: rgba(212, 175, 55, 0.12);
-  border-color: var(--gold-primary);
-}
-
-.radio-card input[type="radio"] {
-  display: none;
-}
-
-.radio-custom {
-  width: 19px;
-  height: 19px;
-  border-radius: 50%;
-  border: 1.5px solid var(--gold-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.radio-card input[type="radio"]:checked + .radio-custom::after {
-  content: '';
-  width: 10px;
-  height: 10px;
-  background: var(--gold-gradient);
-  border-radius: 50%;
-  position: absolute;
-}
-
-.radio-text {
-  font-size: 0.86rem;
-  color: #e2e8f0;
-}
-
-.radio-card input[type="radio"]:checked ~ .radio-text {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-/* Submit Buttons */
-.submit-btn {
-  background: var(--gold-gradient);
-  border: none;
-  border-radius: 25px;
-  color: #0b0f1d;
-  font-family: var(--font-sans);
-  font-size: 0.94rem;
-  font-weight: 700;
-  padding: 15px 22px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-  transition: var(--transition-smooth);
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(212, 175, 55, 0.6);
-}
-
-.submit-btn.secondary-btn {
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid var(--gold-primary);
-  color: var(--gold-light);
-  box-shadow: none;
-}
-
-.submit-btn.secondary-btn:hover {
-  background: var(--gold-gradient);
-  color: #0b0f1d;
-}
-
-.rsvp-success-box {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid #10b981;
-  border-radius: 18px;
-  padding: 26px 20px;
   text-align: center;
-  margin-top: 18px;
-  animation: fadeIn 0.4s ease;
-}
-
-.success-icon-wrap {
-  font-size: 2.4rem;
-  color: #10b981;
-  margin-bottom: 10px;
-}
-
-.rsvp-success-box h4 {
-  font-size: 1.1rem;
-  color: #ffffff;
-  margin-bottom: 5px;
-}
-
-.rsvp-success-box p {
-  font-size: 0.85rem;
-  color: #a7f3d0;
+  z-index: 2;
 }
 
 /* ==========================================================================
-   SECTION 10: MEHMONLAR KITOBI (Guestbook)
+   SECTION 9: R.S.V.P. (Ishtirokingizni tasdiqlang)
    ========================================================================== */
-.guestbook-desktop-layout {
+.rsvp-header-block {
+  width: 100%;
+  margin-top: 1%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
-.gb-form-column {
+.rsvp-sub-badge {
+  font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+  font-weight: 700;
+  color: #b8860b;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.rsvp-main-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.35rem, 4.2vw, 1.75rem);
+  font-weight: 800;
+  color: #1a2238;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.15;
+  text-shadow: 0 1px 2px rgba(212, 175, 55, 0.2);
+}
+
+.rsvp-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 5px auto 0;
+  max-width: 130px;
+}
+
+.rsvp-div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c5a059, transparent);
+}
+
+.rsvp-div-symbol {
+  color: #b8860b;
+  font-size: 0.68rem;
+}
+
+/* RSVP Compact Form */
+.rsvp-compact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: auto 0;
+  box-sizing: border-box;
+}
+
+.rsvp-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
 }
 
-.gb-list-column {
-  width: 100%;
-}
-
-.wish-form {
+.rsvp-input-group {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.wishes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-height: 420px;
-  overflow-y: auto;
-  padding-right: 6px;
+  gap: 3px;
   text-align: left;
+  width: 100%;
+}
+
+.rsvp-field-label {
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 2vw, 0.78rem);
+  font-weight: 700;
+  color: #1a2238;
+  letter-spacing: 0.2px;
+  margin-left: 2px;
+}
+
+.rsvp-input-box,
+.rsvp-select-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.rsvp-input-box i,
+.rsvp-select-box i {
+  position: absolute;
+  left: 12px;
+  color: #b8860b;
+  font-size: 0.82rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.rsvp-input-box input,
+.rsvp-select-box select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.2px solid rgba(200, 160, 60, 0.45);
+  border-radius: 12px;
+  padding: 8px 12px 8px 34px;
+  color: #1a2238;
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 2.2vw, 0.84rem);
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 6px rgba(120, 90, 30, 0.05);
+  box-sizing: border-box;
+}
+
+.rsvp-input-box input:focus,
+.rsvp-select-box select:focus {
+  border-color: #b8860b;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22);
+  background: #ffffff;
+}
+
+.rsvp-input-box input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.rsvp-select-box select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23b8860b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 10px;
+  padding-right: 32px;
+}
+
+.rsvp-select-box select option {
+  background: #ffffff;
+  color: #1a2238;
+}
+
+/* Radio attendance pills in 2x2 grid */
+.rsvp-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
+}
+
+.rsvp-option-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.2px solid rgba(200, 160, 60, 0.35);
+  border-radius: 10px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.rsvp-option-pill input[type="radio"] {
+  display: none;
+}
+
+.rsvp-pill-custom {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #b8860b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #ffffff;
+  position: relative;
+}
+
+.rsvp-option-pill input[type="radio"]:checked + .rsvp-pill-custom::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: #b8860b;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.rsvp-pill-text {
+  font-size: clamp(0.7rem, 2vw, 0.76rem);
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.2;
+}
+
+.rsvp-option-pill input[type="radio"]:checked ~ .rsvp-pill-text {
+  color: #1a2238;
+  font-weight: 700;
+}
+
+.rsvp-option-pill:has(input[type="radio"]:checked) {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(255, 255, 255, 0.96));
+  border-color: #b8860b;
+  box-shadow: 0 2px 8px rgba(184, 134, 11, 0.18);
+}
+
+.rsvp-submit-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #0b0f19;
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 2.2vw, 0.88rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-shadow: 0 4px 14px rgba(184, 134, 11, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.rsvp-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(184, 134, 11, 0.45);
+}
+
+.rsvp-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Success Card */
+.rsvp-success-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid #10b981;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
+  margin: auto 0;
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 0.4s ease;
+}
+
+.rsvp-check-icon {
+  font-size: 2.2rem;
+  color: #10b981;
+  margin-bottom: 6px;
+}
+
+.rsvp-success-card h4 {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: #1a2238;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.rsvp-success-card p {
+  font-size: 0.78rem;
+  color: #059669;
+  font-weight: 600;
+  margin: 0;
+}
+
+.rsvp-footer-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.72rem, 2.1vw, 0.8rem);
+  color: #8c6e3b;
+  margin-bottom: 1.5%;
+}
+
+.rsvp-footer-tag span:first-child,
+.rsvp-footer-tag span:last-child {
+  font-style: normal;
+  font-size: 0.6rem;
+  color: #c5a059;
+}
+
+/* ==========================================================================
+   SECTION 10: MEHMONLAR KITOBI (Tilaklar)
+   ========================================================================== */
+.gb-header-block {
+  width: 100%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gb-sub-badge {
+  font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+  font-weight: 700;
+  color: #b8860b;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.gb-main-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 4.4vw, 1.9rem);
+  font-weight: 800;
+  color: #1a2238;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(212, 175, 55, 0.2);
+}
+
+.gb-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 5px auto 0;
+  max-width: 130px;
+}
+
+.gb-div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c5a059, transparent);
+}
+
+.gb-div-symbol {
+  color: #b8860b;
+  font-size: 0.68rem;
+}
+
+/* Guestbook Compact Form */
+.gb-compact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+.gb-input-box,
+.gb-textarea-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.gb-input-box i,
+.gb-textarea-box i {
+  position: absolute;
+  left: 12px;
+  color: #b8860b;
+  font-size: 0.82rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gb-textarea-box i {
+  top: 10px;
+}
+
+.gb-input-box input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.2px solid rgba(200, 160, 60, 0.45);
+  border-radius: 12px;
+  padding: 7px 12px 7px 34px;
+  color: #1a2238;
+  font-family: var(--font-sans);
+  font-size: clamp(0.76rem, 2.2vw, 0.82rem);
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 6px rgba(120, 90, 30, 0.05);
+  box-sizing: border-box;
+}
+
+.gb-textarea-box textarea {
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  max-height: 58px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.2px solid rgba(200, 160, 60, 0.45);
+  border-radius: 12px;
+  padding: 7px 12px 7px 34px;
+  color: #1a2238;
+  font-family: var(--font-sans);
+  font-size: clamp(0.76rem, 2.2vw, 0.82rem);
+  font-weight: 600;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 6px rgba(120, 90, 30, 0.05);
+  box-sizing: border-box;
+  line-height: 1.35;
+}
+
+.gb-input-box input:focus,
+.gb-textarea-box textarea:focus {
+  border-color: #b8860b;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22);
+  background: #ffffff;
+}
+
+.gb-input-box input::placeholder,
+.gb-textarea-box textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.gb-submit-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #0b0f19;
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 2.2vw, 0.85rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  box-shadow: 0 3px 12px rgba(184, 134, 11, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.gb-submit-btn i {
+  color: #e11d48;
+}
+
+.gb-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(184, 134, 11, 0.45);
+}
+
+.gb-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Scrollable Wishes List */
+.gb-wishes-container {
+  width: 100%;
+  height: clamp(210px, 26vw, 260px);
+  max-height: 270px;
+  overflow-y: auto;
+  padding-right: 4px;
+  box-sizing: border-box;
+  margin: 6px 0;
+}
+
+.gb-wishes-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.gb-wishes-container::-webkit-scrollbar-track {
+  background: rgba(200, 160, 60, 0.1);
+  border-radius: 4px;
+}
+
+.gb-wishes-container::-webkit-scrollbar-thumb {
+  background: rgba(184, 134, 11, 0.45);
+  border-radius: 4px;
+}
+
+.wishes-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
 }
 
 .wish-item {
-  background: rgba(8, 12, 22, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.22);
-  border-radius: 16px;
-  padding: 16px 18px;
-  position: relative;
-  animation: slideUp 0.3s ease;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1.2px solid rgba(200, 160, 60, 0.35);
+  border-radius: 12px;
+  padding: 8px 12px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(120, 90, 30, 0.05);
+  animation: fadeIn 0.3s ease;
+  box-sizing: border-box;
 }
 
 .wish-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
 .wish-name {
   font-family: var(--font-title);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--gold-light);
+  color: #1a2238;
 }
 
 .wish-date {
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  font-size: 0.65rem;
+  color: #8c6e3b;
+  font-weight: 600;
 }
 
 .wish-body {
-  font-size: 0.86rem;
-  color: #e2e8f0;
-  line-height: 1.5;
+  font-size: 0.76rem;
+  color: #2c3345;
+  line-height: 1.4;
+  margin: 0;
+  word-break: break-word;
 }
 
-/* ==========================================================================
-   SECTION 11: YAKUNIY FOOTER
-   ========================================================================== */
-.footer-section {
-  min-height: 72vh;
-  position: relative;
+.gb-footer-tag {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding: 60px 20px;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.72rem, 2.1vw, 0.8rem);
+  color: #8c6e3b;
+  margin-bottom: 1.5%;
 }
 
-.floral-frame-footer {
-  position: absolute;
-  top: 0;
-  left: 0;
+.gb-footer-tag span:first-child,
+.gb-footer-tag span:last-child {
+  font-style: normal;
+  font-size: 0.6rem;
+  color: #c5a059;
+}
+
+/* ==========================================================================
+   SECTION 11: FOOTER (Tashrifingiz uchun minnatdormiz)
+   ========================================================================== */
+.footer-header-block {
   width: 100%;
-  height: 100%;
-  background-image: url('../assets/images/floral_frame.jpg');
-  background-size: cover;
-  background-position: center bottom;
-  transform: rotate(180deg);
-  z-index: 1;
-}
-
-.footer-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(7, 10, 18, 0.75) 0%, rgba(7, 10, 18, 0.93) 100%);
-  z-index: 2;
-}
-
-.footer-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 800px;
+  margin-top: 1.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.footer-calligraphy {
+.footer-sub-badge {
+  font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+  font-weight: 700;
+  color: #b8860b;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.footer-main-quote {
   font-family: var(--font-calligraphy);
-  font-size: 3rem;
-  color: var(--gold-light);
-  line-height: 1.2;
-  margin: 12px 0 22px;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
+  font-size: clamp(1.8rem, 5.2vw, 2.4rem);
+  color: #1a2238;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(212, 175, 55, 0.2);
+  font-weight: 400;
 }
 
-.gold-ring-decor {
+.footer-divider {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px auto 0;
+  max-width: 140px;
 }
 
-.gold-ring-decor .ring-left, .gold-ring-decor .ring-right {
-  width: 45px;
+.footer-div-line {
+  flex: 1;
   height: 1px;
-  background: var(--gold-primary);
+  background: linear-gradient(90deg, transparent, #c5a059, transparent);
 }
 
-.gold-ring-decor i {
-  color: var(--gold-primary);
-  font-size: 0.95rem;
-  animation: heartPulse 1.8s infinite;
+.footer-div-symbol {
+  color: #b8860b;
+  font-size: 0.68rem;
 }
 
-.footer-couple {
+/* Center Monogram & Couple info */
+.footer-center-badge {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}
+
+.footer-monogram-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1.8px solid #c5a059;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(248, 243, 229, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.2), inset 0 0 10px rgba(212, 175, 55, 0.15);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.mono-f,
+.mono-m {
   font-family: var(--font-title);
-  font-size: 1.45rem;
-  letter-spacing: 4px;
-  color: #ffffff;
-  font-weight: 700;
-  margin-bottom: 4px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1a2238;
+  letter-spacing: 1px;
 }
 
-.footer-date {
-  font-size: 0.9rem;
-  letter-spacing: 3px;
-  color: var(--gold-light);
-  margin-bottom: 26px;
-}
-
-.footer-share-btn {
-  background: rgba(14, 21, 38, 0.85);
-  border: 1px solid var(--border-gold);
-  color: var(--gold-light);
-  font-family: var(--font-sans);
+.mono-heart {
   font-size: 0.85rem;
+  color: #e11d48;
+  margin: 0 1px;
+  filter: drop-shadow(0 1px 2px rgba(225, 29, 72, 0.3));
+}
+
+.footer-couple-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.2rem, 3.6vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #1a2238;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.footer-date-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #b8860b;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(200, 160, 60, 0.4);
+  border-radius: 14px;
+  padding: 3px 14px;
+  display: inline-block;
+  margin: 0 0 5px;
+}
+
+.footer-city-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 2vw, 0.8rem);
+  color: #64748b;
   font-weight: 600;
-  padding: 12px 26px;
-  border-radius: 25px;
-  cursor: pointer;
+  margin: 0;
+}
+
+/* Action Buttons Group */
+.footer-buttons-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.footer-action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: var(--transition-smooth);
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 16px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 2.2vw, 0.85rem);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 
-.footer-share-btn:hover {
-  background: var(--gold-gradient);
-  color: #0c101c;
-  border-color: transparent;
-  transform: translateY(-2px);
+.footer-action-btn:active {
+  transform: scale(0.98);
+}
+
+.footer-btn-share {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #0b0f19;
+  border: none;
+  box-shadow: 0 3px 14px rgba(184, 134, 11, 0.35);
+}
+
+.footer-btn-share:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(184, 134, 11, 0.45);
+}
+
+.footer-btn-top {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.2px solid rgba(200, 160, 60, 0.45);
+  color: #1a2238;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.footer-btn-top:hover {
+  background: #ffffff;
+  border-color: #b8860b;
+  color: #b8860b;
+}
+
+.footer-tag-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 0.78rem);
+  color: #8c6e3b;
+  margin-bottom: 1.5%;
+}
+
+.footer-tag-bottom span:first-child,
+.footer-tag-bottom span:last-child {
+  font-style: normal;
+  font-size: 0.6rem;
+  color: #c5a059;
 }
 
 /* ==========================================================================
@@ -1465,47 +1892,6 @@
     flex: 1;
   }
 
-  .form-row-desktop {
-    flex-direction: row;
-    gap: 18px;
-  }
-
-  .form-row-desktop .form-group {
-    flex: 1;
-  }
-
-  .radio-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .guestbook-desktop-layout {
-    flex-direction: row;
-    gap: 30px;
-    align-items: flex-start;
-  }
-
-  .gb-form-column {
-    flex: 1;
-  }
-
-  .gb-list-column {
-    flex: 1.2;
-  }
-
-  .wishes-list {
-    max-height: 420px;
-  }
-
-  .footer-calligraphy {
-    font-size: 3.6rem;
-  }
-
-  .footer-couple {
-    font-size: 1.7rem;
-    letter-spacing: 5px;
-  }
 }
 
 @media (min-width: 1440px) {
