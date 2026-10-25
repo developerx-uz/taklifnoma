@@ -281,34 +281,61 @@
         </div>
       </section>
 
-      <!-- SECTION 8: JOYLASHUV (Location & Map) -->
-      <section class="section location-section" id="joylashuv">
-        <div class="glass-container location-glass">
-          <span class="sub-heading" data-key="loc_subtitle">SEVGI VA BAXT UCHRASHADIGAN MANZIL</span>
-          <h2 class="section-title" data-key="loc_title">Joylashuv</h2>
-          <div class="gold-divider-sm"></div>
+      <!-- SECTION 8: JOYLASHUV (Location & Map with Royal Framed Card) -->
+      <section class="section location-card-section" id="joylashuv">
+        <div class="location-card-wrapper">
+          <!-- 1080x2200 Shohona naqshli orqa fon rasmi -->
+          <img
+            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            alt="Sohil Tantanalar Saroyi joylashuvi va xaritasi"
+            class="location-card-img"
+            width="1080"
+            height="2200"
+            loading="lazy"
+          />
 
-          <!-- Location Venue Info & Interactive Google Map -->
-          <div class="map-card">
-            <!-- Address details banner -->
-            <div class="venue-address-banner">
-              <div class="venue-address-icon">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
-              <div class="venue-address-details">
-                <h3 class="venue-tag">SOHIL Tantanalar Saroyi</h3>
-                <p class="address-text" data-key="address_text">Termiz shahri, Fidokor ko'chasi 90G</p>
-                <span class="address-landmark"><i class="fa-solid fa-compass"></i> Mo'ljal: 17-maktab yaqinida</span>
+          <!-- Ichkaridagi ixcham, nafis joylashtirilgan elementlar -->
+          <div class="location-card-inner">
+            <!-- Sarlavha bloki -->
+            <div class="loc-header-block">
+              <span class="loc-sub-title" data-key="loc_subtitle">SEVGI VA BAXT UCHRASHADIGAN MANZIL</span>
+              <h2 class="loc-main-title" data-key="loc_title">Joylashuv</h2>
+              <div class="loc-divider">
+                <span class="loc-div-line"></span>
+                <span class="loc-div-symbol">❖</span>
+                <span class="loc-div-line"></span>
               </div>
             </div>
 
-            <!-- Live Interactive Google Maps Iframe -->
-            <div class="map-interactive-wrap">
+            <!-- Manzil & To'yxona kartochkasi (Ixcham va nafis) -->
+            <div class="loc-info-card">
+              <div class="loc-info-header">
+                <span class="loc-venue-badge">
+                  <i class="fa-solid fa-champagne-glasses"></i>
+                  <span>Tantanalar Saroyi</span>
+                </span>
+                <h3 class="loc-venue-title">SOHIL</h3>
+              </div>
+
+              <div class="loc-info-body">
+                <p class="loc-address-line">
+                  <i class="fa-solid fa-location-dot loc-pin-icon"></i>
+                  <span data-key="address_text">Termiz shahri, Fidokor ko'chasi 90G</span>
+                </p>
+                <p class="loc-landmark-line">
+                  <i class="fa-solid fa-compass"></i>
+                  <span>Mo'ljal: 17-maktab yaqinida</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Jonli Interaktiv Google Xaritasi (Ixchamgina joyga sig'dirilgan) -->
+            <div class="loc-map-container">
               <iframe
                 id="google-map-iframe"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.8!2d67.31361!3d37.234846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f352d278e9546bd%3A0x30c82e97e56c7dc5!2sSohil%20tantanalar%20saroyi!5e0!3m2!1suz!2suz!4v1729890000000!5m2!1suz!2suz"
                 width="100%"
-                height="320"
+                height="100%"
                 style="border:0;"
                 allowfullscreen=""
                 loading="lazy"
@@ -317,22 +344,31 @@
               ></iframe>
             </div>
 
-            <!-- Navigation Action Buttons -->
-            <div class="location-actions">
-              <a href="https://maps.app.goo.gl/5P1n1ZXuFCtsWy3Z6" target="_blank" rel="noopener noreferrer" class="map-btn google-map-btn">
-                <i class="fa-solid fa-map-location-dot"></i>
-                <span data-key="btn_google_map">Google Xaritada ochish</span>
-              </a>
+            <!-- Harakat tugmalari (Ixcham va qulay qatorlar) -->
+            <div class="loc-buttons-grid">
+              <div class="loc-btn-row-main">
+                <a href="https://maps.app.goo.gl/5P1n1ZXuFCtsWy3Z6" target="_blank" rel="noopener noreferrer" class="loc-action-btn loc-btn-google">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span data-key="btn_google_map">Google Xarita</span>
+                </a>
 
-              <a href="https://yandex.com/maps/?text=37.234846,67.31361" target="_blank" rel="noopener noreferrer" class="map-btn yandex-map-btn">
-                <i class="fa-solid fa-route"></i>
-                <span data-key="btn_yandex_map">Yandex Xaritada ochish</span>
-              </a>
-              
-              <button class="map-btn copy-btn" id="copy-address-btn">
+                <a href="https://yandex.com/maps/?text=37.234846,67.31361" target="_blank" rel="noopener noreferrer" class="loc-action-btn loc-btn-yandex">
+                  <i class="fa-solid fa-route"></i>
+                  <span data-key="btn_yandex_map">Yandex Xarita</span>
+                </a>
+              </div>
+
+              <button class="loc-action-btn loc-btn-copy" id="copy-address-btn">
                 <i class="fa-regular fa-copy"></i>
                 <span data-key="btn_copy_address">Manzilni nusxalash</span>
               </button>
+            </div>
+
+            <!-- Pastki nozik ezgu tilak -->
+            <div class="loc-footer-tag">
+              <span>✦</span>
+              <span data-key="loc_welcome_note">Sizni to'yimizda ko'rishdan bag'oyat mamnunmiz</span>
+              <span>✦</span>
             </div>
           </div>
         </div>
