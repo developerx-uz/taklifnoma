@@ -47,6 +47,13 @@
     <link rel="stylesheet" href="css/sections.css">
     <link rel="stylesheet" href="css/components.css">
   </noscript>
+  <!-- Instant Preload for Inner Card Images (Oldindan bir zumda yuklash) -->
+  <link rel="preload" as="image" type="image/webp" href="assets/images/taklifnoma_card.webp?v=fast_v4" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/vaqt_before.webp?v=fast_v4">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/kun_tartibi.webp?v=fast_v4">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/toyxona_card.webp?v=fast_v4">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/galereya_card.webp?v=fast_v4">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/joylashuv_card_bg.webp?v=fast_v4">
 </head>
 <body class="is-locked">
 
@@ -181,7 +188,7 @@
       <section class="section royal-invitation-section" id="taklifnoma">
         <div class="royal-card-wrapper">
           <img
-            src="assets/images/taklifnoma_card.png?v=fixed_typo_1080x2200"
+            src="assets/images/taklifnoma_card.webp?v=fast_v4"
             alt="Farruxjon va Marjonaxon — Nikoh to'yi taklifnomasi"
             class="royal-invitation-img"
             id="royal-invitation-img"
@@ -199,12 +206,12 @@
           <!-- 1. TO'Y BOSHLANISHIDAN OLDIN (Ortga hisoblash & Taqvim) -->
           <div class="vaqt-card vaqt-before" id="vaqt-before">
             <img
-              src="assets/images/vaqt_before.png?v=1080x2200"
+              src="assets/images/vaqt_before.webp?v=fast_v4"
               alt="To'yimizga qolgan vaqt va taqvim"
               class="vaqt-card-img"
               width="1080"
               height="2200"
-              loading="lazy"
+              loading="eager" fetchpriority="high"
             />
             <!-- 4 ta ramka ichidagi real-vaqtda o'zgaruvchi raqamlar -->
             <div class="vaqt-numbers-overlay">
@@ -220,12 +227,12 @@
           <!-- 2. TO'Y VAQTIDA (To'y boshlanganda chiquvchi hashamatli tabrik) -->
           <div class="vaqt-card vaqt-started" id="vaqt-started" style="display: none;">
             <img
-              src="assets/images/vaqt_started.png?v=1080x2200"
+              src="assets/images/vaqt_started.webp?v=fast_v4"
               alt="To'y boshlandi!"
               class="vaqt-card-img"
               width="1080"
               height="2200"
-              loading="lazy"
+              loading="eager" fetchpriority="high"
             />
           </div>
         </div>
@@ -235,12 +242,12 @@
       <section class="section schedule-card-section" id="tartib">
         <div class="schedule-card-wrapper">
           <img
-            src="assets/images/kun_tartibi.png?v=1080x2200"
+            src="assets/images/kun_tartibi.webp?v=fast_v4"
             alt="Kun tartibi — Marosim va bayram vaqtlari"
             class="schedule-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
         </div>
       </section>
@@ -249,12 +256,12 @@
       <section class="section gallery-card-section" id="galereya">
         <div class="gallery-card-wrapper">
           <img
-            src="assets/images/galereya_card.png?v=1080x2200"
+            src="assets/images/galereya_card.webp?v=fast_v4"
             alt="Bizning xotiralarimiz — Xotira Galereyasi"
             class="gallery-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <!-- 3 ta rasm uchun interaktiv bosiluvchi maydonlar (Hitboxlar) -->
@@ -268,12 +275,12 @@
       <section class="section venue-card-section" id="toyxona">
         <div class="venue-card-wrapper">
           <img
-            src="assets/images/toyxona_card.png?v=1080x2200"
+            src="assets/images/toyxona_card.webp?v=fast_v4"
             alt="Sohil Tantanalar Saroyi — Tantanali manzil"
             class="venue-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <!-- 4 ta rasm uchun interaktiv bosiluvchi maydonlar (Hitboxlar) -->
@@ -289,12 +296,12 @@
         <div class="location-card-wrapper">
           <!-- 1080x2200 Shohona naqshli orqa fon rasmi -->
           <img
-            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            src="assets/images/joylashuv_card_bg.webp?v=fast_v4"
             alt="Sohil Tantanalar Saroyi joylashuvi va xaritasi"
             class="location-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <!-- Ichkaridagi ixcham, nafis joylashtirilgan elementlar -->
@@ -340,7 +347,7 @@
                 height="100%"
                 style="border:0;"
                 allowfullscreen=""
-                loading="lazy"
+                loading="eager" fetchpriority="high"
                 referrerpolicy="no-referrer-when-downgrade"
                 title="Sohil Tantanalar Saroyi joylashuvi — Google Xarita"
               ></iframe>
@@ -380,12 +387,12 @@
       <section class="section rsvp-card-section" id="rsvp">
         <div class="rsvp-card-wrapper">
           <img
-            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            src="assets/images/joylashuv_card_bg.webp?v=fast_v4"
             alt="Ishtirokingizni tasdiqlang — R.S.V.P."
             class="rsvp-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <div class="rsvp-card-inner">
@@ -485,12 +492,12 @@
       <section class="section guestbook-card-section" id="mehmonlar">
         <div class="guestbook-card-wrapper">
           <img
-            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            src="assets/images/joylashuv_card_bg.webp?v=fast_v4"
             alt="Mehmonlar Kitobi — Kelin va kuyovga tilaklar"
             class="guestbook-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <div class="guestbook-card-inner">
@@ -544,12 +551,12 @@
       <footer class="section footer-card-section" id="yakun">
         <div class="footer-card-wrapper">
           <img
-            src="assets/images/joylashuv_card_bg.jpg?v=1080x2200"
+            src="assets/images/joylashuv_card_bg.webp?v=fast_v4"
             alt="Tashrifingiz uchun minnatdormiz"
             class="footer-card-img"
             width="1080"
             height="2200"
-            loading="lazy"
+            loading="eager" fetchpriority="high"
           />
 
           <div class="footer-card-inner">
