@@ -14,10 +14,10 @@
   <style>
     :root {
       --bg-dark: #070b19;
-      --bg-card: rgba(15, 23, 42, 0.75);
-      --bg-card-hover: rgba(22, 34, 61, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.8);
+      --bg-card-hover: rgba(22, 34, 61, 0.9);
       --border-gold: rgba(212, 175, 55, 0.35);
-      --border-gold-bright: rgba(212, 175, 55, 0.8);
+      --border-gold-bright: rgba(212, 175, 55, 0.85);
       --gold-primary: #d4af37;
       --gold-light: #f5e6a8;
       --gold-gradient: linear-gradient(135deg, #f5e6a8 0%, #d4af37 50%, #aa8214 100%);
@@ -27,6 +27,7 @@
       --accent-blue: #38bdf8;
       --accent-rose: #f43f5e;
       --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
       --radius-lg: 16px;
       --radius-md: 10px;
     }
@@ -45,19 +46,18 @@
       min-height: 100vh;
       background-image: 
         radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.15), transparent),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.08), transparent);
+        radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08), transparent);
       background-attachment: fixed;
-      padding-bottom: 50px;
+      padding-bottom: 60px;
     }
 
-    /* Container */
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 20px 16px;
     }
 
-    /* Header */
+    /* HEADER */
     .admin-header {
       display: flex;
       flex-wrap: wrap;
@@ -66,12 +66,12 @@
       gap: 16px;
       padding: 20px 24px;
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-gold);
       border-radius: var(--radius-lg);
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .brand-wrap {
@@ -92,7 +92,7 @@
       font-weight: 700;
       font-size: 20px;
       color: #070b19;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.45);
     }
 
     .brand-text h1 {
@@ -107,7 +107,7 @@
       color: var(--text-muted);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .live-dot {
@@ -115,13 +115,13 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 1.6s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.35; transform: scale(0.85); }
     }
 
     .header-actions {
@@ -175,7 +175,18 @@
       background: rgba(244, 63, 94, 0.25);
     }
 
-    /* KPI STATS GRID */
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin: 24px 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* STATS GRID */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -198,6 +209,19 @@
       border-color: var(--border-gold-bright);
     }
 
+    .stat-card.card-highlight-green {
+      border-color: rgba(16, 185, 129, 0.6);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(15, 23, 42, 0.85));
+    }
+    .stat-card.card-highlight-green::before {
+      background: #10b981;
+    }
+
+    .stat-card.card-highlight-gold {
+      border-color: rgba(212, 175, 55, 0.7);
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(15, 23, 42, 0.85));
+    }
+
     .stat-card::before {
       content: '';
       position: absolute;
@@ -216,7 +240,7 @@
     }
 
     .stat-title {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 500;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -224,9 +248,9 @@
     }
 
     .stat-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -246,6 +270,39 @@
       color: var(--text-muted);
     }
 
+    /* ATTENDANCE HIGHLIGHT BOX */
+    .rsvp-summary-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .side-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .side-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+    .side-chip b {
+      color: var(--gold-light);
+    }
+
     /* ANALYTICS SECTION (Devices & Browsers) */
     .analytics-row {
       display: grid;
@@ -259,7 +316,7 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-lg);
-      padding: 20px;
+      padding: 22px;
     }
 
     .panel-title {
@@ -310,6 +367,7 @@
       gap: 8px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       margin-bottom: 20px;
+      overflow-x: auto;
     }
 
     .tab-btn {
@@ -325,6 +383,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
     }
     .tab-btn:hover {
       color: var(--text-main);
@@ -342,7 +401,7 @@
       display: block;
     }
 
-    /* TABLE */
+    /* TABLES */
     .table-responsive {
       overflow-x: auto;
       border-radius: var(--radius-md);
@@ -377,16 +436,67 @@
 
     .badge {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 4px 9px;
       border-radius: 6px;
       font-size: 11.5px;
       font-weight: 600;
+      white-space: nowrap;
     }
     .badge-pageview { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; }
     .badge-unlock { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
     .badge-music { background: rgba(212, 175, 55, 0.15); color: #fde047; }
     .badge-yes { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .badge-plus { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
     .badge-no { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+    .badge-maybe { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+    /* WISHES CARDS GRID */
+    .wishes-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .wish-admin-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+    .wish-admin-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+
+    .wish-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .wish-card-author {
+      font-weight: 600;
+      color: var(--gold-light);
+      font-size: 14.5px;
+    }
+
+    .wish-card-time {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .wish-card-text {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      font-style: italic;
+    }
 
     /* LOGIN MODAL */
     .login-modal {
@@ -427,18 +537,6 @@
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
 
-    .login-card h2 {
-      font-size: 22px;
-      color: var(--gold-light);
-      margin-bottom: 8px;
-    }
-
-    .login-card p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
     .pin-input {
       width: 100%;
       padding: 14px;
@@ -451,11 +549,6 @@
       letter-spacing: 4px;
       outline: none;
       margin-bottom: 16px;
-      transition: border-color 0.2s;
-    }
-    .pin-input:focus {
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
     }
 
     .pin-error {
@@ -465,7 +558,6 @@
       display: none;
     }
 
-    /* EMPTY STATE */
     .empty-state {
       padding: 40px 20px;
       text-align: center;
@@ -501,7 +593,7 @@
         <i class="fa-solid fa-lock"></i>
       </div>
       <h2>Admin Paneli</h2>
-      <p>Farrux & Marjona Nikoh To'yi taklifnoma statistikasi uchun PIN kodni kiriting:</p>
+      <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 22px;">Farrux & Marjona Nikoh To'yi boshqaruv paneli uchun PIN kodni kiriting:</p>
       
       <form id="pin-form" onsubmit="handlePinSubmit(event)">
         <input 
@@ -521,7 +613,7 @@
     </div>
   </div>
 
-  <!-- MAIN ADMIN DASHBOARD -->
+  <!-- MAIN DASHBOARD -->
   <div class="container" id="dashboard" style="display: none;">
     
     <!-- HEADER -->
@@ -530,7 +622,7 @@
         <div class="brand-logo">F & M</div>
         <div class="brand-text">
           <h1>Farrux & Marjona — Boshqaruv Paneli</h1>
-          <p><span class="live-dot"></span> Jonli tashriflar monitoringi faol</p>
+          <p><span class="live-dot"></span> Jonli onlayn kuzatuv va ishtirok hisobi faol</p>
         </div>
       </div>
       <div class="header-actions">
@@ -546,9 +638,22 @@
       </div>
     </header>
 
-    <!-- KPI STAT CARDS -->
+    <!-- ROW 1: REAL-TIME ONLAYN & ASOSIY TASHRIFLAR -->
+    <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> Tashriflar va Jonli Kuzatuv</h2>
     <div class="stats-grid">
-      <!-- 1. Jami ko'rishlar -->
+      <!-- 1. AYNI DAMDA ONLAYN -->
+      <div class="stat-card card-highlight-green">
+        <div class="stat-top">
+          <span class="stat-title" style="color: #6ee7b7; font-weight: 600;">Hozir Onlayn Kuzatmoqda</span>
+          <div class="stat-icon" style="background: rgba(16, 185, 129, 0.25); color: #34d399;">
+            <i class="fa-solid fa-circle-dot"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-online-visitors" style="color: #6ee7b7;">1</div>
+        <div class="stat-sub" style="color: #a7f3d0;"><span class="live-dot" style="display:inline-block; margin-right:4px;"></span> Ayni soniyada saytda turganlar</div>
+      </div>
+
+      <!-- 2. Jami ko'rishlar -->
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-title">Jami Tashriflar</span>
@@ -560,7 +665,7 @@
         <div class="stat-sub">Barcha sahifa ochilishlari</div>
       </div>
 
-      <!-- 2. Unikal Mehmonlar -->
+      <!-- 3. Unikal Mehmonlar -->
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-title">Noyob Mehmonlar</span>
@@ -572,7 +677,7 @@
         <div class="stat-sub">Alohida qurilma / IP egalari</div>
       </div>
 
-      <!-- 3. Bugungi Tashriflar -->
+      <!-- 4. Bugungi Tashriflar -->
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-title">Bugungi Tashrif</span>
@@ -584,10 +689,10 @@
         <div class="stat-sub"><span id="stat-today-unique">0</span> ta unikal mehmon bugun</div>
       </div>
 
-      <!-- 4. Taklifnomani Ochganlar -->
+      <!-- 5. Qulfni Ochganlar -->
       <div class="stat-card">
         <div class="stat-top">
-          <span class="stat-title">Qulfni Ochganlar</span>
+          <span class="stat-title">Taklifnomani Ochganlar</span>
           <div class="stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">
             <i class="fa-solid fa-lock-open"></i>
           </div>
@@ -596,10 +701,10 @@
         <div class="stat-sub">Surib to'liq ochganlar</div>
       </div>
 
-      <!-- 5. Musiqa tinglaganlar -->
+      <!-- 6. Musiqa tinglaganlar -->
       <div class="stat-card">
         <div class="stat-top">
-          <span class="stat-title">Musiqa Tinglaganlar</span>
+          <span class="stat-title">Musiqani Tinglaganlar</span>
           <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">
             <i class="fa-solid fa-music"></i>
           </div>
@@ -607,50 +712,173 @@
         <div class="stat-value" id="stat-music">0</div>
         <div class="stat-sub">"Yoningdaman" qo'shig'ini eshitganlar</div>
       </div>
+    </div>
 
-      <!-- 6. RSVP Tasdiqlar -->
-      <div class="stat-card">
+    <!-- ROW 2: ISHTIROK (RSVP - "MEN BORAMAN") TO'LIQ HISOBI -->
+    <h2 class="section-title"><i class="fa-solid fa-user-check"></i> Ishtirok Hisobi (RSVP — "Men Boraman")</h2>
+    <div class="stats-grid">
+      <!-- 1. JAMI KELADIGAN MEHMONLAR (HEAD COUNT) -->
+      <div class="stat-card card-highlight-gold">
         <div class="stat-top">
-          <span class="stat-title">RSVP Javoblari</span>
-          <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
-            <i class="fa-solid fa-envelope-circle-check"></i>
+          <span class="stat-title" style="color: var(--gold-light); font-weight: 600;">Jami Keluvchi Mehmonlar</span>
+          <div class="stat-icon" style="background: rgba(212, 175, 55, 0.25); color: #f5e6a8;">
+            <i class="fa-solid fa-crown"></i>
           </div>
         </div>
-        <div class="stat-value" id="stat-rsvps">0</div>
-        <div class="stat-sub"><span id="stat-attending-count">0</span> ta mehmon kelishini bildirdi</div>
+        <div class="stat-value" id="stat-attending-heads" style="color: #f5e6a8;">0</div>
+        <div class="stat-sub">Kutilayotgan umumiy kishilar soni</div>
+      </div>
+
+      <!-- 2. "Albatta Boraman" deganlar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">"Ha, Albatta Boraman!"</span>
+          <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-attending-yes" style="color: #34d399;">0</div>
+        <div class="stat-sub">Aniq ishtirok etuvchilar</div>
+      </div>
+
+      <!-- 3. "+ Mehmon bilan" -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">+ Mehmon Bilan</span>
+          <div class="stat-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+            <i class="fa-solid fa-user-group"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-attending-plus" style="color: #38bdf8;">0</div>
+        <div class="stat-sub">Hamrohi bilan keladiganlar (x2)</div>
+      </div>
+
+      <!-- 4. Kela olmayman -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Kela Olmaydiganlar</span>
+          <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #fb7185;">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-attending-no" style="color: #fb7185;">0</div>
+        <div class="stat-sub">Uzr bildirganlar</div>
+      </div>
+
+      <!-- 5. Hali Aniq Emas -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Hali Aniq Emas</span>
+          <div class="stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <i class="fa-solid fa-circle-question"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-attending-maybe" style="color: #fbbf24;">0</div>
+        <div class="stat-sub">O'ylab ko'rayotganlar</div>
+      </div>
+
+      <!-- 6. Jami Yuborilgan Tilaklar -->
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-title">Jami Tilaklar</span>
+          <div class="stat-icon" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+        <div class="stat-value" id="stat-total-wishes" style="color: #fda4af;">0</div>
+        <div class="stat-sub">Kelin-kuyovga yozilgan tabriklar</div>
       </div>
     </div>
 
-    <!-- ANALYTICS ROWS (Devices & Browsers) -->
+    <!-- KIM TOMONDAN MEHMOHLAR CHIPLARI -->
+    <div class="rsvp-summary-box">
+      <div style="font-size: 14px; font-weight: 600; color: var(--gold-light); margin-bottom: 8px;">
+        <i class="fa-solid fa-people-roof"></i> Mehmonlar tomoni bo'yicha taqsimot:
+      </div>
+      <div class="side-chips-row" id="side-chips-container">
+        <!-- Dinamik to'ldiriladi -->
+      </div>
+    </div>
+
+    <!-- ROW 3: ANALYTICS (Devices & Browsers) -->
     <div class="analytics-row">
       <div class="panel-card">
         <h3 class="panel-title"><i class="fa-solid fa-mobile-screen-button"></i> Qurilmalar Taqsimoti</h3>
-        <div class="bar-list" id="devices-list">
-          <!-- Dinamik to'ldiriladi -->
-        </div>
+        <div class="bar-list" id="devices-list"></div>
       </div>
 
       <div class="panel-card">
         <h3 class="panel-title"><i class="fa-brands fa-telegram"></i> Ilova va Brauzerlar</h3>
-        <div class="bar-list" id="browsers-list">
-          <!-- Dinamik to'ldiriladi -->
-        </div>
+        <div class="bar-list" id="browsers-list"></div>
       </div>
     </div>
 
-    <!-- TABS: Recent Visits / RSVP Guests -->
+    <!-- ROW 4: TABS (RSVP MEHMONLAR / TILAKLAR KITOBI / TASHRIFLAR JURNALI) -->
     <div class="panel-card">
       <div class="tabs-header">
-        <button class="tab-btn active" onclick="switchTab('visits')">
-          <i class="fa-solid fa-list-check"></i> Oxirgi Tashriflar Jurnali (<span id="visits-count-badge">0</span>)
+        <button class="tab-btn active" onclick="switchTab('rsvps')">
+          <i class="fa-solid fa-user-check"></i> RSVP Mehmonlar Ro'yxati (<span id="rsvps-count-badge">0</span>)
         </button>
-        <button class="tab-btn" onclick="switchTab('rsvps')">
-          <i class="fa-solid fa-heart"></i> Kelin-kuyovga Tilaklar va RSVP (<span id="rsvps-count-badge">0</span>)
+        <button class="tab-btn" onclick="switchTab('wishes')">
+          <i class="fa-solid fa-heart"></i> Kelin-Kuyovga Tilaklar (<span id="wishes-count-badge">0</span>)
+        </button>
+        <button class="tab-btn" onclick="switchTab('visits')">
+          <i class="fa-solid fa-list-check"></i> Tashriflar Jurnali (<span id="visits-count-badge">0</span>)
         </button>
       </div>
 
-      <!-- TAB 1: VISITS TABLE -->
-      <div class="tab-content active" id="tab-visits">
+      <!-- TAB 1: RSVP MEHMONLAR RO'YXATI -->
+      <div class="tab-content active" id="tab-rsvps">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 13.5px; color: var(--text-muted);">
+            Ishtirokini tasdiqlagan barcha mehmonlar to'liq ma'lumotlari:
+          </div>
+          <button class="btn btn-outline" onclick="exportRsvpsCsv()">
+            <i class="fa-solid fa-file-csv"></i> Excel / CSV Yuklab olish
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mehmon Ismi</th>
+                <th>Kim tomondan</th>
+                <th>Qatnashishi</th>
+                <th>Kishilar soni</th>
+                <th>Sana & Vaqt</th>
+                <th>Amal</th>
+              </tr>
+            </thead>
+            <tbody id="rsvps-table-body">
+              <tr>
+                <td colspan="7" class="empty-state">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                  <p>Yuklanmoqda...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: TILAKLAR KITOBI -->
+      <div class="tab-content" id="tab-wishes">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 13.5px; color: var(--text-muted);">
+            Mehmonlar tomonidan yozib qoldirilgan barcha samimiy tabriklar:
+          </div>
+          <button class="btn btn-outline" onclick="exportWishesCsv()">
+            <i class="fa-solid fa-file-csv"></i> Tilaklarni yuklab olish
+          </button>
+        </div>
+        <div class="wishes-admin-grid" id="wishes-grid">
+          <!-- Dinamik to'ldiriladi -->
+        </div>
+      </div>
+
+      <!-- TAB 3: TASHRIFLAR JURNALI -->
+      <div class="tab-content" id="tab-visits">
         <div class="table-responsive">
           <table>
             <thead>
@@ -663,50 +891,17 @@
                 <th>IP Manzil</th>
               </tr>
             </thead>
-            <tbody id="visits-table-body">
-              <tr>
-                <td colspan="6" class="empty-state">
-                  <i class="fa-solid fa-spinner fa-spin"></i>
-                  <p>Ma'lumotlar yuklanmoqda...</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- TAB 2: RSVP GUESTS TABLE -->
-      <div class="tab-content" id="tab-rsvps">
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 14px;">
-          <button class="btn btn-outline" onclick="exportRsvpsCsv()">
-            <i class="fa-solid fa-file-csv"></i> Excel/CSV Yuklab olish
-          </button>
-        </div>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Mehmon Ismi</th>
-                <th>Ishtiroki</th>
-                <th>Mehmonlar Soni</th>
-                <th>Samimiy Tilagi</th>
-                <th>Vaqti</th>
-              </tr>
-            </thead>
-            <tbody id="rsvps-table-body">
-              <!-- Dinamik to'ldiriladi -->
-            </tbody>
+            <tbody id="visits-table-body"></tbody>
           </table>
         </div>
       </div>
     </div>
 
     <!-- DANGER ZONE -->
-    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: var(--radius-md);">
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: var(--radius-md); flex-wrap: wrap; gap: 12px;">
       <div>
-        <div style="font-weight: 600; color: #f87171; font-size: 14px;">Statistikani tozalash</div>
-        <div style="font-size: 12px; color: var(--text-muted);">Sinov tashriflarini nollash uchun barcha tashrif jurnallarini o'chirish</div>
+        <div style="font-weight: 600; color: #f87171; font-size: 14px;">Tashriflar statistikasini tozalash</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Sinov tashriflarini nollash uchun ko'rishlar jurnalini tozalash (RSVP va tilaklar o'chirilmaydi)</div>
       </div>
       <button class="btn btn-danger" onclick="resetStats()">
         <i class="fa-solid fa-trash-can"></i> Tozalash
@@ -736,7 +931,6 @@
       if (e) e.preventDefault();
       const pin = document.getElementById('pin-input').value.trim();
       if (!pin) return;
-
       currentPin = pin;
       verifyAndLoad(pin);
     }
@@ -763,7 +957,7 @@
     async function loadStats() {
       if (!currentPin) return;
       const refLabel = document.getElementById('refresh-label');
-      if (refLabel) refLabel.innerText = "Yuklanmoqda...";
+      if (refLabel) refLabel.innerText = "Yangilanmoqda...";
       try {
         const res = await fetch(`${API_BASE}/stats?pin=${encodeURIComponent(currentPin)}`);
         if (res.ok) {
@@ -777,31 +971,61 @@
     function renderDashboard(data) {
       cachedStats = data;
       const s = data.summary || {};
+      const att = data.attendance || {};
 
+      // 1. Jonli Onlayn va Tashriflar
+      document.getElementById('stat-online-visitors').innerText = data.online_visitors || 1;
       document.getElementById('stat-total-views').innerText = s.total_views || 0;
       document.getElementById('stat-unique-visitors').innerText = s.unique_visitors || 0;
       document.getElementById('stat-today-views').innerText = s.today_views || 0;
       document.getElementById('stat-today-unique').innerText = s.today_unique || 0;
       document.getElementById('stat-unlocked').innerText = s.unlocked_count || 0;
       document.getElementById('stat-music').innerText = s.music_count || 0;
-      document.getElementById('stat-rsvps').innerText = s.total_rsvps || 0;
-      document.getElementById('stat-attending-count').innerText = s.total_attending_guests || 0;
+
+      // 2. Ishtirok (RSVP) hisobi
+      document.getElementById('stat-attending-heads').innerText = att.total_attending_heads || 0;
+      document.getElementById('stat-attending-yes').innerText = att.attending_yes || 0;
+      document.getElementById('stat-attending-plus').innerText = att.attending_plus || 0;
+      document.getElementById('stat-attending-no').innerText = att.attending_no || 0;
+      document.getElementById('stat-attending-maybe').innerText = att.attending_maybe || 0;
+      document.getElementById('stat-total-wishes').innerText = s.total_wishes || 0;
 
       // Badges count
-      document.getElementById('visits-count-badge').innerText = (data.recent_visits || []).length;
       document.getElementById('rsvps-count-badge').innerText = (data.rsvps || []).length;
+      document.getElementById('wishes-count-badge').innerText = (data.wishes || []).length;
+      document.getElementById('visits-count-badge').innerText = (data.recent_visits || []).length;
 
-      // Render Devices Breakdown
+      // Tomonlar bo'yicha chiplar
+      renderSideChips(att.by_side || {});
+
+      // Qurilmalar va Brauzerlar
       renderBars('devices-list', data.devices, s.total_views || 1);
-
-      // Render Browsers Breakdown
       renderBars('browsers-list', data.browsers, s.total_views || 1);
 
-      // Render Visits Table
-      renderVisitsTable(data.recent_visits || []);
-
-      // Render RSVPs Table
+      // Jadvallar
       renderRsvpsTable(data.rsvps || []);
+      renderWishesGrid(data.wishes || []);
+      renderVisitsTable(data.recent_visits || []);
+    }
+
+    function renderSideChips(sidesObj) {
+      const container = document.getElementById('side-chips-container');
+      if (!container) return;
+      container.innerHTML = '';
+      const icons = {
+        'Kuyov tomondan': '🤵',
+        'Kelin tomondan': '👰',
+        'Qadrdon do‘stlar': '🤝',
+        'Hamkasblar / Boshqa': '💼'
+      };
+
+      for (const [side, count] of Object.entries(sidesObj)) {
+        const icon = icons[side] || '👥';
+        const chip = document.createElement('div');
+        chip.className = 'side-chip';
+        chip.innerHTML = `<span>${icon} ${escapeHtml(side)}:</span> <b>${count} ta</b>`;
+        container.appendChild(chip);
+      }
     }
 
     function renderBars(containerId, obj, total) {
@@ -830,6 +1054,86 @@
       }
     }
 
+    function renderRsvpsTable(rsvps) {
+      const tbody = document.getElementById('rsvps-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (rsvps.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-state">
+              <i class="fa-regular fa-envelope-open"></i>
+              <p>Hozircha mehmonlar tomonidan javob yozilmagan.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      rsvps.forEach((r, idx) => {
+        const tr = document.createElement('tr');
+        const att = (r.attendance || '').toLowerCase();
+        let badge = `<span class="badge badge-yes">Boradi</span>`;
+        if (att.includes('mehmon bilan') || att.includes('+ mehmon')) {
+          badge = `<span class="badge badge-plus"><i class="fa-solid fa-user-group"></i> + Mehmon</span>`;
+        } else if (att.includes('kela olmayman') || att.includes('afsus')) {
+          badge = `<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Kela olmaydi</span>`;
+        } else if (att.includes('aniq emas')) {
+          badge = `<span class="badge badge-maybe"><i class="fa-solid fa-question"></i> Aniq emas</span>`;
+        }
+
+        tr.innerHTML = `
+          <td style="color: var(--text-muted);">${idx + 1}</td>
+          <td style="font-weight: 600; color: #fff;">${escapeHtml(r.guest_name || 'Nomaʼlum')}</td>
+          <td><span style="color: var(--gold-light); font-size: 13px;">${escapeHtml(r.guest_side || '—')}</span></td>
+          <td>${badge}</td>
+          <td style="font-weight: 600; color: var(--gold-light);">${r.guests_count || 1} kishi</td>
+          <td style="white-space: nowrap; font-size: 12px; color: var(--text-muted);">${escapeHtml(r.created_at || '')}</td>
+          <td>
+            <button class="btn btn-outline" style="padding: 4px 8px; font-size: 12px;" onclick="deleteRsvp(${r.id})" title="O'chirish">
+              <i class="fa-solid fa-trash-can" style="color: #f87171;"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderWishesGrid(wishes) {
+      const grid = document.getElementById('wishes-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      if (wishes.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <i class="fa-regular fa-comment-dots"></i>
+            <p>Hozircha tilaklar qoldirilmagan.</p>
+          </div>
+        `;
+        return;
+      }
+
+      wishes.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'wish-admin-card';
+        card.innerHTML = `
+          <div>
+            <div class="wish-card-top">
+              <span class="wish-card-author"><i class="fa-solid fa-user-pen" style="color: var(--gold-primary); margin-right: 6px;"></i>${escapeHtml(w.author)}</span>
+              <button class="btn btn-outline" style="padding: 3px 7px; font-size: 11px;" onclick="deleteWish(${w.id})" title="O'chirish">
+                <i class="fa-solid fa-trash" style="color: #f87171;"></i>
+              </button>
+            </div>
+            <div class="wish-card-time"><i class="fa-regular fa-clock"></i> ${escapeHtml(w.created_at || '')}</div>
+          </div>
+          <div class="wish-card-text">"${escapeHtml(w.text)}"</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
     function renderVisitsTable(visits) {
       const tbody = document.getElementById('visits-table-body');
       if (!tbody) return;
@@ -849,12 +1153,10 @@
 
       visits.forEach((v, idx) => {
         const tr = document.createElement('tr');
-        
         let actionBadge = `<span class="badge badge-pageview">Kirish</span>`;
         if (v.action === 'unlock') actionBadge = `<span class="badge badge-unlock">Qulf ochildi</span>`;
         if (v.action === 'music_play') actionBadge = `<span class="badge badge-music">Musiqa tingladi</span>`;
 
-        // Qurilma ikonkasi
         let devIcon = 'fa-desktop';
         if (v.device_type === 'iPhone' || v.device_type === 'Android') devIcon = 'fa-mobile-screen';
         if (v.device_type === 'iPad') devIcon = 'fa-tablet-screen-button';
@@ -871,51 +1173,47 @@
       });
     }
 
-    function renderRsvpsTable(rsvps) {
-      const tbody = document.getElementById('rsvps-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-
-      if (rsvps.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="6" class="empty-state">
-              <i class="fa-regular fa-envelope-open"></i>
-              <p>Hozircha mehmonlar tomonidan javob yozilmagan.</p>
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      rsvps.forEach((r, idx) => {
-        const tr = document.createElement('tr');
-        const badge = r.attendance === 'yes' 
-          ? `<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Boradi</span>`
-          : `<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Borolmaydi</span>`;
-
-        tr.innerHTML = `
-          <td style="color: var(--text-muted);">${idx + 1}</td>
-          <td style="font-weight: 600; color: #fff;">${escapeHtml(r.guest_name || 'Nomaʼlum')}</td>
-          <td>${badge}</td>
-          <td style="text-align: center; font-weight: 600; color: var(--gold-light);">${r.guests_count || 1} kishi</td>
-          <td style="max-width: 320px; font-style: italic;">"${escapeHtml(r.wishes || '—')}"</td>
-          <td style="white-space: nowrap; font-size: 12px; color: var(--text-muted);">${escapeHtml(r.created_at || '')}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
     function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-      if (tabName === 'visits') {
+      if (tabName === 'rsvps') {
         document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
-        document.getElementById('tab-visits').classList.add('active');
-      } else {
-        document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
         document.getElementById('tab-rsvps').classList.add('active');
+      } else if (tabName === 'wishes') {
+        document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+        document.getElementById('tab-wishes').classList.add('active');
+      } else {
+        document.querySelector('.tab-btn:nth-child(3)').classList.add('active');
+        document.getElementById('tab-visits').classList.add('active');
+      }
+    }
+
+    async function deleteRsvp(id) {
+      if (!confirm("Ushbu RSVP yozuvini o'chirishni xohlaysizmi?")) return;
+      try {
+        const res = await fetch(`${API_BASE}/rsvp?id=${id}&pin=${encodeURIComponent(currentPin)}`, { method: 'DELETE' });
+        if (res.ok) {
+          loadStats();
+        } else {
+          alert("O'chirishda xatolik yuz berdi");
+        }
+      } catch (e) {
+        alert("Xatolik: " + e.message);
+      }
+    }
+
+    async function deleteWish(id) {
+      if (!confirm("Ushbu tilakni o'chirishni xohlaysizmi?")) return;
+      try {
+        const res = await fetch(`${API_BASE}/wish?id=${id}&pin=${encodeURIComponent(currentPin)}`, { method: 'DELETE' });
+        if (res.ok) {
+          loadStats();
+        } else {
+          alert("O'chirishda xatolik yuz berdi");
+        }
+      } catch (e) {
+        alert("Xatolik: " + e.message);
       }
     }
 
@@ -925,29 +1223,50 @@
         return;
       }
 
-      let csv = "ID,Mehmon Ismi,Ishtiroki,Mehmonlar Soni,Tilagi,Vaqti\n";
+      let csv = "ID,Mehmon Ismi,Tomoni,Qatnashishi,Kishilar Soni,Vaqti\n";
       cachedStats.rsvps.forEach(r => {
         const ism = `"${(r.guest_name || '').replace(/"/g, '""')}"`;
-        const holat = r.attendance === 'yes' ? 'Boradi' : 'Borolmaydi';
+        const tomon = `"${(r.guest_side || '').replace(/"/g, '""')}"`;
+        const holat = `"${(r.attendance || '').replace(/"/g, '""')}"`;
         const soni = r.guests_count || 1;
-        const tilak = `"${(r.wishes || '').replace(/"/g, '""')}"`;
         const vaqt = r.created_at || '';
-        csv += `${r.id},${ism},${holat},${soni},${tilak},${vaqt}\n`;
+        csv += `${r.id},${ism},${tomon},${holat},${soni},${vaqt}\n`;
       });
 
-      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      downloadCsvFile(csv, `Farrux_Marjona_RSVP_Hisobi_${new Date().toISOString().slice(0,10)}.csv`);
+    }
+
+    function exportWishesCsv() {
+      if (!cachedStats || !cachedStats.wishes || cachedStats.wishes.length === 0) {
+        alert("Eksport qilish uchun tilaklar mavjud emas");
+        return;
+      }
+
+      let csv = "ID,Muallif,Tilak Matni,Vaqti\n";
+      cachedStats.wishes.forEach(w => {
+        const muallif = `"${(w.author || '').replace(/"/g, '""')}"`;
+        const matn = `"${(w.text || '').replace(/"/g, '""')}"`;
+        const vaqt = w.created_at || '';
+        csv += `${w.id},${muallif},${matn},${vaqt}\n`;
+      });
+
+      downloadCsvFile(csv, `Farrux_Marjona_Tilaklar_${new Date().toISOString().slice(0,10)}.csv`);
+    }
+
+    function downloadCsvFile(csvContent, filename) {
+      const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.setAttribute('href', url);
-      link.setAttribute('download', `Farrux_Marjona_RSVP_${new Date().toISOString().slice(0,10)}.csv`);
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
 
     async function resetStats() {
-      if (!confirm("Haqiqatan ham barcha tashrif statistikasini tozalashni xohlaysizmi?")) return;
-      if (!confirm("Diqqat! Barcha ko'rishlar jurnali o'chiriladi. Davom etilsinmi?")) return;
+      if (!confirm("Haqiqatan ham tashrif statistikasini tozalashni xohlaysizmi?")) return;
+      if (!confirm("Diqqat! Faqat ko'rishlar jurnali o'chiriladi. RSVP va tilaklar saqlanib qoladi. Davom etilsinmi?")) return;
 
       try {
         const res = await fetch(`${API_BASE}/reset?pin=${encodeURIComponent(currentPin)}`, { method: 'POST' });
@@ -980,17 +1299,16 @@
         .replace(/'/g, '&#039;');
     }
 
-    // Auto-login if session exists
+    // Auto-login and real-time refresh every 10 seconds
     window.addEventListener('DOMContentLoaded', () => {
       if (currentPin) {
         verifyAndLoad(currentPin);
       }
-      // Auto-refresh every 25 seconds if dashboard is open
       setInterval(() => {
         if (document.getElementById('dashboard').style.display !== 'none') {
           loadStats();
         }
-      }, 25000);
+      }, 10000);
     });
   </script>
 </body>
