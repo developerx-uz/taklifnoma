@@ -44,24 +44,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         keepalive: true
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.online_count) {
-          updateOnlineBadge(data.online_count);
-        }
-      })
-      .catch(() => {});
+      }).catch(() => {});
     } catch (_) {}
   }
 
-  function updateOnlineBadge(count) {
-    const badge = document.getElementById('live-online-badge');
-    if (badge) {
-      badge.innerHTML = `<span class="live-dot-pulse"></span> <span id="online-num">${count}</span> kishi onlayn`;
-      badge.style.display = 'inline-flex';
-    }
-  }
 
   // ===========================================================================
   // 1. TILAKLARNI SERVERDAN YUKLASH VA CHIQARISH
