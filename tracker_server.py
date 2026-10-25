@@ -483,6 +483,7 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     server_address = ("127.0.0.1", PORT)
+    socketserver.TCPServer.allow_reuse_address = True
     httpd = socketserver.TCPServer(server_address, StatsHandler)
     print(f"Taklifnoma Stats Tracker running on http://127.0.0.1:{PORT}")
     try:
