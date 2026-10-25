@@ -214,7 +214,7 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
             return self.respond_json(200, {
                 "success": True, 
                 "action": action, 
-                "online_count": max(1, online_count),
+                "online_count": online_count,
                 "timestamp": now_str
             })
 
@@ -306,7 +306,7 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
             clean_old_sessions()
             with get_db() as conn:
                 online = conn.execute("SELECT COUNT(DISTINCT ip) FROM active_sessions").fetchone()[0]
-            return self.respond_json(200, {"online_visitors": max(1, online)})
+            return self.respond_json(200, {"online_visitors": online})
 
         # 3. Barcha jamoat tilaklarini olish (Saytda ko'rsatish uchun)
         elif path.endswith("/api/wishes"):
@@ -416,7 +416,7 @@ class StatsHandler(http.server.BaseHTTPRequestHandler):
 
             stats_data = {
                 "server_time": datetime.now(UZB_TZ).strftime("%Y-%m-%d %H:%M:%S"),
-                "online_visitors": max(1, online_visitors),
+                "online_visitors": online_visitors,
                 "summary": {
                     "total_views": total_views,
                     "unique_visitors": unique_visitors,
